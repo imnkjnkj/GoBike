@@ -1,6 +1,6 @@
 import {CHANGE_THEME} from "../types";
 
-const setThemeApp=(payload: number) => ({
+const setThemeApp=(payload: string) => ({
 	type: CHANGE_THEME,
 	payload,
 });

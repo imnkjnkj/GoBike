@@ -1,29 +1,39 @@
 import {StatusBar} from 'expo-status-bar'
-import React from 'react'
-import {StyleSheet,View} from 'react-native'
+import React,{useEffect} from 'react'
+import {Appearance,Text} from 'react-native'
 import {SafeAreaProvider} from 'react-native-safe-area-context'
-import {Provider} from 'react-redux'
+import {Provider,useDispatch} from 'react-redux'
+import useCachedResources from './hooks/useCachedResources'
 import useColorScheme from './hooks/useColorScheme'
 import Navigation from './navigation'
+import {changeThemeAction} from './redux/actions'
 import store from './redux/store'
 
-export default function App(): React.ReactElement {
-  const colorScheme=useColorScheme();
+const AppWrapper=() => {
   return (
     <Provider store={store}>
+      <App />
+    </Provider>
+  )
+}
+const App=() => {
+  const isLoadingComplete=useCachedResources();
+  const colorScheme=useColorScheme();
+  const dispatch=useDispatch();
+  const colorTheme=Appearance.getColorScheme()||'dark';
+  useEffect(() => {
+    dispatch(changeThemeAction.setThemeApp(colorTheme))
+  },[])
+
+  if(!isLoadingComplete) {
+    return <Text>Error</Text>
+  } else {
+    return (
       <SafeAreaProvider>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </SafeAreaProvider>
-    </Provider>
-  )
+    )
+  }
 }
-
-const styles=StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
+export default AppWrapper;
