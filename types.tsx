@@ -25,11 +25,30 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  HomeScreen: undefined;
+  MenuScreen: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+interface Theme {
+  light: string;
+  dark: string;
+}
+
+export interface State {
+  theme: string;
+}
+
+export const initialState: State = {
+  theme: 'light'
+};
+
+interface SetUserAction {
+  type: 'SET_THEME';
+  payload: string;
+}
+
+export type Actions = SetUserAction;

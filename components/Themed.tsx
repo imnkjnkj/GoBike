@@ -27,7 +27,8 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText['props'];
+export type TextProps = ThemeProps & DefaultText['props'] 
+                        & { color?: string, size?: number };
 export type ViewProps = ThemeProps & DefaultView['props'];
 
 export function Text(props: TextProps) {
