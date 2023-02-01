@@ -18,6 +18,7 @@ export default function useCachedResources() {
           'Barlow Condensed': require('../assets/fonts/BarlowCondensed-SemiBold.ttf'),
           'Montserrat': require('../assets/fonts/Montserrat-VariableFont_wght.ttf')
         });
+
       } catch (e) {
         // We might want to provide this error information to an error reporting service
         console.warn(e);

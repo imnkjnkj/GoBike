@@ -1,37 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { createStore } from "redux";
-import reducer from "./hooks/reducer";
-import { Provider, useDispatch } from 'react-redux';
+import {StatusBar} from 'expo-status-bar'
+import React from 'react'
+import {StyleSheet,View} from 'react-native'
+import {SafeAreaProvider} from 'react-native-safe-area-context'
+import {Provider} from 'react-redux'
+import useColorScheme from './hooks/useColorScheme'
+import Navigation from './navigation'
+import store from './redux/store'
 
-import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import Navigation from "./navigation";
-import { Appearance } from "react-native";
-
-export default function App() {
-  const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
-  const store = createStore(reducer);
-  const dispatch = useDispatch();
-  const colorTheme = Appearance.getColorScheme() || 'dark';
-  useEffect(() => {
-    dispatch({type: 'SET_THEME', payload: colorTheme })
-  }, [])
-  
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <Navigation colorScheme={colorScheme} />
-          <StatusBar />
-        </SafeAreaProvider>
-      </Provider>
-    );
-  }
+export default function App(): React.ReactElement {
+  const colorScheme=useColorScheme();
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <Navigation colorScheme={colorScheme} />
+        <StatusBar />
+      </SafeAreaProvider>
+    </Provider>
+  )
 }
 
-
+const styles=StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
