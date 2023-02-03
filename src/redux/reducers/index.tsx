@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
-import shared from './shared';
+import sharedReducer from './sharedReducer';
 
 
 const appReducer=combineReducers({
-	shared,
+	shared : sharedReducer,
 });
 
 export default appReducer;

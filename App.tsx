@@ -1,13 +1,12 @@
 import {StatusBar} from 'expo-status-bar'
 import React,{useEffect} from 'react'
-import {Appearance,Text} from 'react-native'
+import {Appearance,Text, useColorScheme} from 'react-native'
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import {Provider,useDispatch} from 'react-redux'
-import useCachedResources from './hooks/useCachedResources'
-import useColorScheme from './hooks/useColorScheme'
-import Navigation from './navigation'
-import {changeThemeAction} from './redux/actions'
-import store from './redux/store'
+import useCachedResources from './src/hooks/useCachedResources'
+import Navigation from './src/navigation'
+import { changeThemeAction } from './src/redux/actions'
+import store from './src/redux/store'
 
 const AppWrapper=() => {
   return (
