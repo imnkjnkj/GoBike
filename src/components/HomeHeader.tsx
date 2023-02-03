@@ -34,7 +34,6 @@ export function HomeHeader(props: any) {
     logo: {
       flexDirection: "row",
       alignItems: "center",
-      marginTop: Platform.OS === "ios" ? 0 : 15,
       position: "absolute",
       width: '100%',
       zIndex: 1,

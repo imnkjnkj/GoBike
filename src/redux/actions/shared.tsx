@@ -1,12 +1,12 @@
 import { Animated } from "react-native";
-import {CHANGE_ANIMATEDVALUE, CHANGE_THEME} from "../types";
+import {UPDATE_ANIMATED_VALUE, CHANGE_THEME} from "../types";
 
 const setThemeApp=(payload: string) => ({
 	type: CHANGE_THEME,
 	payload,
 });
 const setAnimatedValue=(payload: Animated.Value) => ({
-	type: CHANGE_ANIMATEDVALUE,
+	type: UPDATE_ANIMATED_VALUE,
 	payload,
 });
 

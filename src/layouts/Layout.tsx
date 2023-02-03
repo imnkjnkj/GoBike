@@ -1,11 +1,14 @@
 import { View, Text, Animated, ScrollView } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
+import { State } from "../redux/reducers";
 
 interface LayoutI {
   children: React.ReactNode;
-  animatedValue: Animated.Value;
 }
-const Layout = ({ children, animatedValue }: LayoutI) => {
+const Layout = ({ children }: LayoutI) => {
+  const animatedValue = useSelector((state: State) => state.shared.animatedValue);
+
   return (
     <ScrollView
       onScroll={(e) => {
