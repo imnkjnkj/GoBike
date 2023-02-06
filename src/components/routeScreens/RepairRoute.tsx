@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 
 import { useSelector } from "react-redux";
 import Layout from "../../layouts/Layout";
-import { MontserratText } from "../StyledText";
+import { MontserratText } from "../shared/StyledText";
 
 
 interface Props {}

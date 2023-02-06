@@ -1,9 +1,10 @@
 import { StyleSheet, useWindowDimensions, Animated } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { TabBar, TabView } from "react-native-tab-view";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/reducers";
-import TabRoute from "./TabRoute";
+import TabRoute from "../components/TabRoute";
+import { sharedAction } from "../redux/actions";
 
 interface Props {
   translateHeader: Animated.AnimatedMultiplication<string | number>;
@@ -20,26 +21,30 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
     { key: "training", title: "TRAINING" },
   ]);
   const { theme } = useSelector((state: State) => state.shared);
-  console.log("render");
+  const dispatch=useDispatch();
+  // dispatch(sharedAction.setCategoryValue(routes[index]))
 
+  useEffect(() => {  
+    console.log('here');
+    dispatch(sharedAction.setCategoryValue(routes[index]))
+}, [routes, index])
   const styles = StyleSheet.create({
     headerText: {
       width: "100%",
       zIndex: 1,
       marginTop: 45,
       fontFamily: 'Barlow Condensed'
-
     },
     labelStyle: {
       height: 15,
       color: theme.tint,
-
       padding: 0,
       margin: 0,
     },
     tabBar: {
       backgroundColor: "transparent",
       overflow: 'hidden',
+      marginTop:5
     },
     indicator: {
       backgroundColor: "blue",
@@ -62,6 +67,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
         return null;
     }
   };
+
   const FilterTabBar = (props: any) => {
     return (
       <Animated.View
@@ -72,6 +78,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
       >
         <TabBar
           {...props}
+          navigationState={{ index, routes }}
           indicatorStyle={{ backgroundColor: theme.tabIconSelected }}
           style={styles.tabBar}
           labelStyle={styles.labelStyle}
@@ -79,6 +86,8 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
           inactiveColor={theme.text}
           tabStyle={{ minHeight: 10,}}
           activeColor={theme.tabIconSelected}
+          scrollEnabled={true}
+          onIndexChange={setIndex}
         />
       </Animated.View>
     );

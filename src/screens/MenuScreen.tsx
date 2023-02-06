@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../components/shared/Themed';
 import { MenuHeader } from '../components/MenuHeader';
 
 export default function MenuScreen() {

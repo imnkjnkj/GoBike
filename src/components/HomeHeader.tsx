@@ -5,11 +5,11 @@ import {
   Text,
   Animated,
 } from "react-native";
-import { BarlowCondensedText } from "./StyledText";
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
 import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
+import { BarlowCondensedText } from "./shared/StyledText";
 
 const AnimatedLogo = Animated.createAnimatedComponent(View);
 const AnimatedName = Animated.createAnimatedComponent(Text);
@@ -47,7 +47,7 @@ export function HomeHeader(props: any) {
     <>
         <View style={styles.headerContent}>
           <AnimatedLogo style={[logoAnimation, styles.logo, { transform: [{ translateY: translateHeaderLogo }] }]}>
-            <LOGO height={48} width={48} color={theme.tint} />
+            <LOGO height={48} width={48} color={theme.colorLogo} />
             <AnimatedName style={[logoNameAnimation]}>
               <BarlowCondensedText
                 size={32}

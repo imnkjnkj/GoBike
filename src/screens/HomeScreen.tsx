@@ -1,9 +1,9 @@
 import { StyleSheet, Animated } from "react-native";
 import { Extrapolate } from "react-native-reanimated";
-import { View } from "../components/Themed";
+import { View } from "../components/shared/Themed";
 import { RootTabScreenProps } from "../../types";
 import { HomeHeader } from "../components/HomeHeader";
-import MenuHeaderTab from "../components/MenuHeaderTab";
+import MenuHeaderTab from "../navigation/MenuHeaderTab";
 import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
 

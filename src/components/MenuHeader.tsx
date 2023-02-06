@@ -1,8 +1,8 @@
 import {View,StyleSheet,Platform} from "react-native";
-import {BarlowCondensedText} from "./StyledText";
 import LOGO from "../assets/images/logo.svg";
 import {backgroundColor,primaryColor} from "../constants/Colors";
 import Constant from 'expo-constants';
+import { BarlowCondensedText } from "./shared/StyledText";
 
 
 export const MenuHeader=(props: any) => {

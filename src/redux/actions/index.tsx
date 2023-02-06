@@ -1,4 +1,4 @@
-import changeThemeAction from './shared';
+import sharedAction from './shared';
 
 
-export {changeThemeAction};
+export {sharedAction};
