@@ -22,12 +22,11 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
   ]);
   const { theme } = useSelector((state: State) => state.shared);
   const dispatch=useDispatch();
-  // dispatch(sharedAction.setCategoryValue(routes[index]))
 
-  useEffect(() => {  
-    console.log('here');
-    dispatch(sharedAction.setCategoryValue(routes[index]))
-}, [routes, index])
+  useEffect(() => { 
+  dispatch(sharedAction.setCategoryValue(routes[index]))
+}, [index, routes]);
+
   const styles = StyleSheet.create({
     headerText: {
       width: "100%",
@@ -97,7 +96,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
     <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
-      onIndexChange={()=> {}}
+      onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
       renderTabBar={(props) => <FilterTabBar {...props} />}
       swipeEnabled={true}

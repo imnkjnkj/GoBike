@@ -5,13 +5,13 @@ const setThemeApp=(payload: string) => ({
 	type: CHANGE_THEME,
 	payload,
 });
-const setAnimatedValue=(payload: Animated.Value) => ({
+const setAnimatedValue=(animatedValue: Animated.Value) => ({
 	type: UPDATE_ANIMATED_VALUE,
-	payload,
+	animatedValue,
 });
-const setCategoryValue=(payload: ICategory) => ({
+const setCategoryValue=(category: ICategory) => ({
 	type: UPDATE_CATEGORY_VALUE,
-	payload,
+	category,
 });
 export default {
 	setThemeApp,

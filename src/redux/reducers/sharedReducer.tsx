@@ -16,7 +16,7 @@ interface State {
 const initialState: State = {
   theme: Color["light"],
   animatedValue: new Animated.Value(0),
-  category: { key: "", title: "" },
+  category: { key: "news", title: "NEWS" },
 };
 
 type Action = {
@@ -27,6 +27,7 @@ type Action = {
 };
 
 export default (state: State = initialState, action: Action): State => {
+  console.log(action)
   switch (action.type) {
     case CHANGE_THEME:
       return {
@@ -39,7 +40,6 @@ export default (state: State = initialState, action: Action): State => {
         animatedValue: action.animatedValue,
       };
     case UPDATE_CATEGORY_VALUE:
-      console.log("haha");
       return {
         ...state,
         category: action.category,

@@ -23,7 +23,7 @@ const App=() => {
   LogBox.ignoreLogs(['Sending']);
   const colorTheme=Appearance.getColorScheme()||'dark';
   useEffect(() => {
-    dispatch(sharedAction.setThemeApp(colorTheme))
+    dispatch(sharedAction.setThemeApp(colorTheme));
   },[])
 
   if(!isLoadingComplete) {
