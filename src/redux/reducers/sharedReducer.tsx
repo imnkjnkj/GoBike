@@ -27,7 +27,6 @@ type Action = {
 };
 
 export default (state: State = initialState, action: Action): State => {
-  console.log(action)
   switch (action.type) {
     case CHANGE_THEME:
       return {

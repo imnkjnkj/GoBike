@@ -62,7 +62,7 @@ function RootNavigator() {
       <Stack.Screen
         name="PostDetail"
         component={PostDetail}
-        // options={{ headerShown: false }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -13,7 +13,6 @@ import { BarlowCondensedText } from "./shared/StyledText";
 
 const AnimatedLogo = Animated.createAnimatedComponent(View);
 const AnimatedName = Animated.createAnimatedComponent(Text);
-const AnimatedScrollLogo = Animated.createAnimatedComponent(View);
 
 export function HomeHeader(props: any) {
   const { logoAnimation, logoNameAnimation, translateHeaderLogo } = props;
