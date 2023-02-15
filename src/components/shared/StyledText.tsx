@@ -7,5 +7,5 @@ export function BarlowCondensedText(props: TextProps) {
 }
 export function MontserratText(props: TextProps) {
   const {size,color}=props
-  return <Text {...props} style={[props.style,{fontFamily: 'Montserrat',fontSize: size,color: color, fontWeight:'700'}]} />;
+  return <Text {...props} style={[props.style,{fontFamily: 'Montserrat',fontSize: size,color: color}]} />;
 }
