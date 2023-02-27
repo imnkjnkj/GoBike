@@ -18,13 +18,12 @@ export const MenuHeader=(props: any) => {
     },
     headerContent: {
       flexDirection: "row",
-      marginTop: Constant.statusBarHeight,
+      marginTop: Platform.OS === 'android' ? Constant.statusBarHeight : 0,
       position: 'relative',
     },
     logo: {
       flexDirection: "row",
       alignItems: "center",
-      position: "absolute",
       width: '100%',
       zIndex: 1,
       left: '35%',

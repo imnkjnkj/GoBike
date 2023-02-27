@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
-import { MontserratText } from '../StyledText';
 import Layout from '../../layouts/Layout';
+import TabRoute from '../TabRoute';
 
 const BikesGearRoute = () => {
   const styles = StyleSheet.create({
@@ -35,8 +35,7 @@ const BikesGearRoute = () => {
   });
   return (
     <Layout>
-      <MontserratText>BIKES GEAR</MontserratText>
-
+      <TabRoute />
     </Layout>
   );
 }

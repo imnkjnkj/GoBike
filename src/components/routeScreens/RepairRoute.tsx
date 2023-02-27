@@ -5,13 +5,14 @@ import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
 import Layout from "../../layouts/Layout";
 import { MontserratText } from "../shared/StyledText";
+import TabRoute from "../TabRoute";
 
 
 interface Props {}
 const RepairRoute = ({}: Props) => {
   return (
     <Layout>
-      <MontserratText>Home</MontserratText>
+      <TabRoute />
     </Layout>
   );
 };

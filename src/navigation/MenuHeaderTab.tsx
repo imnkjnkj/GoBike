@@ -3,8 +3,12 @@ import React, { useEffect } from "react";
 import { TabBar, TabView } from "react-native-tab-view";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/reducers";
-import TabRoute from "../components/TabRoute";
 import { sharedAction } from "../redux/actions";
+import NewsRoute from "../components/routeScreens/NewsRoute";
+import BikesGearRoute from "../components/routeScreens/BikesGearRoute";
+import RepairRoute from "../components/routeScreens/RepairRoute";
+import HealthRoute from "../components/routeScreens/HealthRoute";
+import TrainingRoute from "../components/routeScreens/TrainingRoute";
 
 interface Props {
   translateHeader: Animated.AnimatedMultiplication<string | number>;
@@ -21,18 +25,18 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
     { key: "training", title: "TRAINING" },
   ]);
   const { theme } = useSelector((state: State) => state.shared);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  useEffect(() => { 
-  dispatch(sharedAction.setCategoryValue(routes[index]))
-}, [index, routes]);
+  useEffect(() => {
+    dispatch(sharedAction.setCategoryValue(routes[index]));
+  }, [routes]);
 
   const styles = StyleSheet.create({
     headerText: {
       width: "100%",
       zIndex: 1,
       marginTop: 45,
-      fontFamily: 'Barlow Condensed'
+      fontFamily: "Barlow Condensed",
     },
     labelStyle: {
       height: 15,
@@ -42,26 +46,26 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
     },
     tabBar: {
       backgroundColor: "transparent",
-      overflow: 'hidden',
-      marginTop:5
+      overflow: "hidden",
+      marginTop: 5,
     },
     indicator: {
       backgroundColor: "blue",
       width: "100%",
     },
   });
-  const renderScene = ({ route }:any) => {
+  const renderScene = ({ route }: any) => {
     switch (route.key) {
       case "news":
-        return <TabRoute />;
+        return <NewsRoute />;
       case "bikeGear":
-        return <TabRoute />;
+        return <BikesGearRoute />;
       case "repair":
-        return <TabRoute />;
+        return <RepairRoute />;
       case "health":
-        return <TabRoute />;
+        return <HealthRoute />;
       case "training":
-        return <TabRoute />;
+        return <TrainingRoute />;
       default:
         return null;
     }
@@ -77,16 +81,14 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
       >
         <TabBar
           {...props}
-          navigationState={{ index, routes }}
           indicatorStyle={{ backgroundColor: theme.tabIconSelected }}
           style={styles.tabBar}
           labelStyle={styles.labelStyle}
           pressColor={"transparent"}
           inactiveColor={theme.text}
-          tabStyle={{ minHeight: 10,}}
+          tabStyle={{ minHeight: 10 }}
           activeColor={theme.tabIconSelected}
           scrollEnabled={true}
-          onIndexChange={setIndex}
         />
       </Animated.View>
     );

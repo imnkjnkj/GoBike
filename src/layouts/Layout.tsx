@@ -1,13 +1,16 @@
-import { View, Animated, ScrollView } from "react-native";
+import { View, Animated, ScrollView, StyleSheet, ViewStyle, StyleProp } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
 
 interface LayoutI {
   children: React.ReactNode;
+  style?: StyleProp<ViewStyle>
 }
-const Layout = ({ children }: LayoutI) => {
-  const animatedValue = useSelector((state: State) => state.shared.animatedValue);
+const Layout = ({ children, style }: LayoutI) => {
+  const animatedValue = useSelector(
+    (state: State) => state.shared.animatedValue
+  );
 
   return (
     <ScrollView
@@ -23,9 +26,14 @@ const Layout = ({ children }: LayoutI) => {
       }}
       scrollEventThrottle={16}
     >
-      <View>{children}</View>
+      <View style={style}>{children}</View>
     </ScrollView>
   );
 };
 
 export default Layout;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
