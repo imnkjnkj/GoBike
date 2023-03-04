@@ -5,19 +5,13 @@ import { State } from "../redux/reducers";
 import { MontserratText } from "./shared/StyledText";
 import Button from "./Button";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Menu() {
   const [count, setCount] = useState(0);
   const { theme } = useSelector((state: State) => state.shared);
-  // const [layoutHeight, setLayoutHeight] = useState(0);
+  const navigation = useNavigation();
 
-  // useEffect(() => {
-  //   if (isExpanded) {
-  //     setLayoutHeight(null);
-  //   } else {
-  //     setLayoutHeight(0);
-  //   }
-  // }, [item.isExpanded]);
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -48,9 +42,14 @@ export default function Menu() {
           }
         />
       </View>
-      <View style ={{marginTop: 30}}>
-        <MontserratText style={{fontWeight: '600'}}>Theo Chuyên Mục</MontserratText>
-        <Button text="Xe Đạp & Thiết Bị" />
+      <View style={{ marginTop: 30 }}>
+        <MontserratText style={{ fontWeight: "600" }}>
+          Theo Chuyên Mục
+        </MontserratText>
+        <Button
+          text="Xe Đạp & Thiết Bị"
+          handlePress={() => navigation.navigate("BikesGearRoute")}
+        />
         <Button text="Dinh Dưỡng & Sức Khoẻ" />
         <Button text="Đào Tạo" />
         <Button text="Sửa chữa" />

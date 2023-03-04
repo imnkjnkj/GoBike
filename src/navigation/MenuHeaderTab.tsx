@@ -29,7 +29,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
 
   useEffect(() => {
     dispatch(sharedAction.setCategoryValue(routes[index]));
-  }, [routes]);
+  }, [routes, index]);
 
   const styles = StyleSheet.create({
     headerText: {
@@ -89,6 +89,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
           tabStyle={{ minHeight: 10 }}
           activeColor={theme.tabIconSelected}
           scrollEnabled={true}
+          onIndexChange={setIndex}
         />
       </Animated.View>
     );

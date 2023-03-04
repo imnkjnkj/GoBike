@@ -24,6 +24,7 @@ import { useSelector } from "react-redux";
 import { State } from "../redux/reducers";
 import Post from "../components/Post";
 import PostDetail from "../components/PostDetail";
+import BikesGearRoute from "../components/routeScreens/BikesGearRoute";
 
 export default function Navigation({
   colorScheme,
@@ -61,6 +62,11 @@ function RootNavigator() {
       <Stack.Screen
         name="PostDetail"
         component={PostDetail}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="BikesGearRoute"
+        component={BikesGearRoute}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
