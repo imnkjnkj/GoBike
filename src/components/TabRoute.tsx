@@ -1,19 +1,24 @@
-import { View, Text } from "react-native";
+import {View,Text} from "react-native";
 import React from "react";
 import Layout from "../layouts/Layout";
 import Post from "./Post";
+import {listData} from "../api/data/listPost";
 
-const TabRoute = () => {
-  var myloop = [];
+interface ITabRouteProps {
+  category?: string
+}
+const TabRoute=({category}: ITabRouteProps) => {
+  const list=listData.filter(x => category? x.category===category:x)
 
-  for (let i = 0; i < 10; i++) {
-    myloop.push(
+
+  return <Layout>
+    {list.map((item,i) => (
       <View key={i}>
-        <Post />
+        <Post item={item} />
       </View>
-    );
-  }
-  return <Layout>{myloop}</Layout>;
+    ))}
+
+  </Layout>;
 };
 
 export default React.memo(TabRoute);

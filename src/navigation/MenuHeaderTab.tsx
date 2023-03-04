@@ -1,37 +1,33 @@
-import { StyleSheet, useWindowDimensions, Animated } from "react-native";
-import React, { useEffect } from "react";
-import { TabBar, TabView } from "react-native-tab-view";
-import { useDispatch, useSelector } from "react-redux";
-import { State } from "../redux/reducers";
-import { sharedAction } from "../redux/actions";
-import NewsRoute from "../components/routeScreens/NewsRoute";
-import BikesGearRoute from "../components/routeScreens/BikesGearRoute";
-import RepairRoute from "../components/routeScreens/RepairRoute";
-import HealthRoute from "../components/routeScreens/HealthRoute";
-import TrainingRoute from "../components/routeScreens/TrainingRoute";
+import {StyleSheet,useWindowDimensions,Animated} from "react-native";
+import React,{useEffect} from "react";
+import {TabBar,TabView} from "react-native-tab-view";
+import {useDispatch,useSelector} from "react-redux";
+import {State} from "../redux/reducers";
+import {sharedAction} from "../redux/actions";
+import TabRoute from "../components/TabRoute";
 
 interface Props {
-  translateHeader: Animated.AnimatedMultiplication<string | number>;
+  translateHeader: Animated.AnimatedMultiplication<string|number>;
 }
 
-const MenuHeaderTab = ({ translateHeader }: Props) => {
-  const layout = useWindowDimensions();
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: "news", title: "NEWS" },
-    { key: "bikeGear", title: "BIKES & GEAR" },
-    { key: "repair", title: "REPAIR" },
-    { key: "health", title: "HEALTH & NUTRITION" },
-    { key: "training", title: "TRAINING" },
+const MenuHeaderTab=({translateHeader}: Props) => {
+  const layout=useWindowDimensions();
+  const [index,setIndex]=React.useState(0);
+  const [routes]=React.useState([
+    {key: "news",title: "NEWS"},
+    {key: "bikeGear",title: "BIKES & GEAR"},
+    {key: "repair",title: "REPAIR"},
+    {key: "health",title: "HEALTH & NUTRITION"},
+    {key: "training",title: "TRAINING"},
   ]);
-  const { theme } = useSelector((state: State) => state.shared);
-  const dispatch = useDispatch();
+  const {theme}=useSelector((state: State) => state.shared);
+  const dispatch=useDispatch();
 
   useEffect(() => {
     dispatch(sharedAction.setCategoryValue(routes[index]));
-  }, [routes, index]);
+  },[routes,index]);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     headerText: {
       width: "100%",
       zIndex: 1,
@@ -54,39 +50,39 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
       width: "100%",
     },
   });
-  const renderScene = ({ route }: any) => {
-    switch (route.key) {
+  const renderScene=({route}: any) => {
+    switch(route.key) {
       case "news":
-        return <NewsRoute />;
+        return <TabRoute />;
       case "bikeGear":
-        return <BikesGearRoute />;
+        return <TabRoute category={"BIKES & GEAR"} />;
       case "repair":
-        return <RepairRoute />;
+        return <TabRoute category={"REPAIR"} />;
       case "health":
-        return <HealthRoute />;
+        return <TabRoute category={"HEALTH & NUTRITION"} />;
       case "training":
-        return <TrainingRoute />;
+        return <TabRoute category={"TRAINING"} />;
       default:
         return null;
     }
   };
 
-  const FilterTabBar = (props: any) => {
+  const FilterTabBar=(props: any) => {
     return (
       <Animated.View
         style={[
           styles.headerText,
-          { transform: [{ translateY: translateHeader }] },
+          {transform: [{translateY: translateHeader}]},
         ]}
       >
         <TabBar
           {...props}
-          indicatorStyle={{ backgroundColor: theme.tabIconSelected }}
+          indicatorStyle={{backgroundColor: theme.tabIconSelected}}
           style={styles.tabBar}
           labelStyle={styles.labelStyle}
           pressColor={"transparent"}
           inactiveColor={theme.text}
-          tabStyle={{ minHeight: 10 }}
+          tabStyle={{minHeight: 10}}
           activeColor={theme.tabIconSelected}
           scrollEnabled={true}
           onIndexChange={setIndex}
@@ -97,10 +93,10 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
 
   return (
     <TabView
-      navigationState={{ index, routes }}
+      navigationState={{index,routes}}
       renderScene={renderScene}
       onIndexChange={setIndex}
-      initialLayout={{ width: layout.width }}
+      initialLayout={{width: layout.width}}
       renderTabBar={(props) => <FilterTabBar {...props} />}
       swipeEnabled={true}
     />

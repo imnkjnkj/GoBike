@@ -6,21 +6,25 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
-import { HorizontalLine } from "./shared/Themed";
-import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import React,{useState} from "react";
+import {useSelector} from "react-redux";
+import {State} from "../redux/reducers";
+import {HorizontalLine} from "./shared/Themed";
+import {BarlowCondensedText,MontserratText} from "./shared/StyledText";
+import {Ionicons} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
+import {IPost} from "../../types";
 
-const Post = () => {
-  const { theme } = useSelector((state: State) => state.shared);
-  const layout = useWindowDimensions();
-  const [saveIcon, setSaveIcon] = useState(false);
-  const navigation = useNavigation();
+interface IPostProps {
+  item: IPost,
+}
+const Post=({item}: IPostProps) => {
+  const {theme}=useSelector((state: State) => state.shared);
+  const layout=useWindowDimensions();
+  const [saveIcon,setSaveIcon]=useState(false);
+  const navigation=useNavigation();
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     title: {
       paddingHorizontal: 20,
     },
@@ -47,25 +51,24 @@ const Post = () => {
     >
       <Image
         style={styles.thumbnail}
-        source={require("../assets/images/thumbnail.jpg")}
+        source={{uri: item.thumbnail}}
       />
       <View style={styles.title}>
         <BarlowCondensedText
           size={20}
           color={theme.text}
-          style={{ marginVertical: 10 }}
+          style={{marginVertical: 10}}
         >
-          The 9 Best Kids Bikes You Can Buy Right Now
+          {item.title}
         </BarlowCondensedText>
         <MontserratText
           size={16}
           color={theme.text}
-          style={{ fontWeight: "500", fontStyle: "normal" }}
+          style={{
+            fontWeight: "500",fontStyle: "normal",textTransform: 'lowercase'
+          }}
         >
-          There's no better way to get kids out of the screen-staring habit than
-          by putting them on a bicycle. It's a lifetime activity that pays big
-          dividends in everything from hand-eye coordination to long-term
-          cardiovascular health.
+          {item.sapo}
         </MontserratText>
         <View style={styles.footerContent}>
           <MontserratText
@@ -76,10 +79,10 @@ const Post = () => {
               fontStyle: "normal",
             }}
           >
-            Bikes & Gear
+            {item.category}
           </MontserratText>
           <Ionicons
-            name={saveIcon ? "ios-bookmark-sharp" : "ios-bookmark-outline"}
+            name={saveIcon? "ios-bookmark-sharp":"ios-bookmark-outline"}
             onPress={(e) => setSaveIcon((current) => !current)}
             color={theme.text}
             size={16}
