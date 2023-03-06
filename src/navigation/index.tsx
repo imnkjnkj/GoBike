@@ -3,28 +3,29 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { Ionicons } from "@expo/vector-icons";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {Ionicons} from "@expo/vector-icons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import * as React from "react";
-import { ColorSchemeName } from "react-native";
+import {ColorSchemeName} from "react-native";
 
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MenuScreen from "../screens/MenuScreen";
-import { RootStackParamList, RootTabParamList } from "../../types";
+import {RootStackParamList,RootTabParamList} from "../../types";
 import LinkingConfiguration from "./LinkingConfiguration";
-import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import {useSelector} from "react-redux";
+import {State} from "../redux/reducers";
 import Post from "../components/Post";
 import PostDetail from "../components/PostDetail";
 import BikesGearRoute from "../components/routeScreens/BikesGearRoute";
+import RouteScreen from "../screens/RouteScreen";
 
 export default function Navigation({
   colorScheme,
@@ -34,14 +35,14 @@ export default function Navigation({
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={colorScheme==="dark"? DarkTheme:DefaultTheme}
     >
       <RootNavigator />
     </NavigationContainer>
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack=createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
@@ -49,25 +50,25 @@ function RootNavigator() {
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
-        options={{ title: "Oops!" }}
+        options={{title: "Oops!"}}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{presentation: "modal"}}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
       <Stack.Screen
         name="PostDetail"
         component={PostDetail}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen
-        name="BikesGearRoute"
-        component={BikesGearRoute}
-        options={{ headerShown: false }}
+        name="RouteScreens"
+        component={RouteScreen}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -77,10 +78,10 @@ function RootNavigator() {
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
  * https://reactnavigation.org/docs/bottom-tab-navigator
  */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab=createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
-  const { theme } = useSelector((state: State) => state.shared);
+  const {theme}=useSelector((state: State) => state.shared);
 
   return (
     <BottomTab.Navigator
@@ -97,9 +98,9 @@ function BottomTabNavigator() {
         component={HomeScreen}
         options={{
           title: "Home",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({color,focused}) => (
             <TabBarIcon
-              name={focused ? "ios-home" : "ios-home-outline"}
+              name={focused? "ios-home":"ios-home-outline"}
               color={color}
             />
           ),
@@ -110,9 +111,9 @@ function BottomTabNavigator() {
         component={MenuScreen}
         options={{
           title: "Menu",
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({color,focused}) => (
             <TabBarIcon
-              name={focused ? "ios-menu" : "ios-menu-outline"}
+              name={focused? "ios-menu":"ios-menu-outline"}
               color={color}
             />
           ),
@@ -127,5 +128,5 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={30} style={{marginBottom: -3}} {...props} />;
 }

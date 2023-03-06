@@ -1,7 +1,7 @@
 export const listData=[
 	{
 		id: 1,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/kidsbike2000-1650998724.jpg?crop=0.889xw:1.00xh;0.0561xw,0&resize=1920:*',
+		thumbnail: 'https://i.imgur.com/pkv3U3l.jpg',
 		title: 'The 9 Best Kids Bikes You Can Buy Right Now',
 		sapo: 'WITH THE RIGHT BIKE, YOUR PINT-SIZED RIDER WILL THRIVE ON TRAILS, PATHS, PAVEMENT, AND AT BIKE PARKS.',
 		category: 'BIKES & GEAR',
@@ -11,7 +11,7 @@ export const listData=[
 	},
 	{
 		id: 2,
-		thumbnail: 'hhttps://hips.hearstapps.com/hmg-prod/images/niner-mcr-340-1600718142.jpg?crop=0.917xw:0.774xh;0.0417xw,0.226xh&resize=1920:*',
+		thumbnail: 'https://i.imgur.com/h3ILSXA.jpg',
 		title: 'The Best Gravel Bikes You Can Buy Right Now',
 		sapo: 'LOOKING TO RIDE A LITTLE BIT OF EVERYTHING? TURN TO ONE OF THESE EXCEPTIONAL, VERSATILE RIGS, RIDDEN AND VETTED BY OUR TEAM.',
 		category: 'BIKES & GEAR',
@@ -20,7 +20,7 @@ export const listData=[
 	},
 	{
 		id: 3,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/dsc1641-1640210137.jpg?crop=1.00xw:0.847xh;0,0.0552xh&resize=1920:*',
+		thumbnail: 'https://i.imgur.com/SQAMadr.jpg',
 		title: 'The 18 Best Premium Long Sleeve Jerseys and Jackets',
 		sapo: 'WE TESTED A LONG LIST OF LONG SLEEVE JERSEYS AND JACKETS TO FIND THE BEST OPTIONS FOR ROAD, GRAVEL, AND LIGHT TRAIL USE',
 		category: 'BIKES & GEAR',
@@ -29,7 +29,7 @@ export const listData=[
 	},
 	{
 		id: 4,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/portrait-of-cyclist-eating-homemade-flapjack-whilst-royalty-free-image-1643222613.jpg?crop=0.670xw:1.00xh;0.272xw,0&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/ewcb1k8.jpg',
 		title: `HERE’S WHY IT’S IMPORTANT TO NAIL YOUR NUTRITION IN COLD WEATHER.`,
 		category: 'HEALTH & NUTRITION',
 		sapo: 'WE TESTED A LONG LIST OF LONG SLEEVE JERSEYS AND JACKETS TO FIND THE BEST OPTIONS FOR ROAD, GRAVEL, AND LIGHT TRAIL USE',
@@ -38,7 +38,7 @@ export const listData=[
 	},
 	{
 		id: 5,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/portrait-of-cyclist-eating-homemade-flapjack-whilst-royalty-free-image-1643222613.jpg?crop=0.670xw:1.00xh;0.272xw,0&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/H67Lk89.jpg',
 		title: `HERE’S WHY IT’S IMPORTANT TO NAIL YOUR NUTRITION IN COLD WEATHER.`,
 		category: 'HEALTH & NUTRITION',
 		sapo: 'WE TESTED A LONG LIST OF LONG SLEEVE JERSEYS AND JACKETS TO FIND THE BEST OPTIONS FOR ROAD, GRAVEL, AND LIGHT TRAIL USE',
@@ -47,7 +47,7 @@ export const listData=[
 	},
 	{
 		id: 6,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/century-fueling-0015-1623946828.jpg?crop=0.835xw:0.834xh;0.158xw,0.0995xh&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/grITLhn.jpg',
 		title: 'How to Fuel a Century Ride',
 		sapo: 'THE RIGHT NUTRITION PLAN CAN HELP YOU PEDAL STRONG, FEEL GREAT, AND KEEP THE DREADED BONK AT BAY.',
 		category: 'HEALTH & NUTRITION',
@@ -56,7 +56,7 @@ export const listData=[
 	},
 	{
 		id: 7,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/ceylin-del-carmen-alvarado-of-the-netherlands-and-team-news-photo-1670355513.jpg?resize=1200:*',
+		thumbnail: 'https://i.imgur.com/rphhkwR.jpg',
 		title: 'Cyclocross Basics: 3 Essential Skills You Need to Know',
 		sapo: `ONCE YOU GET THESE SKILLS DOWN, YOU'RE READY TO TRY YOUR FIRST 'CROSS RACE`,
 		category: 'TRAINING',
@@ -65,7 +65,7 @@ export const listData=[
 	},
 	{
 		id: 8,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/century-fueling-0015-1623946828.jpg?crop=0.835xw:0.834xh;0.158xw,0.0995xh&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/ShUXzvq.jpg',
 		title: 'These Cycling Tips for Beginners Will Make Riding More Fun',
 		sapo: `MAKE THE MOST OUT OF YOUR NEW OBSESSION WITH THESE USEFUL TIPS AND TRICKS.`,
 		category: 'TRAINING',
@@ -74,7 +74,7 @@ export const listData=[
 	},
 	{
 		id: 9,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/wahoo-kickr-v6-0085v2-1665592044.jpg?crop=1.00xw:0.846xh;0,0.0192xh&resize=1920:*',
+		thumbnail: 'https://i.imgur.com/hv72B0i.jpg',
 		title: 'The 10 Best Indoor Bike Trainers',
 		sapo: `EXCELLENT BIKE TRAINERS FOR ALL TYPES OF INDOOR RIDING.`,
 		category: 'TRAINING',
@@ -83,7 +83,7 @@ export const listData=[
 	},
 	{
 		id: 10,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/african-father-and-daughter-are-fixed-a-bicycle-royalty-free-image-1629299037.jpg?crop=1.00xw:0.754xh;0,0.118xh&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/kwsV6BW.jpg',
 		title: 'Common Bicycling Repairs You Can Master at Home',
 		sapo: `TIME SPENT HAULING YOUR BIKE TO THE SHOP IS TIME SPENT AWAY FROM RIDING. HERE’S HOW TO SOLVE SOME BASIC ISSUES YOURSELF.`,
 		category: 'REPAIR',
@@ -92,7 +92,7 @@ export const listData=[
 	},
 	{
 		id: 11,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/century-fueling-0015-1623946828.jpg?crop=0.835xw:0.834xh;0.158xw,0.0995xh&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/YpE87Qd.jpg',
 		title: 'A Step-by-Step Guide on How to Clean a Bike',
 		sapo: `THE SLIGHTLY OBSESSIVE (BUT TOTALLY DOABLE) GUIDE TO MAKING YOUR BIKE SHINE.`,
 		category: 'REPAIR',
@@ -101,7 +101,7 @@ export const listData=[
 	},
 	{
 		id: 12,
-		thumbnail: 'https://hips.hearstapps.com/hmg-prod/images/how-to-chain-lube-0029-1634840693.jpg?crop=0.668xw:1.00xh;0.0799xw,0&resize=1200:*',
+		thumbnail: 'https://i.imgur.com/h3ILSXA.jpg',
 		title: 'Why You Should Be Using Dry Bike Chain Lube, If You Aren’t Already',
 		sapo: 'AN EXPERT EXPLAINS WHAT YOU NEED TO KNOW.',
 		category: 'REPAIR',

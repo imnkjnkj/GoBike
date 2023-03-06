@@ -22,7 +22,7 @@ export type RootStackParamList={
   NotFound: undefined;
   Post: undefined;
   PostDetail: undefined;
-  BikesGearRoute: undefined;
+  RouteScreens: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList>=
