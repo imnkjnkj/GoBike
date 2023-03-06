@@ -1,0 +1,6 @@
+export enum Category {
+  BIKEGEAR = "BIKES & GEAR",
+  TRAINING = "TRAINING",
+  REPAIR = "REPAIR",
+  HEALTHNUTRITION = "HEALTH & NUTRITION",
+}
