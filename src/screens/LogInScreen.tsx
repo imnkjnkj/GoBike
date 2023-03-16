@@ -83,10 +83,13 @@ const LogInScreen = () => {
     login: {
       flexDirection: "row",
       alignItems: "center",
-      backgroundColor: theme.colorLogo,
-      paddingHorizontal: 20,
-      paddingVertical: 10,
+      backgroundColor: theme.background,
+      borderColor: theme.colorLogo,
+      borderWidth: 1,
+      paddingHorizontal: 60,
+      paddingVertical: 8,
       borderRadius: 5,
+      marginTop: 10,
     },
   });
   const [username, setUsername] = React.useState("");
@@ -124,7 +127,7 @@ const LogInScreen = () => {
       // Add your own error handler here
     }
   };
-  console.log(token);
+  console.log(token, userInfo);
   const handleGoogleSignIn = async () => {
     //try {
     //  const result=await Google.logInAsync({
@@ -181,7 +184,11 @@ const LogInScreen = () => {
             placeholderTextColor={theme.text}
           />
         </View>
-
+        <TouchableOpacity style={styles.login}>
+          <MontserratText color={theme.colorLogo} size={16}>
+            Login
+          </MontserratText>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginGoogle}
           onPress={() => {
@@ -195,11 +202,6 @@ const LogInScreen = () => {
             style={{ marginLeft: 8, fontWeight: "700" }}
           >
             Login With Google
-          </MontserratText>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.login}>
-          <MontserratText color={theme.background} size={16}>
-            Login
           </MontserratText>
         </TouchableOpacity>
       </View>
