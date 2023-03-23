@@ -120,7 +120,6 @@ const LogInScreen = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
       const user = await response.json();
       setUserInfo(user);
     } catch (error) {

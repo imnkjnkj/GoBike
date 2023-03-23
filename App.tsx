@@ -8,7 +8,6 @@ import Navigation from "./src/navigation";
 import { sharedAction } from "./src/redux/actions";
 import store from "./src/redux/store";
 import { LogBox } from "react-native";
-
 const AppWrapper = () => {
   return (
     <Provider store={store}>
