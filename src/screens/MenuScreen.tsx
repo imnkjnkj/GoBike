@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 import { MenuHeader } from "../components/MenuHeader";
 import Layout from "../layouts/Layout";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 import Menu from "../components/Menu";
 import Contact from "../components/Contact";
 import Search from "../components/Search";

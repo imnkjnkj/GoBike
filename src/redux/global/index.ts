@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { globalReducer } from "@/store/global/reducer"
+import { globalReducer } from "./reducer"
 
 export interface IGlobalStore {
   isLoading: number

@@ -8,19 +8,27 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
 } from "../components/shared/StyledText";
 import LOGO from "../assets/images/logo.svg";
-import { State } from "../redux/reducers";
 import Constant from "expo-constants";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import { AuthSessionResult, TokenResponse } from "expo-auth-session";
+import { State } from "../redux/store";
+import { loginUser } from "../redux/user/thunkApi";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
+GoogleSignin.configure({
+  webClientId:
+    "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
+  iosClientId:
+    "484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com",
+});
 const LogInScreen = () => {
   const { theme } = useSelector((state: State) => state.shared);
   const styles = StyleSheet.create({
@@ -96,48 +104,16 @@ const LogInScreen = () => {
   const [password, setPassword] = React.useState("");
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
+  const dispatch = useDispatch();
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "484087272547-bf4je4llrl6d1j4jug3aa1oag7gipbk8.apps.googleusercontent.com",
-    iosClientId:
-      "484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com",
-    expoClientId:
-      "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
-  });
-  useEffect(() => {
-    if (response?.type === "success" && response.authentication) {
-      setToken(response.authentication.accessToken);
-      getUserInfo();
-    }
-  }, [response, token]);
-
-  const getUserInfo = async () => {
-    try {
-      const response = await fetch(
-        "https://www.googleapis.com/userinfo/v2/me",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      const user = await response.json();
-      setUserInfo(user);
-    } catch (error) {
-      // Add your own error handler here
-    }
-  };
-  console.log(token, userInfo);
   const handleGoogleSignIn = async () => {
-    //try {
-    //  const result=await Google.logInAsync({
-    //    androidClientId: '484087272547-bf4je4llrl6d1j4jug3aa1oag7gipbk8.apps.googleusercontent.com',
-    //    iosClientId: '484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com',
-    //    scopes: ['profile','email'],
-    //  });
-    //  console.log(result);
-    //} catch(error) {
-    //  console.log(error);
-    //}
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      console.log(userInfo);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <View style={styles.container}>
@@ -191,7 +167,7 @@ const LogInScreen = () => {
         <TouchableOpacity
           style={styles.loginGoogle}
           onPress={() => {
-            promptAsync();
+            handleGoogleSignIn();
           }}
         >
           <AntDesign name="google" size={24} color={theme.colorLogo} />

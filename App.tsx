@@ -5,9 +5,10 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider, useDispatch } from "react-redux";
 import useCachedResources from "./src/hooks/useCachedResources";
 import Navigation from "./src/navigation";
-import { sharedAction } from "./src/redux/actions";
-import store from "./src/redux/store";
 import { LogBox } from "react-native";
+import { store } from "./src/redux/store";
+import { setThemeApp } from "./src/redux/shared";
+
 const AppWrapper = () => {
   return (
     <Provider store={store}>
@@ -22,7 +23,7 @@ const App = () => {
   LogBox.ignoreLogs(["Sending"]);
   const colorTheme = Appearance.getColorScheme() || "dark";
   useEffect(() => {
-    dispatch(sharedAction.setThemeApp(colorTheme));
+    dispatch(setThemeApp(colorTheme));
   }, []);
 
   if (!isLoadingComplete) {

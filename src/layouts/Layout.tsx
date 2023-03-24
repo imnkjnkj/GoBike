@@ -1,7 +1,7 @@
 import { View, Animated, ScrollView, StyleSheet, ViewStyle, StyleProp } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 
 interface LayoutI {
   children: React.ReactNode;

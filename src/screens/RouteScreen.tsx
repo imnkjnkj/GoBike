@@ -8,7 +8,7 @@ import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Constant from "expo-constants";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 
 type RootStackParamList = {
   RouteScreen: { category: string };

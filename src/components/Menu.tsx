@@ -1,13 +1,13 @@
 import {View,Text,TouchableOpacity,StyleSheet} from "react-native";
 import React,{useEffect,useState} from "react";
 import {useDispatch,useSelector} from "react-redux";
-import {State} from "../redux/reducers";
 import {MontserratText} from "./shared/StyledText";
 import Button from "./Button";
 import {FontAwesome5,Ionicons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
-import {sharedAction} from "../redux/actions";
 import {Category} from "../enums/common";
+import { State } from "../redux/store";
+import { setCategoryValue } from "../redux/shared";
 
 export default function Menu() {
   const [count,setCount]=useState(0);
@@ -68,7 +68,7 @@ export default function Menu() {
             key={item.key}
             text={item.title}
             handlePress={() => {
-              dispatch(sharedAction.setCategoryValue(item));
+              dispatch(setCategoryValue(item));
               navigation.navigate("RouteScreen",{
                 category: `${item.title}`,
               });

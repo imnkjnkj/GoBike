@@ -2,9 +2,9 @@ import { StyleSheet, useWindowDimensions, Animated } from "react-native";
 import React, { useEffect } from "react";
 import { TabBar, TabView } from "react-native-tab-view";
 import { useDispatch, useSelector } from "react-redux";
-import { State } from "../redux/reducers";
-import { sharedAction } from "../redux/actions";
+import { State } from "../redux/store";
 import TabRoute from "../components/TabRoute";
+import { setCategoryValue } from "../redux/shared";
 
 interface Props {
   translateHeader: Animated.AnimatedMultiplication<string | number>;
@@ -24,7 +24,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(sharedAction.setCategoryValue(routes[index]));
+    dispatch(setCategoryValue(routes[index]));
   }, [routes, index]);
 
   const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ import {
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 import { BarlowCondensedText } from "./shared/StyledText";
 
 const AnimatedLogo = Animated.createAnimatedComponent(View);

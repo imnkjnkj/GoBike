@@ -2,7 +2,7 @@ import { View, StyleSheet, TextInput, Dimensions } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 // import { TextInput } from "react-native-paper";
 
 const Search = () => {

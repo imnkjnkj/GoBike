@@ -20,14 +20,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "host.exp.exponent"
+      "bundleIdentifier": "host.exp.exponent",
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "package": "host.exp.exponent",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.svg",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/images/icon.svg"
@@ -36,6 +38,7 @@
       "eas": {
         "projectId": "37a80879-d485-4fa7-8221-87520f7d0003"
       }
-    }
+    },
+    "plugins": ["@react-native-google-signin/google-signin"]
   }
 }

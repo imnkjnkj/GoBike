@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
 import React from "react";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
 import { Entypo, Foundation, MaterialIcons } from "@expo/vector-icons";
 import { Divider } from "react-native-paper";

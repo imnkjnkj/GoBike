@@ -21,7 +21,7 @@ import MenuScreen from "../screens/MenuScreen";
 import { RootStackParamList, RootTabParamList } from "../../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 import Post from "../components/Post";
 import PostDetail from "../components/PostDetail";
 import BikesGearRoute from "../components/routeScreens/BikesGearRoute";

@@ -5,7 +5,7 @@ import { RootTabScreenProps } from "../../types";
 import { HomeHeader } from "../components/HomeHeader";
 import MenuHeaderTab from "../navigation/MenuHeaderTab";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducers";
+import { State } from "../redux/store";
 
 export default function HomeScreenScreen({
   navigation,
