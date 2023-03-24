@@ -6,9 +6,10 @@ import {
   Dimensions,
   Button,
   TouchableOpacity,
+  useColorScheme,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
@@ -16,20 +17,17 @@ import {
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
-import { AuthSessionResult, TokenResponse } from "expo-auth-session";
-import { State } from "../redux/store";
+import { AppDispatch, State } from "../redux/store";
 import { loginUser } from "../redux/user/thunkApi";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+import { useNavigation } from "@react-navigation/native";
+import Navigation from "../navigation";
 
-GoogleSignin.configure({
-  webClientId:
-    "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
-  iosClientId:
-    "484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com",
-});
-const LogInScreen = () => {
+const LogInScreen = ({
+  pLogin,
+}: {
+  pLogin: (token: string) => Promise<unknown>;
+}) => {
   const { theme } = useSelector((state: State) => state.shared);
   const styles = StyleSheet.create({
     container: {
@@ -104,16 +102,31 @@ const LogInScreen = () => {
   const [password, setPassword] = React.useState("");
   const [token, setToken] = useState("");
   const [userInfo, setUserInfo] = useState(null);
-  const dispatch = useDispatch();
-
-  const handleGoogleSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
-    } catch (error) {
-      console.log(error);
+  const navigation=useNavigation();
+  const colorScheme = useColorScheme();
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "484087272547-bf4je4llrl6d1j4jug3aa1oag7gipbk8.apps.googleusercontent.com",
+    iosClientId:
+      "484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com",
+    expoClientId:
+      "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
+  });
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { access_token } = response.params;
+      setToken(access_token);
+      console.log(response, typeof access_token);
+      pLogin(access_token).then(
+        () => navigation.
+        (<Navigation colorScheme={colorScheme} />)
+      );
     }
+  }, [response, token]);
+
+  console.log(token, userInfo);
+  const handleGoogleSignIn = async () => {
+    await promptAsync();
   };
   return (
     <View style={styles.container}>
@@ -166,9 +179,7 @@ const LogInScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginGoogle}
-          onPress={() => {
-            handleGoogleSignIn();
-          }}
+          onPress={handleGoogleSignIn}
         >
           <AntDesign name="google" size={24} color={theme.colorLogo} />
           <MontserratText
@@ -183,4 +194,11 @@ const LogInScreen = () => {
     </View>
   );
 };
-export default LogInScreen;
+
+const mapDispatchToProps = (dispatch: AppDispatch) => {
+  return {
+    pLogin: (token: string) => dispatch(loginUser(token)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LogInScreen);

@@ -5,8 +5,8 @@ import { ILoginGoogle, IUserLogin } from "../../types/users"
 
 export const loginUser = createAsyncThunk(
   "user/login",
-  async (params: IUserLogin) => {
-    return await userApi.login(params)
+  async (token: string) => {
+    return await userApi.login(token)
   }
 )
 export const extraReducers = (
@@ -15,7 +15,8 @@ export const extraReducers = (
   builders.addCase(
     loginUser.fulfilled,
     (state: IUserStore, action: PayloadAction<ILoginGoogle>) => {
-      localStorage.setItem("accessToken", action.payload.accessToken)
+      console.log(action.payload);
+      
     }
   )
 

@@ -8,6 +8,7 @@ import Navigation from "./src/navigation";
 import { LogBox } from "react-native";
 import { store } from "./src/redux/store";
 import { setThemeApp } from "./src/redux/shared";
+import MainScreen from "./src/screens/MainScreen";
 
 const AppWrapper = () => {
   return (
@@ -18,7 +19,6 @@ const AppWrapper = () => {
 };
 const App = () => {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
   const dispatch = useDispatch();
   LogBox.ignoreLogs(["Sending"]);
   const colorTheme = Appearance.getColorScheme() || "dark";
@@ -31,7 +31,7 @@ const App = () => {
   } else {
     return (
       <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
+        <MainScreen />
         <StatusBar />
       </SafeAreaProvider>
     );

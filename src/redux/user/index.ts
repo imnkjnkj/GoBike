@@ -6,21 +6,17 @@ import { DataUser, IUserProfileRes, IUserRole } from "../../types/users"
 
 export interface IUserStore {
   token: string
-  refreshToken: string
   users: DataUser[]
   errorMessage: string
   userRoles: IUserRole[]
-  hasLoadedProfile: boolean
   roleName: string
   userProfile: IUserProfileRes
 }
 const initialState: IUserStore = {
   token: "",
-  refreshToken: "",
   users: [],
   errorMessage: "",
   userRoles: [],
-  hasLoadedProfile: false,
   roleName: "",
   userProfile: {
     id: NaN,

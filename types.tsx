@@ -24,6 +24,7 @@ export type RootStackParamList = {
   PostDetail: undefined;
   RouteScreen: { category: string };
   LogIn: undefined;
+  HomeScreen:undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
