@@ -1,32 +1,33 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect } from "react";
-import { Appearance, Text, useColorScheme } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider, useDispatch } from "react-redux";
+import {StatusBar} from "expo-status-bar";
+import React,{useEffect} from "react";
+import {Appearance,Text,useColorScheme} from "react-native";
+import {SafeAreaProvider} from "react-native-safe-area-context";
+import {Provider,useDispatch,useSelector} from "react-redux";
 import useCachedResources from "./src/hooks/useCachedResources";
 import Navigation from "./src/navigation";
-import { LogBox } from "react-native";
-import { store } from "./src/redux/store";
-import { setThemeApp } from "./src/redux/shared";
+import {LogBox} from "react-native";
+import {State,store} from "./src/redux/store";
+import {setThemeApp} from "./src/redux/shared";
 import MainScreen from "./src/screens/MainScreen";
+import {sIsExpiredToken} from "./src/redux/user/selector";
 
-const AppWrapper = () => {
+const AppWrapper=() => {
   return (
     <Provider store={store}>
       <App />
     </Provider>
   );
 };
-const App = () => {
-  const isLoadingComplete = useCachedResources();
-  const dispatch = useDispatch();
+const App=() => {
+  const isLoadingComplete=useCachedResources();
+  const dispatch=useDispatch();
   LogBox.ignoreLogs(["Sending"]);
-  const colorTheme = Appearance.getColorScheme() || "dark";
+  const colorTheme=Appearance.getColorScheme()||"dark";
   useEffect(() => {
     dispatch(setThemeApp(colorTheme));
-  }, []);
+  },[]);
 
-  if (!isLoadingComplete) {
+  if(!isLoadingComplete) {
     return <Text>Error</Text>;
   } else {
     return (

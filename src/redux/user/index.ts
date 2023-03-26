@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit"
+import {createSlice} from "@reduxjs/toolkit"
 
-import { extraReducers } from "./thunkApi"
-import { userReducer } from "./reducer"
-import { DataUser, IUserProfileRes, IUserRole } from "../../types/users"
+import {extraReducers} from "./thunkApi"
+import {userReducer} from "./reducer"
+import {DataUser,IUserProfileRes,IUserRole} from "../../types/users"
 
 export interface IUserStore {
   token: string
@@ -11,8 +11,9 @@ export interface IUserStore {
   userRoles: IUserRole[]
   roleName: string
   userProfile: IUserProfileRes
+  isLogIn: boolean
 }
-const initialState: IUserStore = {
+const initialState: IUserStore={
   token: "",
   users: [],
   errorMessage: "",
@@ -39,9 +40,10 @@ const initialState: IUserStore = {
     iat: NaN,
     exp: 0,
   },
+  isLogIn: false,
 }
 
-const userSlice = createSlice({
+const userSlice=createSlice({
   name: "user",
   initialState,
   reducers: userReducer,
@@ -49,5 +51,5 @@ const userSlice = createSlice({
 })
 export const {
   setRoleName,
-} = userSlice.actions
+}=userSlice.actions
 export default userSlice.reducer

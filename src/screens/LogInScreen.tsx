@@ -8,28 +8,29 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import React,{useEffect,useState} from "react";
+import {connect,useDispatch,useSelector} from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
 } from "../components/shared/StyledText";
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import {AntDesign,Ionicons} from "@expo/vector-icons";
 import * as Google from "expo-auth-session/providers/google";
-import { AppDispatch, State } from "../redux/store";
-import { loginUser } from "../redux/user/thunkApi";
-import { useNavigation } from "@react-navigation/native";
+import {AppDispatch,State} from "../redux/store";
+import {loginUser} from "../redux/user/thunkApi";
+import {useNavigation} from "@react-navigation/native";
 import Navigation from "../navigation";
+import {sIsExpiredToken} from "../redux/user/selector";
 
-const LogInScreen = ({
+const LogInScreen=({
   pLogin,
 }: {
   pLogin: (token: string) => Promise<unknown>;
 }) => {
-  const { theme } = useSelector((state: State) => state.shared);
-  const styles = StyleSheet.create({
+  const {theme}=useSelector((state: State) => state.shared);
+  const styles=StyleSheet.create({
     container: {
       backgroundColor: theme.background,
       alignContent: "center",
@@ -53,7 +54,7 @@ const LogInScreen = ({
       flexDirection: "row",
     },
     inputSection: {
-      width: Dimensions.get("window").width * 0.74,
+      width: Dimensions.get("window").width*0.74,
       flexDirection: "row",
       alignItems: "center",
       backgroundColor: theme.background,
@@ -98,13 +99,13 @@ const LogInScreen = ({
       marginTop: 10,
     },
   });
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [token, setToken] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
+  const [username,setUsername]=React.useState("");
+  const [password,setPassword]=React.useState("");
+  const [token,setToken]=useState("");
+  const [userInfo,setUserInfo]=useState(null);
   const navigation=useNavigation();
-  const colorScheme = useColorScheme();
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const colorScheme=useColorScheme();
+  const [request,response,promptAsync]=Google.useAuthRequest({
     androidClientId:
       "484087272547-bf4je4llrl6d1j4jug3aa1oag7gipbk8.apps.googleusercontent.com",
     iosClientId:
@@ -113,19 +114,18 @@ const LogInScreen = ({
       "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
   });
   useEffect(() => {
-    if (response?.type === "success") {
-      const { access_token } = response.params;
+    if(response?.type==="success") {
+      const {access_token}=response.params;
       setToken(access_token);
-      console.log(response, typeof access_token);
       pLogin(access_token).then(
-        () => navigation.
-        (<Navigation colorScheme={colorScheme} />)
+        () => navigation.navigate
+          ('MainScreen')
       );
     }
-  }, [response, token]);
-
-  console.log(token, userInfo);
-  const handleGoogleSignIn = async () => {
+  },[response,token]);
+  const isLogIn=sIsExpiredToken
+  console.log(isLogIn);
+  const handleGoogleSignIn=async () => {
     await promptAsync();
   };
   return (
@@ -185,7 +185,7 @@ const LogInScreen = ({
           <MontserratText
             color={theme.colorLogo}
             size={16}
-            style={{ marginLeft: 8, fontWeight: "700" }}
+            style={{marginLeft: 8,fontWeight: "700"}}
           >
             Login With Google
           </MontserratText>
@@ -195,10 +195,10 @@ const LogInScreen = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: AppDispatch) => {
+const mapDispatchToProps=(dispatch: AppDispatch) => {
   return {
     pLogin: (token: string) => dispatch(loginUser(token)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(LogInScreen);
+export default connect(null,mapDispatchToProps)(LogInScreen);
