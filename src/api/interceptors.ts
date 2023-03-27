@@ -4,8 +4,8 @@ import {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import store from "../redux/store";
 import { showSpinner, clearSpinner, hideSpinner } from "../redux/global";
+import { store } from "../redux/store";
 
 interface IRequestAxios extends InternalAxiosRequestConfig {
   skipLoading?: boolean;

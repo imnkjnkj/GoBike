@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/store";
 import TabRoute from "../components/TabRoute";
 import { setCategoryValue } from "../redux/shared";
+import { CategoryId } from "../enums/common";
 
 interface Props {
   translateHeader: Animated.AnimatedMultiplication<string | number>;
@@ -14,11 +15,11 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: "news", title: "NEWS" },
-    { key: "bikeGear", title: "BIKES & GEAR" },
-    { key: "repair", title: "REPAIR" },
-    { key: "health", title: "HEALTH & NUTRITION" },
-    { key: "training", title: "TRAINING" },
+    { key: "news", title: "NEWS", id: undefined },
+    { key: "bikeGear", title: "BIKES & GEAR",id: CategoryId.BIKEGEAR },
+    { key: "repair", title: "REPAIR", id: CategoryId.REPAIR },
+    { key: "health", title: "HEALTH & NUTRITION",id: CategoryId.HEALTHNUTRITION },
+    { key: "training", title: "TRAINING", id: CategoryId.TRAINING },
   ]);
   const { theme } = useSelector((state: State) => state.shared);
   const dispatch = useDispatch();
@@ -55,13 +56,13 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
       case "news":
         return <TabRoute />;
       case "bikeGear":
-        return <TabRoute category={"BIKES & GEAR"} />;
+        return <TabRoute />;
       case "repair":
-        return <TabRoute category={"REPAIR"} />;
+        return <TabRoute />;
       case "health":
-        return <TabRoute category={"HEALTH & NUTRITION"} />;
+        return <TabRoute/>;
       case "training":
-        return <TabRoute category={"TRAINING"} />;
+        return <TabRoute />;
       default:
         return null;
     }

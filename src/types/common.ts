@@ -6,4 +6,12 @@ export interface IShared {
     theme: Theme;
     animatedValue: Animated.Value;
     category: ICategory;
+    categoryId?: number
 }
+export interface IRequestParams {
+    page?: number
+    size?: number
+    sort?: string
+    // search?: string
+    categoryId?: number
+  }

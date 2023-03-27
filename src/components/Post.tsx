@@ -6,25 +6,41 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from "react-native";
-import React,{useState} from "react";
-import {useSelector} from "react-redux";
-import {State} from "../redux/reducers";
-import {HorizontalLine} from "./shared/Themed";
-import {BarlowCondensedText,MontserratText} from "./shared/StyledText";
-import {Ionicons} from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native";
-import {IPost} from "../../types";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { HorizontalLine } from "./shared/Themed";
+import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
+import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { IPost } from "../../types";
+import { IPostsDetail } from "../types/posts";
+import { State } from "../redux/store";
+import { Category, CategoryId } from "../enums/common";
 
 interface IPostProps {
-  item: IPost,
+  item: IPostsDetail;
 }
-const Post=({item}: IPostProps) => {
-  const {theme}=useSelector((state: State) => state.shared);
-  const layout=useWindowDimensions();
-  const [saveIcon,setSaveIcon]=useState(false);
-  const navigation=useNavigation();
+const Post = ({ item }: IPostProps) => {
+  const { theme } = useSelector((state: State) => state.shared);
+  const layout = useWindowDimensions();
+  const [saveIcon, setSaveIcon] = useState(false);
+  const navigation = useNavigation();
+  const renderCate = (categoryId: number) => {
+    switch (categoryId) {
+      case CategoryId.BIKEGEAR:
+        return Category.BIKEGEAR;
+      case CategoryId.HEALTHNUTRITION:
+        return Category.HEALTHNUTRITION;
+      case CategoryId.REPAIR:
+        return Category.REPAIR;
+      case CategoryId.TRAINING:
+        return Category.TRAINING;
+      default:
+        return null;
+    }
+  };
 
-  const styles=StyleSheet.create({
+  const styles = StyleSheet.create({
     title: {
       paddingHorizontal: 20,
     },
@@ -49,15 +65,12 @@ const Post=({item}: IPostProps) => {
       style={styles.container}
       onPress={() => navigation.navigate("PostDetail")}
     >
-      <Image
-        style={styles.thumbnail}
-        source={{uri: item.thumbnail}}
-      />
+      <Image style={styles.thumbnail} source={{ uri: item.thumbnail }} />
       <View style={styles.title}>
         <BarlowCondensedText
           size={20}
           color={theme.text}
-          style={{marginVertical: 10}}
+          style={{ marginVertical: 10 }}
         >
           {item.title}
         </BarlowCondensedText>
@@ -65,7 +78,9 @@ const Post=({item}: IPostProps) => {
           size={16}
           color={theme.text}
           style={{
-            fontWeight: "500",fontStyle: "normal",textTransform: 'lowercase'
+            fontWeight: "500",
+            fontStyle: "normal",
+            textTransform: "lowercase",
           }}
         >
           {item.sapo}
@@ -79,10 +94,10 @@ const Post=({item}: IPostProps) => {
               fontStyle: "normal",
             }}
           >
-            {item.category}
+            {renderCate(item.category.id)}
           </MontserratText>
           <Ionicons
-            name={saveIcon? "ios-bookmark-sharp":"ios-bookmark-outline"}
+            name={saveIcon ? "ios-bookmark-sharp" : "ios-bookmark-outline"}
             onPress={(e) => setSaveIcon((current) => !current)}
             color={theme.text}
             size={16}

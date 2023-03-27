@@ -5,4 +5,5 @@ export const UPDATE_CATEGORY_VALUE = "UPDATE_CATEGORY_VALUE";
 export interface ICategory {
   key: string;
   title: string;
+  id?:number;
 }

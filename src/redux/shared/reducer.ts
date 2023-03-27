@@ -19,4 +19,5 @@ export const sharedReducer = {
   setCategoryValue: (state: IShared, action: PayloadAction<ICategory>) => {
     state.category = action.payload;
   },
+
 };

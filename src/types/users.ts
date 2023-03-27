@@ -1,5 +1,5 @@
 export interface IUserLogin {
-  googleAuthToken: string
+  accessToken: string
 }
 
 export interface DataUserInfo {

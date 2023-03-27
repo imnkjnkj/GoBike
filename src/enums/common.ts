@@ -4,3 +4,9 @@ export enum Category {
   REPAIR = "REPAIR",
   HEALTHNUTRITION = "HEALTH & NUTRITION",
 }
+export enum CategoryId {
+  BIKEGEAR = 19,
+  TRAINING = 20,
+  REPAIR = 21,
+  HEALTHNUTRITION = 1,
+}
