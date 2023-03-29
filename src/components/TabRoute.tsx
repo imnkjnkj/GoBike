@@ -16,19 +16,20 @@ interface ITabRouteProps {
 }
 const TabRoute = ({ pGetNews, pNewsList }: ITabRouteProps) => {
   // const list = listData.filter((x) => (category ? x.category === category : x));
-  const {category}=useSelector((state: State) => state.shared);
-
-  const fetchData = async (): Promise<IDashboarData> => {
-    const res = await pGetNews({
-      page: 1,
-      size: 100,
-      sort: "updatedAt",
-      categoryId: category.id,
-    });
-    const latestNews = res.payload as IDashboarData;
-    return latestNews;
-  };
+  const { category } = useSelector((state: State) => state.shared);
+  // console.log(category);
   
+  // const fetchData = async (): Promise<IDashboarData> => {
+  //   const res = await pGetNews({
+  //     page: 1,
+  //     size: 100,
+  //     sort: "updatedAt",
+  //     categoryId: category.id,
+  //   });
+  //   const latestNews = res.payload as IDashboarData;
+  //   return latestNews;
+  // };
+
   useEffect(() => {
     pGetNews({
       page: 0,
@@ -36,7 +37,7 @@ const TabRoute = ({ pGetNews, pNewsList }: ITabRouteProps) => {
       sort: "updatedAt",
       categoryId: category.id,
     });
-  }, [category]);
+  }, [category.id]);
   return (
     <Layout>
       {pNewsList?.content?.map((item, i) => (

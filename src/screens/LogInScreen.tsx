@@ -19,16 +19,18 @@ import Constant from "expo-constants";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import * as Google from "expo-auth-session/providers/google";
 import { AppDispatch, State } from "../redux/store";
-import { loginUser } from "../redux/user/thunkApi";
+import { getUser, loginUser } from "../redux/user/thunkApi";
 import { useNavigation } from "@react-navigation/native";
-import Navigation from "../navigation";
-import { sIsAdmin, sIsExpiredToken } from "../redux/user/selector";
-import { IUserLogin } from "../types/users";
+import { IUserLogin, IUserProfileRes } from "../types/users";
 
 const LogInScreen = ({
   pLogin,
+  pGetUser,
 }: {
   pLogin: (token: IUserLogin) => Promise<unknown>;
+  pGetUser: () => Promise<unknown>;
+  pUserInfor: IUserProfileRes;
+  pIsLogIn: boolean
 }) => {
   const { theme } = useSelector((state: State) => state.shared);
   const styles = StyleSheet.create({
@@ -103,7 +105,6 @@ const LogInScreen = ({
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [token, setToken] = useState("");
-  const [userInfo, setUserInfo] = useState(null);
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -118,11 +119,14 @@ const LogInScreen = ({
     if (response?.type === "success") {
       const { access_token } = response.params;
       setToken(access_token);
-      console.log(access_token);
-      
-      pLogin({accessToken: access_token}).then(() => navigation.navigate("MainScreen"));
+      pLogin({ accessToken: access_token }).then(() => {
+        navigation.navigate("MainScreen");
+        pGetUser()
+      });
     }
   }, [response, token]);
+  console.log(token);
+  
   const handleGoogleSignIn = async () => {
     await promptAsync();
   };
@@ -196,6 +200,7 @@ const LogInScreen = ({
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     pLogin: (token: IUserLogin) => dispatch(loginUser(token)),
+    pGetUser: () => dispatch(getUser()),
   };
 };
 

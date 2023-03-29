@@ -1,5 +1,5 @@
 import { View, StyleSheet, Platform } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../layouts/Layout";
 import Post from "../components/Post";
 import { listData } from "../api/data/listPost";
@@ -7,11 +7,16 @@ import { BarlowCondensedText } from "../components/shared/StyledText";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import Constant from "expo-constants";
-import { useSelector } from "react-redux";
-import { State } from "../redux/store";
+import { connect, useSelector } from "react-redux";
+import { AppDispatch, State } from "../redux/store";
+import { IRequestParams } from "../types/common";
+import { getNews } from "../redux/posts/thunkApi";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { IDashboarData } from "../types/posts";
+import { CategoryId } from "../enums/common";
 
 type RootStackParamList = {
-  RouteScreen: { category: string };
+  RouteScreen: { category: string, id: CategoryId };
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<
@@ -23,8 +28,10 @@ type HomeScreenRouteProp = RouteProp<RootStackParamList, "RouteScreen">;
 interface ITabRouteProps {
   navigation: HomeScreenNavigationProp;
   route: HomeScreenRouteProp;
+  pNewsList: IDashboarData;
+  pGetNews: (params: IRequestParams) => Promise<PayloadAction<unknown>>;
 }
-const RouteScreen = ({ route }: ITabRouteProps) => {
+const RouteScreen = ({ route, pGetNews, pNewsList }: ITabRouteProps) => {
   const { theme } = useSelector((state: State) => state.shared);
   const styles = StyleSheet.create({
     container: {
@@ -38,7 +45,15 @@ const RouteScreen = ({ route }: ITabRouteProps) => {
       marginVertical: 10,
     },
   });
-  const { category } = route.params;
+  const { category, id } = route.params;
+  useEffect(() => {
+    pGetNews({
+      page: 0,
+      size: 1000,
+      sort: "updatedAt",
+      categoryId: id,
+    });
+  }, [id]);
   const list = listData.filter((x) => x.category === category);
 
   return (
@@ -51,7 +66,7 @@ const RouteScreen = ({ route }: ITabRouteProps) => {
         {category}
       </BarlowCondensedText>
       <Layout>
-        {list.map((item, i) => (
+        {pNewsList.content?.map((item, i) => (
           <View key={i}>
             <Post item={item} />
           </View>
@@ -60,5 +75,13 @@ const RouteScreen = ({ route }: ITabRouteProps) => {
     </View>
   );
 };
+const mapStateToProps = (state: State) => ({
+  pNewsList: state.posts.dashboardData,
+});
 
-export default React.memo(RouteScreen);
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  pGetNews: (params: IRequestParams) => dispatch(getNews(params)),
+});
+export default React.memo(
+  connect(mapStateToProps, mapDispatchToProps)(RouteScreen)
+);

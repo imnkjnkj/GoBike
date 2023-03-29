@@ -26,7 +26,7 @@ const MenuHeaderTab = ({ translateHeader }: Props) => {
 
   useEffect(() => {
     dispatch(setCategoryValue(routes[index]));
-  }, [routes, index]);
+  }, [routes, index]);  
 
   const styles = StyleSheet.create({
     headerText: {

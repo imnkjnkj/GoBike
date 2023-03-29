@@ -4,7 +4,6 @@ import Navigation from '../navigation'
 
 export default function MainScreen() {
     const colorScheme = useColorScheme();
-
   return (
     <Navigation colorScheme={colorScheme} />
 

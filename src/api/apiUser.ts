@@ -1,3 +1,4 @@
+import axios from "axios";
 import AxiosClient from ".";
 
 const url = "/user";
@@ -7,12 +8,20 @@ const headers = {
   Accept: "application/json",
 };
 export const login = (data: any) => {
-  return AxiosClient.post(`${baseURL}${url}/authenticate`, data, {
-    headers: headers,
-  })
+  return AxiosClient
+    .post(`${url}/authenticate`, data)
     .then((res) => {
       console.log(res);
-
+      return res.data;
+    })
+    .catch((e) => console.log(e));
+};
+export const getUserInfor = () => {
+  return AxiosClient
+    .get(`${url}/info`)
+    .then((res) => {
+      console.log(res.data);
+      
       return res.data;
     })
     .catch((e) => console.log(e));

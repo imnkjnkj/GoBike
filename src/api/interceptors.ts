@@ -6,16 +6,17 @@ import {
 } from "axios";
 import { showSpinner, clearSpinner, hideSpinner } from "../redux/global";
 import { store } from "../redux/store";
+import { getStorage } from "../utils/asyncStorage";
 
 interface IRequestAxios extends InternalAxiosRequestConfig {
   skipLoading?: boolean;
 }
 
-const onRequestConfig = (config: IRequestAxios) => {
+const onRequestConfig = async (config: IRequestAxios) => {
   if (!config.headers["Authorization"]) {
-    const token = localStorage.getItem("accessToken");
+    const token = await getStorage("accessToken");
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["Authorization"] = `${token}`;
     }
   }
   if (!config.headers["Content-Type"]) {

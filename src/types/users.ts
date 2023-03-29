@@ -81,41 +81,22 @@ export enum UserSelectActive {
 
 export interface ILoginGoogle {
   accessToken: string
-  refreshToken: string
 }
 
 export enum USER_ROLES_NAME {
-  ADMIN = "Admin",
-  HR = "HR",
-  STAFF = "Staff",
-  INTERN = "Intern"
+  ADMIN = "ADMIN",
+  USER = "USER",
 }
 
 export interface UserRoles {
-  id: UserRolesEnum
   name: USER_ROLES_NAME
 }
 
 export interface IUserProfileRes {
-  id: number
-  createdBy: string
-  createdTime: string
-  updatedBy: string
-  updatedTime: string
-  deletedBy: number
-  deletedTime: string
-  isDeleted: boolean
-  userName: string
-  emailAddress: string
-  name: string
-  surname: string
-  phoneNumber: string
-  avatar: string
-  komuUserName: string
-  userCode: number
+  id: number,
+  username: string,
+  email: string,
   roles: UserRoles[]
-  iat: number
-  exp: number
 }
 
 export interface IUserInformationSelector {
