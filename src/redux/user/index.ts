@@ -36,5 +36,6 @@ const userSlice=createSlice({
 })
 export const {
   setRoleName,
+  logOutUser
 }=userSlice.actions
 export default userSlice.reducer
