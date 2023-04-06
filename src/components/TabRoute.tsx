@@ -12,32 +12,9 @@ import { IDashboarData } from "../types/posts";
 
 interface ITabRouteProps {
   pNewsList: IDashboarData;
-  pGetNews: (params: IRequestParams) => Promise<PayloadAction<unknown>>;
 }
-const TabRoute = ({ pGetNews, pNewsList }: ITabRouteProps) => {
-  // const list = listData.filter((x) => (category ? x.category === category : x));
-  const { category } = useSelector((state: State) => state.shared);
-  // console.log(category);
+const TabRoute = ({ pNewsList }: ITabRouteProps) => {
   
-  // const fetchData = async (): Promise<IDashboarData> => {
-  //   const res = await pGetNews({
-  //     page: 1,
-  //     size: 100,
-  //     sort: "updatedAt",
-  //     categoryId: category.id,
-  //   });
-  //   const latestNews = res.payload as IDashboarData;
-  //   return latestNews;
-  // };
-
-  useEffect(() => {
-    pGetNews({
-      page: 0,
-      size: 1000,
-      sort: "updatedAt",
-      categoryId: category.id,
-    });
-  }, [category.id]);
   return (
     <Layout>
       {pNewsList?.content?.map((item, i) => (
@@ -53,9 +30,7 @@ const mapStateToProps = (state: State) => ({
   pNewsList: state.posts.dashboardData,
 });
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  pGetNews: (params: IRequestParams) => dispatch(getNews(params)),
-});
+const mapDispatchToProps = null
 export default React.memo(
   connect(mapStateToProps, mapDispatchToProps)(TabRoute)
 );

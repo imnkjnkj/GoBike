@@ -1,5 +1,5 @@
 import { View, StyleSheet, Platform } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layouts/Layout";
 import Post from "../components/Post";
 import { listData } from "../api/data/listPost";
@@ -14,20 +14,18 @@ import { getNews } from "../redux/posts/thunkApi";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IDashboarData } from "../types/posts";
 import { CategoryId } from "../enums/common";
+import Loading from "../components/Loading";
+import { RootStackParamList } from "../../types";
 
-type RootStackParamList = {
-  RouteScreen: { category: string, id: CategoryId };
-};
-
-type HomeScreenNavigationProp = StackNavigationProp<
+type RouteScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "RouteScreen"
 >;
-type HomeScreenRouteProp = RouteProp<RootStackParamList, "RouteScreen">;
+type RouteScreenRouteProp = RouteProp<RootStackParamList, "RouteScreen">;
 
 interface ITabRouteProps {
-  navigation: HomeScreenNavigationProp;
-  route: HomeScreenRouteProp;
+  navigation: RouteScreenNavigationProp;
+  route: RouteScreenRouteProp;
   pNewsList: IDashboarData;
   pGetNews: (params: IRequestParams) => Promise<PayloadAction<unknown>>;
 }
@@ -46,34 +44,41 @@ const RouteScreen = ({ route, pGetNews, pNewsList }: ITabRouteProps) => {
     },
   });
   const { category, id } = route.params;
-  useEffect(() => {
-    pGetNews({
+  const [loading, setLoading] = useState(true);
+  const fetchData = async () => {
+    await pGetNews({
       page: 0,
       size: 1000,
       sort: "updatedAt",
       categoryId: id,
     });
+    await setLoading(false);
+  };
+  useEffect(() => {
+    fetchData();
   }, [id]);
-  const list = listData.filter((x) => x.category === category);
-
-  return (
-    <View style={styles.container}>
-      <BarlowCondensedText
-        size={32}
-        color={theme.colorLogo}
-        style={styles.title}
-      >
-        {category}
-      </BarlowCondensedText>
-      <Layout>
-        {pNewsList.content?.map((item, i) => (
-          <View key={i}>
-            <Post item={item} />
-          </View>
-        ))}
-      </Layout>
-    </View>
-  );
+  if (loading) {
+    return <Loading color={theme.colorLogo} />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <BarlowCondensedText
+          size={32}
+          color={theme.colorLogo}
+          style={styles.title}
+        >
+          {category}
+        </BarlowCondensedText>
+        <Layout>
+          {pNewsList.content?.map((item, i) => (
+            <View key={i}>
+              <Post item={item} />
+            </View>
+          ))}
+        </Layout>
+      </View>
+    );
+  }
 };
 const mapStateToProps = (state: State) => ({
   pNewsList: state.posts.dashboardData,

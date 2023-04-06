@@ -5,7 +5,7 @@ export * as userApi from "./apiUser";
 export * as postsApi from "./apiPosts";
 
 const AxiosClient=axios.create({
-  baseURL: "http://ec2-54-151-167-185.ap-southeast-1.compute.amazonaws.com/v1",
+  baseURL: "http://10.10.10.18:8089/v1",
   headers: {
     Accept: "application/json",
   },

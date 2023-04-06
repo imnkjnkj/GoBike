@@ -5,7 +5,7 @@ import { postsReducer } from "./reducer";
 import { DataUser, IUserProfileRes, IUserRole } from "../../types/users";
 import { INewsStore } from "../../types/posts";
 
-const initialState: INewsStore = {
+export const initialState: INewsStore = {
   dashboardData: {
     totalPages: 0,
     totalElements: 0,
@@ -56,5 +56,5 @@ const postsSlice = createSlice({
   reducers: postsReducer,
   extraReducers: extraReducers,
 });
-export const {} = postsSlice.actions;
+export const { setDetailData } = postsSlice.actions;
 export default postsSlice.reducer;

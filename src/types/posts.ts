@@ -1,3 +1,5 @@
+import { HTMLSource } from "react-native-render-html";
+
 export interface IPostsDetail {
   id: number;
   title: string;
@@ -12,14 +14,14 @@ export interface IPostsDetail {
   createdAt: Date;
   updatedAt: Date;
   user?: {
-    email: string
+    email: string;
   };
 }
 export interface IDashboarData {
   totalPages: number;
   totalElements: number;
   size: number;
-  content?: IPostsDetail[];
+  content: IPostsDetail[];
   number: number;
   sort: {
     empty: boolean;

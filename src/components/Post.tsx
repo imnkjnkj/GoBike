@@ -7,15 +7,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { HorizontalLine } from "./shared/Themed";
 import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { IPost } from "../../types";
+import { RouteProp, useNavigation } from "@react-navigation/native";
+import { IPost, RootStackParamList } from "../../types";
 import { IPostsDetail } from "../types/posts";
 import { State } from "../redux/store";
 import { Category, CategoryId } from "../enums/common";
+import { setDetailData } from "../redux/posts";
 
 interface IPostProps {
   item: IPostsDetail;
@@ -25,6 +26,8 @@ const Post = ({ item }: IPostProps) => {
   const layout = useWindowDimensions();
   const [saveIcon, setSaveIcon] = useState(false);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
   const renderCate = (categoryId: number) => {
     switch (categoryId) {
       case CategoryId.BIKEGEAR:
@@ -60,11 +63,12 @@ const Post = ({ item }: IPostProps) => {
       marginBottom: 20,
     },
   });
+  const handleClick = () => {
+    navigation.navigate("PostDetail");
+    dispatch(setDetailData(item))
+  };
   return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={() => navigation.navigate("PostDetail")}
-    >
+    <TouchableOpacity style={styles.container} onPress={handleClick}>
       <Image style={styles.thumbnail} source={{ uri: item.thumbnail }} />
       <View style={styles.title}>
         <BarlowCondensedText
