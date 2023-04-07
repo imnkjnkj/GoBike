@@ -4,11 +4,11 @@
     "slug": "GoBike",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.svg",
+    "icon": "./assets/images/icon.png",
     "scheme": "gobike",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/icon.svg",
+      "image": "./assets/images/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,13 +26,13 @@
     "android": {
       "package": "host.exp.exponent",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/icon.svg",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json"
     },
     "web": {
-      "favicon": "./assets/images/icon.svg"
+      "favicon": "./assets/images/icon.png"
     },
     "extra": {
       "eas": {

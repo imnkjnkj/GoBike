@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { State } from "../../redux/reducers";
+import { State } from "../../redux/store";
 import { Text, TextProps } from "./Themed";
 
 export function BarlowCondensedText(props: TextProps) {

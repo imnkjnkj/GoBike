@@ -8,8 +8,8 @@ import {
 import React from "react";
 
 import { useSelector } from "react-redux";
-import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
-import { State } from "../redux/store";
+import { BarlowCondensedText, MontserratText } from "../shared/StyledText";
+import { State } from "../../redux/store";
 import { Divider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
 

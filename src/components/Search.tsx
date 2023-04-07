@@ -52,7 +52,7 @@ const Search = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Tìm kiếm..."
+        placeholder="Search..."
         onChangeText={(text) => setText(text)}
         placeholderTextColor={theme.text}
       />
