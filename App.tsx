@@ -1,15 +1,13 @@
 import {StatusBar} from "expo-status-bar";
 import React,{useEffect} from "react";
-import {Appearance,Text,useColorScheme} from "react-native";
+import {Appearance,Text} from "react-native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
-import {Provider,useDispatch,useSelector} from "react-redux";
+import {Provider,useDispatch} from "react-redux";
 import useCachedResources from "./src/hooks/useCachedResources";
-import Navigation from "./src/navigation";
 import {LogBox} from "react-native";
-import {State,store} from "./src/redux/store";
+import {store} from "./src/redux/store";
 import {setThemeApp} from "./src/redux/shared";
 import MainScreen from "./src/screens/MainScreen";
-import {sIsExpiredToken} from "./src/redux/user/selector";
 
 const AppWrapper=() => {
   return (
