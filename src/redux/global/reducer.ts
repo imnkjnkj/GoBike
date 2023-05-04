@@ -1,4 +1,4 @@
-import { IGlobalStore } from "@/store/global"
+import { IGlobalStore } from "."
 
 export const globalReducer = {
   showSpinner: (state: IGlobalStore) => {

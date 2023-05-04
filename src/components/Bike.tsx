@@ -18,6 +18,7 @@ import {State} from "../redux/store";
 import {Category,CategoryId} from "../enums/common";
 import {IBikesDetail} from "../types/bikes";
 import {setDetailData} from "../redux/bikes";
+import { renderCate } from "../utils/common";
 
 interface IBikeProps {
 	item: IBikesDetail;
@@ -28,21 +29,6 @@ const Bike=({item}: IBikeProps) => {
 	const [saveIcon,setSaveIcon]=useState(false);
 	const navigation=useNavigation();
 	const dispatch=useDispatch();
-
-	const renderCate=(categoryId: number) => {
-		switch(categoryId) {
-			case CategoryId.BIKEGEAR:
-				return Category.BIKEGEAR;
-			case CategoryId.HEALTHNUTRITION:
-				return Category.HEALTHNUTRITION;
-			case CategoryId.REPAIR:
-				return Category.REPAIR;
-			case CategoryId.TRAINING:
-				return Category.TRAINING;
-			default:
-				return null;
-		}
-	};
 
 	const styles=StyleSheet.create({
 		title: {
@@ -67,6 +53,8 @@ const Bike=({item}: IBikeProps) => {
 	const handleClick=() => {
 		navigation.navigate("PostDetail");
 		dispatch(setDetailData(item))
+		console.log(item);
+		
 	};
 	return (
 		<TouchableOpacity style={styles.container} onPress={handleClick}>
@@ -88,7 +76,7 @@ const Bike=({item}: IBikeProps) => {
 							fontStyle: "normal",
 						}}
 					>
-						{item.bikesCategory}
+						{renderCate(item.categoryId)}
 					</MontserratText>
 					<Ionicons
 						name={saveIcon? "ios-bookmark-sharp":"ios-bookmark-outline"}

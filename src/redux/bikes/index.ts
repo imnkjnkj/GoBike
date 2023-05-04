@@ -6,14 +6,40 @@ import {IBikesStore} from "../../types/bikes";
 
 export const initialState: IBikesStore={
   dashboardData: {
+    totalPages: 0,
+    totalElements: 0,
+    size: 0,
     content: [],
+    number: 0,
+    sort: {
+      empty: true,
+      sorted: true,
+      unsorted: true,
+    },
+    numberOfElements: 0,
+    pageable: {
+      offset: 0,
+      sort: {
+        empty: true,
+        sorted: true,
+        unsorted: true,
+      },
+      unpaged: true,
+      pageNumber: 0,
+      pageSize: 0,
+      paged: true,
+    },
+    first: true,
+    last: true,
+    empty: true,
   },
   detailData: {
-    id: "",
+    id: 0,
     name: "",
     thumbnail: "",
     createdAt: new Date(),
-    bikesCategory: "",
+    updatedAt: new Date(),
+    categoryId: 0,
     images: [],
     information: {
       paintMaterial: "",
