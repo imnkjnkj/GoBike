@@ -1,80 +1,119 @@
-import {View,StyleSheet} from "react-native";
-import React,{useEffect,useState} from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
+import React, { useEffect, useState } from "react";
 import Layout from "../layouts/Layout";
-import {BarlowCondensedText} from "../components/shared/StyledText";
+import { BarlowCondensedText } from "../components/shared/StyledText";
 import Constant from "expo-constants";
-import {connect,useSelector} from "react-redux";
-import {AppDispatch,State} from "../redux/store";
-import {PayloadAction} from "@reduxjs/toolkit";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { AppDispatch, State } from "../redux/store";
+import { PayloadAction } from "@reduxjs/toolkit";
 import Loading from "../components/Loading";
-import {getBikes} from "../redux/bikes/thunkApi";
-import {IDashboardData} from "../types/bikes";
+import { getBikes } from "../redux/bikes/thunkApi";
+import { IDashboardData } from "../types/bikes";
 import Bike from "../components/Bike";
 import { IRequestParams } from "../types/common";
-
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../types";
+import { BikesCategoryId, BrandList } from "../enums/common";
+import { filteredList } from "../redux/bikes";
+import Select from "../components/forms/Select";
+import Filter from "../components/Filter";
+type RouteScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "BikeInforScreen"
+>;
+type RouteScreenRouteProp = RouteProp<RootStackParamList, "BikeInforScreen">;
 
 interface IBikeInforScreenProps {
-	pBikesList: IDashboardData;
-	pGetBikes: (params: IRequestParams) => Promise<PayloadAction<unknown>>;
+  navigation: RouteScreenNavigationProp;
+  route: RouteScreenRouteProp;
+  pBikesList: IDashboardData;
+  pGetBikes: (params: IRequestParams) => Promise<PayloadAction<unknown>>;
 }
-const BikeInforScreen=({pBikesList,pGetBikes}: IBikeInforScreenProps) => {
-	const {theme}=useSelector((state: State) => state.shared);
-	const styles=StyleSheet.create({
-		container: {
-			backgroundColor: theme.background,
-			marginTop: Constant.statusBarHeight,
-			position: "relative",
-			zIndex: 1,
-			alignItems: "center",
-		},
-		title: {
-			marginVertical: 0,
-		},
-	});
-	const [loading,setLoading]=useState(true);
-	const fetchData=async () => {
-		await pGetBikes({
-			page: 0,
-			size: 1000,
-			sort: "updatedAt",
-			// categoryId: id,
-		  });;
-		await setLoading(false);
-	};
-	useEffect(() => {
-		fetchData();
+const BikeInforScreen = ({
+  route,
+  pBikesList,
+  pGetBikes,
+}: IBikeInforScreenProps) => {
+  const { theme } = useSelector((state: State) => state.shared);
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: theme.background,
+      marginTop: Constant.statusBarHeight,
+      position: "relative",
+      zIndex: 1,
+      alignItems: "center",
+    },
+    title: {
+      marginVertical: 0,
+      textTransform: "uppercase",
+    },
+    contentWrapper: {
+      width: Dimensions.get("window").width,
+    },
+  });
+  const [loading, setLoading] = useState(true);
+  const [paramsValue, setParamsValue] = useState<IRequestParams>({
+    categoryId: route?.params?.id,
+    brand: "",
+    riderHeight: "",
+    wheelSize: "",
+  });
 
-	},[]);
-	if(loading) {
-		return <Loading color={theme.colorLogo} />;
-	} else {
-		return (
-			<View style={styles.container}>
-				<BarlowCondensedText
-					size={32}
-					color={theme.colorLogo}
-					style={styles.title}
-				>
-					Bikes Information
-				</BarlowCondensedText>
-				<Layout>
-					{pBikesList?.content?.map((item,i) => (
-						<View key={i}>
-							<Bike item={item} />
-						</View>
-					))}
-				</Layout>
-			</View>
-		);
-	}
+  const fetchData = async () => {
+    await pGetBikes({
+      page: 0,
+      size: 1000,
+      sort: "updatedAt",
+      categoryId: paramsValue.categoryId,
+      brand: paramsValue.brand,
+      riderHeight: paramsValue.riderHeight,
+      weightLimit: paramsValue.weightLimit,
+      riderAge: paramsValue.riderAge,
+      wheelSize: paramsValue.wheelSize,
+    });
+    await setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [paramsValue]);
+  if (loading) {
+    return <Loading color={theme.colorLogo} />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <BarlowCondensedText
+          size={32}
+          color={theme.colorLogo}
+          style={styles.title}
+        >
+          {route?.params?.category}
+        </BarlowCondensedText>
+
+        <Layout>
+          <Filter setParamsValue={setParamsValue} paramsValue={paramsValue} />
+          {pBikesList?.content?.length > 0 ? (
+            <>
+              {pBikesList?.content?.map((item, i) => (
+                <View key={i}>
+                  <Bike item={item} />
+                </View>
+              ))}
+            </>
+          ) : (
+            <BarlowCondensedText>No Data</BarlowCondensedText>
+          )}
+        </Layout>
+      </View>
+    );
+  }
 };
-const mapStateToProps=(state: State) => ({
-	pBikesList: state.bikes.dashboardData,
+const mapStateToProps = (state: State) => ({
+  pBikesList: state.bikes.dashboardData,
 });
 
-const mapDispatchToProps=(dispatch: AppDispatch) => ({
-	pGetBikes: (params: IRequestParams) => dispatch(getBikes(params)),
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  pGetBikes: (params: IRequestParams) => dispatch(getBikes(params)),
 });
-export default (
-	connect(mapStateToProps,mapDispatchToProps)(BikeInforScreen)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(BikeInforScreen);

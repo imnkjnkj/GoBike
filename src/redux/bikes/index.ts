@@ -1,10 +1,10 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-import {extraReducers} from "./thunkApi";
-import {bikesReducer} from "./reducer";
-import {IBikesStore} from "../../types/bikes";
+import { extraReducers } from "./thunkApi";
+import { bikesReducer } from "./reducer";
+import { IBikesStore } from "../../types/bikes";
 
-export const initialState: IBikesStore={
+export const initialState: IBikesStore = {
   dashboardData: {
     totalPages: 0,
     totalElements: 0,
@@ -83,15 +83,15 @@ export const initialState: IBikesStore={
       tire: "",
       valveType: "",
       brand: "",
-    }
-  }
+    },
+  },
 };
 
-const bikesSlice=createSlice({
+const bikesSlice = createSlice({
   name: "posts",
   initialState,
   reducers: bikesReducer,
   extraReducers: extraReducers,
 });
-export const {setDetailData}=bikesSlice.actions;
+export const { setDetailData, filteredList } = bikesSlice.actions;
 export default bikesSlice.reducer;

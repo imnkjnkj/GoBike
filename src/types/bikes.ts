@@ -84,3 +84,7 @@ export interface IBikesDetail {
     brand?: string;
   };
 }
+export interface IParamsFilterBikes {
+  categoryId?: number
+
+}

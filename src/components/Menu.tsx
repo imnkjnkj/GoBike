@@ -1,47 +1,42 @@
-import {View,Text,TouchableOpacity,StyleSheet} from "react-native";
-import React,{useEffect,useState} from "react";
-import {connect,useDispatch,useSelector} from "react-redux";
-import {MontserratText} from "./shared/StyledText";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { MontserratText } from "./shared/StyledText";
 import Button from "./forms/Button";
-import {FontAwesome5,Ionicons} from "@expo/vector-icons";
-import {useNavigation} from "@react-navigation/native";
-import {Category,CategoryId} from "../enums/common";
-import {AppDispatch,State} from "../redux/store";
-import {setCategoryValue} from "../redux/shared";
-import {IUserProfileRes,USER_ROLES_NAME} from "../types/users";
-import {logOutUser} from "../redux/user";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import {
+  menuBikeList,
+  menuList,
+} from "../enums/common";
+import { AppDispatch, State } from "../redux/store";
+import { setCategoryValue } from "../redux/shared";
+import { IUserProfileRes, USER_ROLES_NAME } from "../types/users";
+import { logOutUser } from "../redux/user";
 
 interface IMenuProps {
   pUserInfor: IUserProfileRes;
   pIsLogIn: boolean;
   pLogout: () => void;
 }
-function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
-  const [count,setCount]=useState(0);
-  const {theme}=useSelector((state: State) => state.shared);
-  const navigation=useNavigation();
-  const styles=StyleSheet.create({
+
+function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
+  const [count, setCount] = useState(0);
+  const { theme } = useSelector((state: State) => state.shared);
+  const navigation = useNavigation();
+  const styles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: "center",
       marginVertical: 20,
     },
   });
-  const dispatch=useDispatch();
-  const isAdmin=pUserInfor?.roles.some(
-    (x) => x.name===USER_ROLES_NAME.ADMIN
+  const dispatch = useDispatch();
+  const isAdmin = pUserInfor?.roles.some(
+    (x) => x.name === USER_ROLES_NAME.ADMIN
   );
-  const menuList=[
-    {key: "bikeGear",title: "BIKES & GEAR",id: CategoryId.BIKEGEAR},
-    {key: "repair",title: "REPAIR",id: CategoryId.REPAIR},
-    {
-      key: "health",
-      title: "HEALTH & NUTRITION",
-      id: CategoryId.HEALTHNUTRITION,
-    },
-    {key: "training",title: "TRAINING",id: CategoryId.TRAINING},
-  ];
-  const handleLogout=() => {
+
+  const handleLogout = () => {
     pLogout();
     navigation.navigate("MainScreen");
   };
@@ -49,7 +44,7 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
   return (
     <View style={styles.container}>
       <View>
-        {pIsLogIn? (
+        {pIsLogIn ? (
           <>
             <Button
               text={pUserInfor?.username}
@@ -66,7 +61,7 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
               }
             />
           </>
-        ):(
+        ) : (
           <Button
             text="Sign in"
             handlePress={() => navigation.navigate("LogIn")}
@@ -75,7 +70,7 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
             }
           />
         )}
-        {isAdmin&&pIsLogIn? (
+        {isAdmin && pIsLogIn ? (
           <Button
             text="Create A Post"
             handlePress={() => navigation.navigate("CreatePostScreen")}
@@ -87,24 +82,41 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
               />
             }
           />
-        ):(
+        ) : (
           <></>
         )}
       </View>
-      <View style={{marginTop: 30}}>
-        <MontserratText style={{fontWeight: "600"}}>
+      <View style={{ marginTop: 30 }}>
+        <MontserratText
+          style={{ fontWeight: "600", textTransform: "uppercase" }}
+        >
           Bike Information
         </MontserratText>
         <Button
-          text={'Bike Information'}
+          text={"Bike Information"}
           handlePress={() => {
-            navigation.navigate("BikeInforScreen");
+            navigation.navigate("BikeInforScreen", {
+              category: `Bike Information`,
+              id: undefined,
+            });
           }}
         />
-
+        {menuBikeList?.map((item) => (
+          <Button
+            key={item.key}
+            text={item.title}
+            handlePress={() => {
+              dispatch(setCategoryValue(item));
+              navigation.navigate("BikeInforScreen", {
+                category: `${item.title}`,
+                id: item.id,
+              });
+            }}
+          />
+        ))}
       </View>
-      <View style={{marginTop: 30}}>
-        <MontserratText style={{fontWeight: "600"}}>
+      <View style={{ marginTop: 30 }}>
+        <MontserratText style={{ fontWeight: "600" }}>
           Categories
         </MontserratText>
         {menuList?.map((item) => (
@@ -113,7 +125,7 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
             text={item.title}
             handlePress={() => {
               dispatch(setCategoryValue(item));
-              navigation.navigate("RouteScreen",{
+              navigation.navigate("RouteScreen", {
                 category: `${item.title}`,
                 id: item.id,
               });
@@ -124,13 +136,13 @@ function Menu({pIsLogIn,pUserInfor,pLogout}: IMenuProps) {
     </View>
   );
 }
-const mapStateToProps=(state: State) => ({
+const mapStateToProps = (state: State) => ({
   pUserInfor: state.user.userProfile,
   pIsLogIn: state.user.isLogIn,
 });
-const mapDispatchToProps=(dispatch: AppDispatch) => {
+const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     pLogout: () => dispatch(logOutUser()),
   };
 };
-export default connect(mapStateToProps,mapDispatchToProps)(Menu);
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

@@ -1,42 +1,60 @@
-import { View, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  Dimensions,
+} from "react-native";
 import React, { useRef, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
+import { useSelector } from "react-redux";
+import { State } from "../../redux/store";
 
 interface ItemsProps {
   label: string;
-  value: number;
+  value?: number | string;
 }
 interface SelectProps {
-  label: string;
+  label?: string;
   items: ItemsProps[];
-  onValueChange: (value: number) => void;
-  selectedValue: number;
+  onValueChange: React.Dispatch<React.SetStateAction<any>>;
+  selectedValue: any;
+  style?: StyleProp<ViewStyle>;
 }
-
 
 const Select: React.FC<SelectProps> = ({
   label,
   items,
   onValueChange,
   selectedValue,
+  style,
 }) => {
-  const [pickerValue, setPickerValue] = useState(selectedValue);
+  const { theme } = useSelector((state: State) => state.shared);
+  const styles = StyleSheet.create({
+
+    selectContainer: {
+      maxWidth: 160,
     
+    },
+  });
+  const [pickerValue, setPickerValue] = useState(selectedValue);
+
   const handleValueChange = (value: number) => {
-    console.log(value);
     setPickerValue(value);
     onValueChange(value);
   };
 
   return (
-    <View>
-      <Text>{label}</Text>
-      <Picker selectedValue={pickerValue} onValueChange={handleValueChange}>
+      <Picker
+        style={styles.selectContainer}
+        selectedValue={pickerValue}
+        onValueChange={handleValueChange}
+        mode={"dropdown"}
+      >
         {items.map((item) => (
           <Picker.Item key={item.value} label={item.label} value={item.value} />
         ))}
       </Picker>
-    </View>
   );
 };
 

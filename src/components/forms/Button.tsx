@@ -15,7 +15,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 interface IButtonProps {
   handlePress?: () => void;
-  text: string;
+  text?: string;
   icon?: any;
 }
 export default function Button({ handlePress, text, icon }: IButtonProps) {
