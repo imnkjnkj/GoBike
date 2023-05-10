@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions,Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   BikeList,
@@ -11,7 +11,7 @@ import {
 } from "../enums/common";
 import Select from "./forms/Select";
 import { IRequestParams } from "../types/common";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/store";
 import Constant from "expo-constants";
 
@@ -25,9 +25,12 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
     container: {
       backgroundColor: theme.background,
       marginTop: Constant.statusBarHeight,
-      width: Dimensions.get("window").width,
-    //   flexDirection: "row",
-    //   flexWrap:'wrap'
+      maxWidth: Dimensions.get("window").width,
+      flex: 1,
+      flexDirection: 'row',
+      flexWrap:'wrap',
+      paddingHorizontal: 10,
+      height: '100%'
     },
 
   });
@@ -39,7 +42,6 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
   const [heightValue, setHeightValue] = useState<string>();
   const [weightValue, setWeightValue] = useState<string>();
   const [wheelSizeValue, setWheelSizeValue] = useState<string>();
-
   useEffect(() => {
     setParamsValue({
       ...paramsValue,

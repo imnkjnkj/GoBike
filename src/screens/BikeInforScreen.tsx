@@ -18,6 +18,7 @@ import { BikesCategoryId, BrandList } from "../enums/common";
 import { filteredList } from "../redux/bikes";
 import Select from "../components/forms/Select";
 import Filter from "../components/Filter";
+import { renderCate } from "../utils/common";
 type RouteScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "BikeInforScreen"
@@ -88,7 +89,7 @@ const BikeInforScreen = ({
           color={theme.colorLogo}
           style={styles.title}
         >
-          {route?.params?.category}
+          {renderCate(paramsValue?.categoryId)}
         </BarlowCondensedText>
 
         <Layout>

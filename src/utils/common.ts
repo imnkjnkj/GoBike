@@ -1,6 +1,11 @@
-import { BikesCategory, BikesCategoryId, Category, CategoryId } from "../enums/common";
+import {
+  BikesCategory,
+  BikesCategoryId,
+  Category,
+  CategoryId,
+} from "../enums/common";
 
-export const renderCate = (categoryId: number) => {
+export const renderCate = (categoryId?: number) => {
   switch (categoryId) {
     case CategoryId.BIKEGEAR:
       return Category.BIKEGEAR;
@@ -20,6 +25,8 @@ export const renderCate = (categoryId: number) => {
       return BikesCategory.ROAD;
     case BikesCategoryId.TOURING:
       return BikesCategory.TOURING;
+    case undefined:
+      return null;
     default:
       return null;
   }
