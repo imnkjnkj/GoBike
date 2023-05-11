@@ -5,10 +5,7 @@ import { MontserratText } from "./shared/StyledText";
 import Button from "./forms/Button";
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import {
-  menuBikeList,
-  menuList,
-} from "../enums/common";
+import { menuBikeList, menuList } from "../enums/common";
 import { AppDispatch, State } from "../redux/store";
 import { setCategoryValue } from "../redux/shared";
 import { IUserProfileRes, USER_ROLES_NAME } from "../types/users";
@@ -87,11 +84,7 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
         )}
       </View>
       <View style={{ marginTop: 30 }}>
-        <MontserratText
-          style={{ fontWeight: "600", textTransform: "uppercase" }}
-        >
-          Bike Information
-        </MontserratText>
+        <MontserratText>Bike Information</MontserratText>
         <Button
           text={"Bike Information"}
           handlePress={() => {
@@ -116,7 +109,7 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
         ))}
       </View>
       <View style={{ marginTop: 30 }}>
-        <MontserratText style={{ fontWeight: "600" }}>
+        <MontserratText>
           Categories
         </MontserratText>
         {menuList?.map((item) => (

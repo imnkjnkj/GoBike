@@ -13,7 +13,7 @@ import { IRequestParams } from "../types/common";
 import { getNews } from "../redux/posts/thunkApi";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { IDashboarData } from "../types/posts";
-import { CategoryId } from "../enums/common";
+import { CategoryId, fontStyleEnum } from "../enums/common";
 import Loading from "../components/Loading";
 import { RootStackParamList } from "../../types";
 
@@ -66,6 +66,7 @@ const RouteScreen = ({ route, pGetNews, pNewsList }: ITabRouteProps) => {
           size={32}
           color={theme.colorLogo}
           style={styles.title}
+          fontStyle={fontStyleEnum.SemiBold}
         >
           {category}
         </BarlowCondensedText>

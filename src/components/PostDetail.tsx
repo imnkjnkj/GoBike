@@ -10,7 +10,7 @@ import React from "react";
 import { connect, useSelector } from "react-redux";
 import Constant from "expo-constants";
 import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
-import RenderHtml from "react-native-render-html";
+import RenderHtml, { MixedStyleDeclaration } from "react-native-render-html";
 import { useWindowDimensions } from "react-native";
 import Navigation from "../navigation";
 import { State } from "../redux/store";
@@ -18,7 +18,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types";
 import { RouteProp } from "@react-navigation/native";
 import { IDashboarData, IPostsDetail } from "../types/posts";
-
+import { fontStyleEnum } from "../enums/common";
+type MyStyles = Readonly<Record<string, MixedStyleDeclaration>>;
 interface IPostDetailProps {
   pDetailData: IPostsDetail;
 }
@@ -38,7 +39,7 @@ const PostDetail = ({ pDetailData }: IPostDetailProps) => {
     postDetailContent: {},
   });
 
-  const tagsStyles = {
+  const tagsStyles: MyStyles = {
     body: {
       whiteSpace: "normal",
       color: theme.text,
@@ -50,14 +51,17 @@ const PostDetail = ({ pDetailData }: IPostDetailProps) => {
     },
   };
 
-  const  width  = Dimensions.get('window').width;
-  console.log(width);
-  
+  const width = Dimensions.get("window").width;
+
   return (
-    <SafeAreaView >
+    <SafeAreaView>
       <ScrollView style={styles.container}>
         <View>
-          <BarlowCondensedText color={theme.colorLogo} size={20}>
+          <BarlowCondensedText
+            fontStyle={fontStyleEnum.SemiBold}
+            color={theme.colorLogo}
+            size={20}
+          >
             {category.title}
           </BarlowCondensedText>
           <MontserratText color={"gray"} style={styles.createDate} size={16}>
@@ -65,7 +69,11 @@ const PostDetail = ({ pDetailData }: IPostDetailProps) => {
           </MontserratText>
         </View>
         <View style={styles.postDetailContent}>
-          <BarlowCondensedText size={32} color={theme.text}>
+          <BarlowCondensedText
+            size={32}
+            color={theme.text}
+            fontStyle={fontStyleEnum.SemiBold}
+          >
             {pDetailData?.title}
           </BarlowCondensedText>
           <Image
@@ -78,7 +86,7 @@ const PostDetail = ({ pDetailData }: IPostDetailProps) => {
               source={{ html: pDetailData?.description }}
               enableExperimentalMarginCollapsing={true}
               tagsStyles={tagsStyles}
-              ignoredDomTags={["button","svg","fieldset", "video"]}
+              ignoredDomTags={["button", "svg", "fieldset", "video"]}
             />
           </View>
         </View>

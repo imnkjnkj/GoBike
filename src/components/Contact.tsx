@@ -21,7 +21,7 @@ export default function Contact() {
   return (
     <View style={styles.container}>
       <View style= {{marginBottom: 15}}>
-        <MontserratText style={{ fontWeight: "600" }}>Liên hệ</MontserratText>
+        <MontserratText >Liên hệ</MontserratText>
         <View
           style={{
             marginTop: 15,
@@ -32,7 +32,7 @@ export default function Contact() {
             <Entypo
               name="facebook-with-circle"
               color={theme.text}
-              size={20}
+              size={15}
               style={{ marginRight: 5 }}
             />
             <BarlowCondensedText>GoBike</BarlowCondensedText>
@@ -41,7 +41,7 @@ export default function Contact() {
             <MaterialIcons
               name="email"
               color={theme.text}
-              size={20}
+              size={15}
               style={{ marginRight: 5 }}
             />
             <BarlowCondensedText>support@gobike.com</BarlowCondensedText>
@@ -50,7 +50,7 @@ export default function Contact() {
             <Foundation
               name="web"
               color={theme.text}
-              size={20}
+              size={15}
               style={{ marginRight: 5 }}
             />
             <BarlowCondensedText>gobike.com</BarlowCondensedText>

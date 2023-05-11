@@ -10,6 +10,7 @@ import Constant from "expo-constants";
 import { useSelector } from "react-redux";
 import { State } from "../redux/store";
 import { BarlowCondensedText } from "./shared/StyledText";
+import { fontStyleEnum } from "../enums/common";
 
 const AnimatedLogo = Animated.createAnimatedComponent(View);
 const AnimatedName = Animated.createAnimatedComponent(Text);
@@ -52,6 +53,7 @@ export function HomeHeader(props: any) {
                 size={32}
                 color={theme.text}
                 style={styles.logoText}
+                fontStyle = {fontStyleEnum.SemiBold}
               >
                 GoBike
               </BarlowCondensedText>

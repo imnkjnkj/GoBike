@@ -15,7 +15,7 @@ import { RouteProp, useNavigation } from "@react-navigation/native";
 import { IPost, RootStackParamList } from "../../types";
 import { IPostsDetail } from "../types/posts";
 import { State } from "../redux/store";
-import { Category, CategoryId } from "../enums/common";
+import { Category, CategoryId, fontStyleEnum } from "../enums/common";
 import { setDetailData } from "../redux/posts";
 import { renderCate } from "../utils/common";
 
@@ -60,6 +60,7 @@ const Post = ({ item }: IPostProps) => {
         <BarlowCondensedText
           size={20}
           color={theme.text}
+          fontStyle={fontStyleEnum.SemiBold}
           style={{ marginVertical: 10 }}
         >
           {item.title}
@@ -68,10 +69,9 @@ const Post = ({ item }: IPostProps) => {
           size={16}
           color={theme.text}
           style={{
-            fontWeight: "500",
-            fontStyle: "normal",
-            textTransform: "lowercase",
+            textTransform: "capitalize",
           }}
+          fontStyle={fontStyleEnum.Light}
         >
           {item.sapo}
         </MontserratText>
@@ -80,9 +80,9 @@ const Post = ({ item }: IPostProps) => {
             size={13}
             color={theme.tint}
             style={{
-              fontWeight: "600",
               fontStyle: "normal",
             }}
+            
           >
             {renderCate(item.category.id)}
           </MontserratText>

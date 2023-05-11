@@ -25,7 +25,7 @@ import { useSelector } from "react-redux";
 import { BarlowCondensedText } from "../../components/shared/StyledText";
 import Input from "../../components/forms/Input";
 import RichEditorTextArea from "../../components/forms/RichEditorTextArea";
-import { Category, CategoryId } from "../../enums/common";
+import { Category, CategoryId, fontStyleEnum } from "../../enums/common";
 import Select from "../../components/forms/Select";
 export interface RefLinkModal {
   setModalVisible: (visile: boolean) => void;
@@ -159,7 +159,11 @@ export default function CreatePostScreen() {
       <SafeAreaView>
         <ScrollView>
           <View style={styles.container}>
-            <BarlowCondensedText size={32} color={theme.text}>
+            <BarlowCondensedText
+              fontStyle={fontStyleEnum.SemiBold}
+              size={32}
+              color={theme.text}
+            >
               Create A Post
             </BarlowCondensedText>
 
@@ -168,12 +172,12 @@ export default function CreatePostScreen() {
               label="Title"
               placeholder="Enter your title..."
             ></Input>
-            <Select
+            {/* <Select
               label="Category"
               items={CategoryOptions}
               selectedValue={category}
               onValueChange={handleCategoryChange}
-            />
+            /> */}
             <RichEditorTextArea
               setDescHTML={setDescHTML}
               showDescError={showDescError}

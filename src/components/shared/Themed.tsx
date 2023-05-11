@@ -11,8 +11,9 @@ import {
 import { useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
+import { fontStyleEnum } from "../../enums/common";
 import useColorScheme from "../../hooks/useColorScheme";
-import { State } from "../../redux/reducers";
+import { State } from "../../redux/store";
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
@@ -33,8 +34,9 @@ type ThemeProps = {
   darkColor?: string;
 };
 
+type fontStyleProps = fontStyleEnum.Light | fontStyleEnum.SemiBold | fontStyleEnum.Medium 
 export type TextProps = ThemeProps &
-  DefaultText["props"] & { color?: string; size?: number ; };
+  DefaultText["props"] & { color?: string; size?: number; fontStyle?: fontStyleProps };
 export type ViewProps = ThemeProps & DefaultView["props"];
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;

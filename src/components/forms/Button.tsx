@@ -12,6 +12,7 @@ import { BarlowCondensedText, MontserratText } from "../shared/StyledText";
 import { State } from "../../redux/store";
 import { Divider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
+import { fontStyleEnum } from "../../enums/common";
 
 interface IButtonProps {
   handlePress?: () => void;
@@ -38,7 +39,12 @@ export default function Button({ handlePress, text, icon }: IButtonProps) {
       <TouchableOpacity style={styles.button} onPress={handlePress}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {icon}
-          <BarlowCondensedText color={theme.text} size={16} style={styles.text}>
+          <BarlowCondensedText
+            fontStyle={fontStyleEnum.SemiBold}
+            color={theme.text}
+            size={16}
+            style={styles.text}
+          >
             {text}
           </BarlowCondensedText>
         </View>

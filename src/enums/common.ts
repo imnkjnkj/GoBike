@@ -1,3 +1,8 @@
+export enum fontStyleEnum {
+  SemiBold = "SemiBold",
+  Light = "Light",
+  Medium ="Medium"
+}
 export enum Category {
   BIKEGEAR = "BIKES & GEAR",
   TRAINING = "TRAINING",
@@ -102,7 +107,7 @@ export const RiderHeightList = [
   { value: "5'8\" - 6'4\"", label: "173cm  193cm" },
 ];
 export const WeightLimitList = [
-  { value: undefined, label: "Weight Height" },
+  { value: undefined, label: "Weight Limit" },
   { value: "220 lbs", label: "100kg" },
   { value: "250 lbs", label: "113kg" },
 ];

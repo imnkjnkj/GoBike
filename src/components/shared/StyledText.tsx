@@ -3,7 +3,7 @@ import { State } from "../../redux/store";
 import { Text, TextProps } from "./Themed";
 
 export function BarlowCondensedText(props: TextProps) {
-  const { size, color } = props;
+  const { size, color, fontStyle } = props;
   const { theme } = useSelector((state: State) => state.shared);
 
   return (
@@ -12,7 +12,7 @@ export function BarlowCondensedText(props: TextProps) {
       style={[
         props.style,
         {
-          fontFamily: "Barlow Condensed",
+          fontFamily: `Barlow Condensed${fontStyle || ""}`,
           fontSize: size,
           color: color ? color : theme.text,
         },
@@ -22,14 +22,14 @@ export function BarlowCondensedText(props: TextProps) {
 }
 export function MontserratText(props: TextProps) {
   const { theme } = useSelector((state: State) => state.shared);
-  const { size, color } = props;
+  const { size, color, fontStyle } = props;
   return (
     <Text
       {...props}
       style={[
         props.style,
         {
-          fontFamily: "Montserrat",
+          fontFamily: `Montserrat${fontStyle || ""}`,
           fontSize: size,
           color: color ? color : theme.text,
         },

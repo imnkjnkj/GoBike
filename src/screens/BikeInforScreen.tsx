@@ -1,4 +1,4 @@
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import Layout from "../layouts/Layout";
 import { BarlowCondensedText } from "../components/shared/StyledText";
@@ -14,7 +14,7 @@ import { IRequestParams } from "../types/common";
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../types";
-import { BikesCategoryId, BrandList } from "../enums/common";
+import { BikesCategoryId, BrandList, fontStyleEnum } from "../enums/common";
 import { filteredList } from "../redux/bikes";
 import Select from "../components/forms/Select";
 import Filter from "../components/Filter";
@@ -88,12 +88,12 @@ const BikeInforScreen = ({
           size={32}
           color={theme.colorLogo}
           style={styles.title}
+          fontStyle={fontStyleEnum.SemiBold}
         >
           {renderCate(paramsValue?.categoryId)}
         </BarlowCondensedText>
-
-        <Layout>
-          <Filter setParamsValue={setParamsValue} paramsValue={paramsValue} />
+        <Filter setParamsValue={setParamsValue} paramsValue={paramsValue} />
+        <ScrollView style={{ marginTop: 80 }}>
           {pBikesList?.content?.length > 0 ? (
             <>
               {pBikesList?.content?.map((item, i) => (
@@ -103,9 +103,11 @@ const BikeInforScreen = ({
               ))}
             </>
           ) : (
-            <BarlowCondensedText>No Data</BarlowCondensedText>
+            <BarlowCondensedText fontStyle={fontStyleEnum.SemiBold}>
+              No Data
+            </BarlowCondensedText>
           )}
-        </Layout>
+        </ScrollView>
       </View>
     );
   }

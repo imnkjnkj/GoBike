@@ -21,6 +21,7 @@ import { AppDispatch, State } from "../redux/store";
 import { getUser, loginUser } from "../redux/user/thunkApi";
 import { useNavigation } from "@react-navigation/native";
 import { IUserLogin, IUserProfileRes } from "../types/users";
+import { fontStyleEnum } from "../enums/common";
 
 const LogInScreen = ({
   pLogin,
@@ -135,6 +136,7 @@ const LogInScreen = ({
             size={32}
             color={theme.text}
             style={styles.logoText}
+            fontStyle={fontStyleEnum.SemiBold}
           >
             GoBike
           </BarlowCondensedText>
@@ -183,7 +185,7 @@ const LogInScreen = ({
           <MontserratText
             color={theme.colorLogo}
             size={16}
-            style={{ marginLeft: 8, fontWeight: "700" }}
+            style={{ marginLeft: 8 }}
           >
             Login With Google
           </MontserratText>
