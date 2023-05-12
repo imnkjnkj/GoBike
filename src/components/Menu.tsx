@@ -43,87 +43,122 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
       <View>
         {pIsLogIn ? (
           <>
-            <Button
-              text={pUserInfor?.username}
-              handlePress={() => navigation.navigate("ProfileScreen")}
-              icon={
-                <FontAwesome5 name={"user-alt"} size={16} color={theme.text} />
-              }
-            />
-            <Button
-              text="Log Out"
-              handlePress={handleLogout}
-              icon={
-                <FontAwesome5 name={"user-alt"} size={16} color={theme.text} />
-              }
-            />
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text={pUserInfor?.username}
+                handlePress={() => navigation.navigate("ProfileScreen")}
+                icon={
+                  <FontAwesome5
+                    name={"user-alt"}
+                    size={16}
+                    color={theme.text}
+                  />
+                }
+              />{" "}
+            </View>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text="Log Out"
+                handlePress={handleLogout}
+                icon={
+                  <FontAwesome5
+                    name={"user-alt"}
+                    size={16}
+                    color={theme.text}
+                  />
+                }
+              />
+            </View>
           </>
         ) : (
-          <Button
-            text="Sign in"
-            handlePress={() => navigation.navigate("LogIn")}
-            icon={
-              <FontAwesome5 name={"user-alt"} size={16} color={theme.text} />
-            }
-          />
+          <View style={{ marginVertical: 5 }}>
+            <Button
+              mode="underline"
+              iconArrow={true}
+              text="Sign in"
+              handlePress={() => navigation.navigate("LogIn")}
+              icon={
+                <FontAwesome5 name={"user-alt"} size={16} color={theme.text} />
+              }
+            />
+          </View>
         )}
         {isAdmin && pIsLogIn ? (
-          <Button
-            text="Create A Post"
-            handlePress={() => navigation.navigate("CreatePostScreen")}
-            icon={
-              <Ionicons
-                name={"ios-settings-sharp"}
-                size={16}
-                color={theme.text}
-              />
-            }
-          />
+          <View style={{ marginVertical: 5 }}>
+            <Button
+              mode="underline"
+              iconArrow={true}
+              text="Create A Post"
+              handlePress={() => navigation.navigate("CreatePostScreen")}
+              icon={
+                <Ionicons
+                  name={"ios-settings-sharp"}
+                  size={16}
+                  color={theme.text}
+                />
+              }
+            />{" "}
+          </View>
         ) : (
           <></>
         )}
       </View>
       <View style={{ marginTop: 30 }}>
-        <MontserratText>Bike Information</MontserratText>
-        <Button
-          text={"Bike Information"}
-          handlePress={() => {
-            navigation.navigate("BikeInforScreen", {
-              category: `Bike Information`,
-              id: undefined,
-            });
-          }}
-        />
-        {menuBikeList?.map((item) => (
+        <MontserratText>BIKE INFORMATION</MontserratText>
+        <View style={{ marginVertical: 5 }}>
           <Button
-            key={item.key}
-            text={item.title}
+            mode="underline"
+            iconArrow={true}
+            text={"Bike Information"}
             handlePress={() => {
-              dispatch(setCategoryValue(item));
               navigation.navigate("BikeInforScreen", {
-                category: `${item.title}`,
-                id: item.id,
+                category: `Bike Information`,
+                id: undefined,
               });
             }}
           />
+        </View>
+
+        {menuBikeList?.map((item) => (
+          <View style={{ marginVertical: 5 }} key={item.key}>
+            <Button
+              mode="underline"
+              iconArrow={true}
+              key={item.key}
+              text={item.title}
+              handlePress={() => {
+                dispatch(setCategoryValue(item));
+                navigation.navigate("BikeInforScreen", {
+                  category: `${item.title}`,
+                  id: item.id,
+                });
+              }}
+            />
+          </View>
         ))}
       </View>
       <View style={{ marginTop: 30 }}>
-        <MontserratText>
-          Categories
-        </MontserratText>
+        <MontserratText>Categories</MontserratText>
         {menuList?.map((item) => (
-          <Button
-            key={item.key}
-            text={item.title}
-            handlePress={() => {
-              dispatch(setCategoryValue(item));
-              navigation.navigate("RouteScreen", {
-                category: `${item.title}`,
-                id: item.id,
-              });
-            }}
-          />
+          <View style={{ marginVertical: 5 }} key={item.key}>
+            <Button
+              mode="underline"
+              iconArrow={true}
+              key={item.key}
+              text={item.title}
+              handlePress={() => {
+                dispatch(setCategoryValue(item));
+                navigation.navigate("RouteScreen", {
+                  category: `${item.title}`,
+                  id: item.id,
+                });
+              }}
+            />
+          </View>
         ))}
       </View>
     </View>

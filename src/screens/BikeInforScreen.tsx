@@ -93,7 +93,7 @@ const BikeInforScreen = ({
           {renderCate(paramsValue?.categoryId)}
         </BarlowCondensedText>
         <Filter setParamsValue={setParamsValue} paramsValue={paramsValue} />
-        <ScrollView style={{ marginTop: 80 }}>
+        <ScrollView style={{ marginTop: 90 }}>
           {pBikesList?.content?.length > 0 ? (
             <>
               {pBikesList?.content?.map((item, i) => (

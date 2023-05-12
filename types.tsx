@@ -22,7 +22,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   Post: undefined;
-  PostDetail: undefined;
+  PostDetailScreen: undefined;
   RouteScreen: { category: string; id: CategoryId };
   LogIn: undefined;
   HomeScreen: undefined;

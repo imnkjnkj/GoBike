@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/store";
 import Constant from "expo-constants";
 import Button from "./forms/Button";
+import { color } from "react-native-reanimated";
 
 interface IFilter {
   paramsValue: IRequestParams;
@@ -30,9 +31,12 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
       flex: 1,
       flexDirection: "row",
       flexWrap: "wrap",
-      paddingHorizontal: 5,
+      paddingHorizontal: 8,
       height: "100%",
       zIndex: 999,
+    },
+    clearButton: {
+      color: theme.colorLogo,
     },
   });
   const [brandValue, setBrandValue] = useState<string>();
@@ -61,7 +65,14 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
     ageValue,
     wheelSizeValue,
   ]);
-
+  const handleClear = () => {
+    setBrandValue(undefined);
+    setTypeValue(undefined);
+    setAgeValue(undefined);
+    setHeightValue(undefined);
+    setWeightValue(undefined);
+    setWheelSizeValue(undefined);
+  };
   return (
     <View style={styles.container}>
       <Select
@@ -100,7 +111,14 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
         selectedValue={wheelSizeValue}
         zIndex={100}
       />
-      <Button text="Clear"></Button>
+      <View style={{ alignItems: "center" }}>
+        <Button
+          handlePress={handleClear}
+          mode="underline"
+          text="Clear"
+          color={theme.colorLogo}
+        ></Button>
+      </View>
     </View>
   );
 }

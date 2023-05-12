@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { connect, useSelector } from "react-redux";
 import Constant from "expo-constants";
-import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
+import { BarlowCondensedText, MontserratText } from "../components/shared/StyledText";
 import RenderHtml, { MixedStyleDeclaration } from "react-native-render-html";
 import { useWindowDimensions } from "react-native";
 import Navigation from "../navigation";
@@ -20,10 +20,10 @@ import { RouteProp } from "@react-navigation/native";
 import { IDashboarData, IPostsDetail } from "../types/posts";
 import { fontStyleEnum } from "../enums/common";
 type MyStyles = Readonly<Record<string, MixedStyleDeclaration>>;
-interface IPostDetailProps {
+interface IPostDetailScreenProps {
   pDetailData: IPostsDetail;
 }
-const PostDetail = ({ pDetailData }: IPostDetailProps) => {
+const PostDetailScreen = ({ pDetailData }: IPostDetailScreenProps) => {
   const { category } = useSelector((state: State) => state.shared);
   const { theme } = useSelector((state: State) => state.shared);
   var date = new Date().toLocaleString();
@@ -100,4 +100,4 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = null;
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetailScreen);

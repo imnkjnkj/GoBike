@@ -5,7 +5,7 @@ import {
   ViewStyle,
   Dimensions,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useSelector } from "react-redux";
 import { State } from "../../redux/store";
@@ -40,14 +40,14 @@ const Select: React.FC<SelectProps> = ({
       fontFamily: "Montserrat",
       flex: 1,
       flexShrink: 1,
-      flexBasis: 100,
+      flexBasis: 95,
       margin: 4,
       maxWidth: width || 160,
       height: height || 35,
       zIndex: zIndex,
     },
     selectContainer: {
-      minHeight: height || 32,
+      minHeight: height || 35,
       backgroundColor: theme.background,
       borderColor: theme.text,
       borderWidth: 0.5,
@@ -66,7 +66,10 @@ const Select: React.FC<SelectProps> = ({
     setPickerValue(value);
     onValueChange(value);
   };
-
+  useEffect(() => {
+    setPickerValue(selectedValue)
+  }, [selectedValue])
+  
   return (
     <View style={styles.container}>
       <DropDownPicker

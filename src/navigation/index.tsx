@@ -23,7 +23,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import {useSelector} from "react-redux";
 import {State} from "../redux/store";
 import Post from "../components/Post";
-import PostDetail from "../components/PostDetail";
+import PostDetailScreen from "../screens/PostDetailScreen";
 import RouteScreen from "../screens/RouteScreen";
 import LogInScreen from "../screens/LogInScreen";
 import MainScreen from "../screens/MainScreen";
@@ -66,8 +66,8 @@ function RootNavigator() {
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
       <Stack.Screen
-        name="PostDetail"
-        component={PostDetail}
+        name="PostDetailScreen"
+        component={PostDetailScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen

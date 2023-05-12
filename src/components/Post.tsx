@@ -50,7 +50,7 @@ const Post = ({ item }: IPostProps) => {
     },
   });
   const handleClick = () => {
-    navigation.navigate("PostDetail");
+    navigation.navigate("PostDetailScreen");
     dispatch(setDetailData(item));
   };
   return (

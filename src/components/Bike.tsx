@@ -51,7 +51,7 @@ const Bike = ({ item }: IBikeProps) => {
     },
   });
   const handleClick = () => {
-    navigation.navigate("PostDetail");
+    navigation.navigate("PostDetailScreen");
     dispatch(setDetailData(item));
     console.log(item);
   };
