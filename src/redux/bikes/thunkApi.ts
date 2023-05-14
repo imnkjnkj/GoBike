@@ -3,8 +3,8 @@ import {
   createAsyncThunk,
   PayloadAction,
 } from "@reduxjs/toolkit";
-import { bikesApi } from "../../api";
-import { IRequestParams } from "../../types/common";
+import {bikesApi} from "../../api";
+import {IRequestParams} from "../../types/common";
 import {
   IBikesDetail,
   IBikesStore,
@@ -12,68 +12,68 @@ import {
   IParamsFilterBikes,
 } from "../../types/bikes";
 
-export const getBikes = createAsyncThunk(
+export const getBikes=createAsyncThunk(
   "bikes",
   async (params: IRequestParams) => {
     const {
-      page = 0,
-      size = 1000,
-      sort = "updatedAt",
+      page=0,
+      size=1000,
+      sort="updatedAt",
       categoryId,
       brand,
       riderHeight,
       weightLimit,
       riderAge,
       wheelSize,
-    } = params;
-    const bikesList = await bikesApi.getBikes({ page, size, sort, categoryId });
-    const filteredList = () => {
+    }=params;
+    const bikesList=await bikesApi.getBikes({page,size,sort,categoryId});
+    const filteredList=() => {
       console.log(params);
-      if (categoryId) {
-        bikesList.content = bikesList.content.filter(
-          (item: IBikesDetail) => item.categoryId === categoryId
+      if(categoryId) {
+        bikesList.content=bikesList.content.filter(
+          (item: IBikesDetail) => item.categoryId===categoryId
         );
       }
-      if (brand) {
-        bikesList.content = bikesList.content.filter(
-          (item: IBikesDetail) => item.information.brand === brand
+      if(brand) {
+        bikesList.content=bikesList.content.filter(
+          (item: IBikesDetail) => item.information.brand===brand
         );
       }
-      if (riderHeight) {
-        bikesList.content = bikesList.content.filter(
+      if(riderHeight) {
+        bikesList.content=bikesList.content.filter(
           (item: IBikesDetail) =>
-            item.suitableUser.recommendedHeight === riderHeight
+            item.suitableUser.recommendedHeight===riderHeight
         );
       }
-      if (weightLimit) {
-        bikesList.content = bikesList.content.filter(
+      if(weightLimit) {
+        bikesList.content=bikesList.content.filter(
           (item: IBikesDetail) =>
-            item.suitableUser.pillionWeightLimit === weightLimit
+            item.suitableUser.bikeWeightLimit===weightLimit
         );
       }
-      if (riderAge) {
-        bikesList.content = bikesList.content.filter(
-          (item: IBikesDetail) => item.suitableUser.recommendedAge === riderAge
+      if(riderAge) {
+        bikesList.content=bikesList.content.filter(
+          (item: IBikesDetail) => item.suitableUser.recommendedAge===riderAge
         );
       }
-      if (wheelSize) {
-        bikesList.content = bikesList.content.filter(
-          (item: IBikesDetail) => item.wheelset.wheelSize === wheelSize
+      if(wheelSize) {
+        bikesList.content=bikesList.content.filter(
+          (item: IBikesDetail) => item.wheelset.wheelSize===wheelSize
         );
-      } else bikesList.content = bikesList.content;
+      } else bikesList.content=bikesList.content;
       console.log(bikesList.content);
     };
     filteredList();
     return bikesList;
   }
 );
-export const extraReducers = (
+export const extraReducers=(
   builders: ActionReducerMapBuilder<IBikesStore>
 ) => {
   builders.addCase(
     getBikes.fulfilled,
-    (state: IBikesStore, action: PayloadAction<IDashboardData>) => {
-      state.dashboardData = action.payload;
+    (state: IBikesStore,action: PayloadAction<IDashboardData>) => {
+      state.dashboardData=action.payload;
     }
   );
 };

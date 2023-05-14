@@ -6,31 +6,31 @@ import {
   useWindowDimensions,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HorizontalLine } from "./shared/Themed";
-import { BarlowCondensedText, MontserratText } from "./shared/StyledText";
-import { Ionicons } from "@expo/vector-icons";
-import { RouteProp, useNavigation } from "@react-navigation/native";
-import { IPost, RootStackParamList } from "../../types";
-import { IPostsDetail } from "../types/posts";
-import { State } from "../redux/store";
-import { Category, CategoryId, fontStyleEnum } from "../enums/common";
-import { IBikesDetail } from "../types/bikes";
-import { setDetailData } from "../redux/bikes";
-import { renderCate } from "../utils/common";
+import React,{useState} from "react";
+import {useDispatch,useSelector} from "react-redux";
+import {HorizontalLine} from "./shared/Themed";
+import {BarlowCondensedText,MontserratText} from "./shared/StyledText";
+import {Ionicons} from "@expo/vector-icons";
+import {RouteProp,useNavigation} from "@react-navigation/native";
+import {IPost,RootStackParamList} from "../../types";
+import {IPostsDetail} from "../types/posts";
+import {State} from "../redux/store";
+import {Category,CategoryId,fontStyleEnum} from "../enums/common";
+import {IBikesDetail} from "../types/bikes";
+import {setDetailData} from "../redux/bikes";
+import {renderCate} from "../utils/common";
 
 interface IBikeProps {
   item: IBikesDetail;
 }
-const Bike = ({ item }: IBikeProps) => {
-  const { theme } = useSelector((state: State) => state.shared);
-  const layout = useWindowDimensions();
-  const [saveIcon, setSaveIcon] = useState(false);
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
+const Bike=({item}: IBikeProps) => {
+  const {theme}=useSelector((state: State) => state.shared);
+  const layout=useWindowDimensions();
+  const [saveIcon,setSaveIcon]=useState(false);
+  const navigation=useNavigation();
+  const dispatch=useDispatch();
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     title: {
       paddingHorizontal: 20,
     },
@@ -50,20 +50,20 @@ const Bike = ({ item }: IBikeProps) => {
       marginBottom: 20,
     },
   });
-  const handleClick = () => {
-    navigation.navigate("PostDetailScreen");
+  const handleClick=() => {
+    navigation.navigate("BikeDetailScreen");
     dispatch(setDetailData(item));
     console.log(item);
   };
   return (
     <TouchableOpacity style={styles.container} onPress={handleClick}>
-      <Image style={styles.thumbnail} source={{ uri: item.thumbnail }} />
+      <Image style={styles.thumbnail} source={{uri: item.thumbnail}} />
       <View style={styles.title}>
         <BarlowCondensedText
           size={20}
           fontStyle={fontStyleEnum.SemiBold}
           color={theme.text}
-          style={{ marginVertical: 10 }}
+          style={{marginVertical: 10}}
         >
           {item.name}
         </BarlowCondensedText>
@@ -79,7 +79,7 @@ const Bike = ({ item }: IBikeProps) => {
             {renderCate(item.categoryId)}
           </MontserratText>
           <Ionicons
-            name={saveIcon ? "ios-bookmark-sharp" : "ios-bookmark-outline"}
+            name={saveIcon? "ios-bookmark-sharp":"ios-bookmark-outline"}
             onPress={(e) => setSaveIcon((current) => !current)}
             color={theme.text}
             size={16}

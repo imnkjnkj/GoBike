@@ -1,4 +1,4 @@
-import { BikesCategory } from "../enums/common";
+import {BikesCategory} from "../enums/common";
 
 export interface IBikesStore {
   dashboardData: IDashboardData;
@@ -36,7 +36,7 @@ export interface IBikesDetail {
   id: number;
   name: string;
   thumbnail: string;
-  images: String[];
+  images: string[];
   createdAt: Date;
   updatedAt: Date;
   categoryId: number;

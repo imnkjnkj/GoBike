@@ -1,5 +1,5 @@
-import { View, StyleSheet, Dimensions, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import {View,StyleSheet,Dimensions,Text} from "react-native";
+import React,{useEffect,useState} from "react";
 import {
   BikeList,
   BrandList,
@@ -10,20 +10,20 @@ import {
   WheelSizeList,
 } from "../enums/common";
 import Select from "./forms/Select";
-import { IRequestParams } from "../types/common";
-import { useDispatch, useSelector } from "react-redux";
-import { State } from "../redux/store";
+import {IRequestParams} from "../types/common";
+import {useDispatch,useSelector} from "react-redux";
+import {State} from "../redux/store";
 import Constant from "expo-constants";
 import Button from "./forms/Button";
-import { color } from "react-native-reanimated";
+import {color} from "react-native-reanimated";
 
 interface IFilter {
   paramsValue: IRequestParams;
   setParamsValue: React.Dispatch<React.SetStateAction<IRequestParams>>;
 }
-export default function Filter({ paramsValue, setParamsValue }: IFilter) {
-  const { theme } = useSelector((state: State) => state.shared);
-  const styles = StyleSheet.create({
+export default function Filter({paramsValue,setParamsValue}: IFilter) {
+  const {theme}=useSelector((state: State) => state.shared);
+  const styles=StyleSheet.create({
     container: {
       backgroundColor: theme.background,
       marginTop: 10,
@@ -39,14 +39,14 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
       color: theme.colorLogo,
     },
   });
-  const [brandValue, setBrandValue] = useState<string>();
-  const [typeValue, setTypeValue] = useState<number | undefined>(
+  const [brandValue,setBrandValue]=useState<string>();
+  const [typeValue,setTypeValue]=useState<number|undefined>(
     paramsValue?.categoryId
   );
-  const [ageValue, setAgeValue] = useState<string>();
-  const [heightValue, setHeightValue] = useState<string>();
-  const [weightValue, setWeightValue] = useState<string>();
-  const [wheelSizeValue, setWheelSizeValue] = useState<string>();
+  const [ageValue,setAgeValue]=useState<string>();
+  const [heightValue,setHeightValue]=useState<string>();
+  const [weightValue,setWeightValue]=useState<string>();
+  const [wheelSizeValue,setWheelSizeValue]=useState<string>();
   useEffect(() => {
     setParamsValue({
       ...paramsValue,
@@ -57,7 +57,7 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
       riderAge: ageValue,
       wheelSize: wheelSizeValue,
     });
-  }, [
+  },[
     brandValue,
     typeValue,
     heightValue,
@@ -65,7 +65,7 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
     ageValue,
     wheelSizeValue,
   ]);
-  const handleClear = () => {
+  const handleClear=() => {
     setBrandValue(undefined);
     setTypeValue(undefined);
     setAgeValue(undefined);
@@ -111,7 +111,7 @@ export default function Filter({ paramsValue, setParamsValue }: IFilter) {
         selectedValue={wheelSizeValue}
         zIndex={100}
       />
-      <View style={{ alignItems: "center" }}>
+      <View style={{alignItems: "center"}}>
         <Button
           handlePress={handleClear}
           mode="underline"

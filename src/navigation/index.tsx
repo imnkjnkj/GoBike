@@ -30,6 +30,7 @@ import MainScreen from "../screens/MainScreen";
 import CreatePostScreen from "../screens/Admin/CreatePostScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import BikeInforScreen from "../screens/BikeInforScreen";
+import BikeDetailScreen from "../screens/BikeDetailScreen";
 
 export default function Navigation({
   colorScheme,
@@ -103,6 +104,11 @@ function RootNavigator() {
       <Stack.Screen
         name="CreatePostScreen"
         component={CreatePostScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="BikeDetailScreen"
+        component={BikeDetailScreen}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
