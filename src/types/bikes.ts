@@ -41,6 +41,7 @@ export interface IBikesDetail {
   updatedAt: Date;
   categoryId: number;
   information: {
+    [key: string]: any;
     paintMaterial?: string;
     handlebarStemMaterial?: string;
     handlebar?: string;
@@ -53,6 +54,7 @@ export interface IBikesDetail {
     brand?: string;
   };
   suitableUser: {
+    [key: string]: any;
     recommendedAge?: string;
     recommendedHeight?: string;
     bikeWeightLimit?: string;
@@ -60,6 +62,7 @@ export interface IBikesDetail {
     sizeWeight?: string;
   };
   transmissionSystem: {
+    [key: string]: any;
     shiftLever?: string;
     shiftLeverType?: string;
     crankset?: string;
@@ -71,10 +74,12 @@ export interface IBikesDetail {
     chainring?: string;
   };
   frame: {
+    [key: string]: any;
     frame?: string;
     fuspension?: string;
   };
   wheelset: {
+    [key: string]: any;
     wheelSize?: string;
     rim?: string;
     hub?: string;
