@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { MontserratText } from "./shared/StyledText";
 import Button from "./forms/Button";
-import { FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { FontAwesome5, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { menuBikeList, menuList } from "../enums/common";
 import { AppDispatch, State } from "../redux/store";
@@ -56,7 +56,7 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
                     color={theme.text}
                   />
                 }
-              />{" "}
+              />
             </View>
             <View style={{ marginVertical: 5 }}>
               <Button
@@ -88,20 +88,60 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
           </View>
         )}
         {isAdmin && pIsLogIn ? (
-          <View style={{ marginVertical: 5 }}>
-            <Button
-              mode="underline"
-              iconArrow={true}
-              text="Create A Post"
-              handlePress={() => navigation.navigate("CreatePostScreen")}
-              icon={
-                <Ionicons
-                  name={"ios-settings-sharp"}
-                  size={16}
-                  color={theme.text}
-                />
-              }
-            />{" "}
+          <View style={{ marginTop: 30 }}>
+            <MontserratText>Manage</MontserratText>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text={"Create A Post"}
+                handlePress={() => navigation.navigate("CreatePostScreen")}
+                icon={
+                  <Ionicons
+                    name={"ios-settings-sharp"}
+                    size={16}
+                    color={theme.text}
+                  />
+                }
+              />
+            </View>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text={"User Overview"}
+                handlePress={() => navigation.navigate("CreatePostScreen")}
+                icon={
+                  <MaterialIcons name="preview" size={16} color={theme.text} />
+                }
+              />
+            </View>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text={"Create A Bike Information"}
+                handlePress={() => navigation.navigate("CreatePostScreen")}
+                icon={
+                  <Ionicons
+                    name={"ios-settings-sharp"}
+                    size={16}
+                    color={theme.text}
+                  />
+                }
+              />
+            </View>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
+                text={"Post Overview"}
+                handlePress={() => navigation.navigate("CreatePostScreen")}
+                icon={
+                  <MaterialIcons name="preview" size={16} color={theme.text} />
+                }
+              />
+            </View>
           </View>
         ) : (
           <></>

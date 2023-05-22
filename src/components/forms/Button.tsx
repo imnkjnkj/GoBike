@@ -41,7 +41,7 @@ export default function Button({
     buttonUnderline: {
       backgroundColor: theme.background,
       padding: 5,
-      borderBottomColor: theme.text,
+      borderBottomColor: color || theme.text,
       borderBottomWidth: 0.5,
       width: width || "100%",
       height: height || 35,
@@ -56,7 +56,7 @@ export default function Button({
       borderRadius: 3,
       justifyContent: "space-between",
       flexDirection: "row",
-      borderColor: theme.text,
+      borderColor: color || theme.text,
       borderWidth: 0.5,
     },
     text: {

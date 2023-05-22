@@ -19,6 +19,7 @@ export default function Input({ setText, placeholder, label }: IInputProps) {
       zIndex: 1,
     },
     searchSection: {
+      fontFamily: "Montserrat",
       width: Dimensions.get("window").width * 0.94,
       flexDirection: "row",
       backgroundColor: theme.background,
@@ -46,7 +47,7 @@ export default function Input({ setText, placeholder, label }: IInputProps) {
   });
   return (
     <View style={styles.container}>
-      <MontserratText size={18} style={{ fontWeight: "800" }}>
+      <MontserratText size={18}>
         {label}
       </MontserratText>
       <View style={styles.searchSection}>

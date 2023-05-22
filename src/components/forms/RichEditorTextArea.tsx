@@ -39,6 +39,7 @@ export default function RichEditorTextArea({
       backgroundColor: theme.background,
       alignItems: "center",
       justifyContent: "center",
+      marginVertical: 10
     },
 
     headerStyle: {
@@ -51,8 +52,8 @@ export default function RichEditorTextArea({
     htmlBoxStyle: {
       height: 200,
       width: 330,
-      backgroundColor: "#fff",
-      borderRadius: 10,
+      backgroundColor: theme.background,
+      borderRadius: 2,
       padding: 10,
       marginBottom: 10,
     },
@@ -61,14 +62,14 @@ export default function RichEditorTextArea({
       display: "flex",
       flexDirection: "column-reverse",
       width: "100%",
-      marginBottom: 10,
+      marginVertical: 10,
     },
 
     richTextEditorStyle: {
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
       borderWidth: 1,
-      borderColor: theme.colorLogoTint,
+      borderColor: theme.text,
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -81,11 +82,12 @@ export default function RichEditorTextArea({
     },
 
     richTextToolbarStyle: {
-      backgroundColor: theme.colorLogoTint,
-      borderColor: theme.colorLogoTint,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
+      backgroundColor: theme.background,
+      borderColor: theme.text,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
       borderWidth: 1,
+      borderBottomWidth:0
     },
 
     errorTextStyle: {
@@ -98,8 +100,8 @@ export default function RichEditorTextArea({
       color: theme.background,
       borderWidth: 1,
       borderColor: theme.tint,
-      borderRadius: 10,
-      padding: 10,
+      borderRadius: 2,
+      padding: 5,
       width: "25%",
       alignItems: "center",
       justifyContent: "center",
@@ -171,7 +173,7 @@ export default function RichEditorTextArea({
         <RichEditor
           ref={editorRef as React.RefObject<RichEditor>}
           onChange={richTextHandle}
-          placeholder="Write your cool content here :)"
+          placeholder="Write your description"
           style={styles.richTextEditorStyle}
           initialHeight={250}
         />

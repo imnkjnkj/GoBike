@@ -31,6 +31,10 @@ export type RootStackParamList={
   CreatePostScreen: undefined;
   BikeInforScreen: {category: string; id?: BikesCategoryId};
   BikeDetailScreen: undefined;
+  SignUpScreen: undefined;
+  UsersOverview: undefined;
+  PostsOverview: undefined;
+  CreateInformation: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList>=

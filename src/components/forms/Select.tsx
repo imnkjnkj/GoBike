@@ -113,6 +113,7 @@ const Select: React.FC<SelectProps> = ({
           textTransform: "capitalize",
         }}
         dropDownContainerStyle={styles.selectContainer}
+        listMode="SCROLLVIEW"  
       />
     </View>
   );

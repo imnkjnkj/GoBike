@@ -21,7 +21,7 @@ export default function Contact() {
   return (
     <View style={styles.container}>
       <View style= {{marginBottom: 15}}>
-        <MontserratText >Liên hệ</MontserratText>
+        <MontserratText >Contact:</MontserratText>
         <View
           style={{
             marginTop: 15,

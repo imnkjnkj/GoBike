@@ -23,7 +23,7 @@ import { useNavigation } from "@react-navigation/native";
 import { IUserLogin, IUserProfileRes } from "../types/users";
 import { fontStyleEnum } from "../enums/common";
 
-const LogInScreen = ({
+const SignUpScreen = ({
   pLogin,
   pGetUser,
 }: {
@@ -114,28 +114,7 @@ const LogInScreen = ({
   const [token, setToken] = useState("");
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "484087272547-bf4je4llrl6d1j4jug3aa1oag7gipbk8.apps.googleusercontent.com",
-    iosClientId:
-      "484087272547-ja8pfmcflrpinr2ckslb2vufs164sote.apps.googleusercontent.com",
-    expoClientId:
-      "484087272547-6ig18d7gb6mt0cnbj14k94ua34r4ipci.apps.googleusercontent.com",
-  });
-  useEffect(() => {
-    if (response?.type === "success") {
-      const { access_token } = response.params;
-      setToken(access_token);
-      pLogin({ accessToken: access_token }).then(() => {
-        navigation.navigate("MainScreen");
-        pGetUser();
-      });
-    }
-  }, [response, token]);
 
-  const handleGoogleSignIn = async () => {
-    await promptAsync();
-  };
   return (
     <View style={styles.container}>
       <View style={styles.logoContent}>
@@ -168,6 +147,36 @@ const LogInScreen = ({
         </View>
         <View style={styles.inputSection}>
           <AntDesign
+            name="mail"
+            size={15}
+            style={styles.searchIcon}
+            color={theme.colorLogo}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            onChangeText={(text) => setUsername(text)}
+            placeholderTextColor={theme.text}
+          />
+        </View>
+        <View style={styles.inputSection}>
+          <AntDesign
+            name="lock"
+            size={15}
+            style={styles.searchIcon}
+            color={theme.colorLogo}
+          />
+          <TextInput
+            keyboardType="email-address"
+            style={styles.input}
+            secureTextEntry={true}
+            placeholder="Password"
+            onChangeText={(text) => setPassword(text)}
+            placeholderTextColor={theme.text}
+          />
+        </View>
+        <View style={styles.inputSection}>
+          <AntDesign
             name="lock"
             size={15}
             style={styles.searchIcon}
@@ -176,33 +185,20 @@ const LogInScreen = ({
           <TextInput
             style={styles.input}
             secureTextEntry={true}
-            placeholder="Password"
+            placeholder="Confirm Password"
             onChangeText={(text) => setPassword(text)}
             placeholderTextColor={theme.text}
           />
         </View>
         <TouchableOpacity style={styles.login}>
           <MontserratText color={theme.colorLogo} size={16}>
-            Login
-          </MontserratText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginGoogle}
-          onPress={handleGoogleSignIn}
-        >
-          <AntDesign name="google" size={24} color={theme.colorLogo} />
-          <MontserratText
-            color={theme.colorLogo}
-            size={16}
-            style={{ marginLeft: 8 }}
-          >
-            Login With Google
+            Sign Up
           </MontserratText>
         </TouchableOpacity>
       </View>
       <View style={styles.signUp}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("SignUpScreen")}
+          onPress={() => navigation.navigate("LogIn")}
           style={[styles.loginGoogle, { left: "225%", width: "100%" }]}
         >
           <MontserratText color={theme.text} size={13}>
@@ -213,7 +209,7 @@ const LogInScreen = ({
             size={13}
             style={{ marginLeft: 3 }}
           >
-            Sign Up
+            Sign In
           </MontserratText>
         </TouchableOpacity>
       </View>
@@ -228,4 +224,4 @@ const mapDispatchToProps = (dispatch: AppDispatch) => {
   };
 };
 
-export default React.memo(connect(null, mapDispatchToProps)(LogInScreen));
+export default React.memo(connect(null, mapDispatchToProps)(SignUpScreen));

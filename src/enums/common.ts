@@ -39,6 +39,13 @@ export const menuList = [
   },
   { key: "training", title: "TRAINING", id: CategoryId.TRAINING },
 ];
+export const categoryList = [
+  { value: undefined, label: "Category" },
+  { value: CategoryId.BIKEGEAR, label: "BIKES & GEAR" },
+  { value: CategoryId.REPAIR, label: "REPAIR" },
+  { value:CategoryId.HEALTHNUTRITION, label: "HEALTH & NUTRITION" },
+  { value: CategoryId.TRAINING, label: "TRAINING" },
+];
 export const menuBikeList = [
   {
     key: BikesCategory.CITY,

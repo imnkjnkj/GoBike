@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import React, { useCallback, useRef, useState } from "react";
 import MainLayout from "../../layouts/MainLayout";
@@ -22,10 +23,20 @@ import * as Permissions from "expo-permissions";
 import * as FileSystem from "expo-file-system";
 import { State } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { BarlowCondensedText } from "../../components/shared/StyledText";
+import {
+  BarlowCondensedText,
+  MontserratText,
+} from "../../components/shared/StyledText";
 import Input from "../../components/forms/Input";
 import RichEditorTextArea from "../../components/forms/RichEditorTextArea";
-import { Category, CategoryId, fontStyleEnum } from "../../enums/common";
+import {
+  BikeList,
+  Category,
+  CategoryId,
+  categoryList,
+  fontStyleEnum,
+  menuList,
+} from "../../enums/common";
 import Select from "../../components/forms/Select";
 export interface RefLinkModal {
   setModalVisible: (visile: boolean) => void;
@@ -71,29 +82,18 @@ export default function CreatePostScreen() {
       width: "100%",
       marginBottom: 10,
     },
-
-    richTextEditorStyle: {
-      borderBottomLeftRadius: 10,
-      borderBottomRightRadius: 10,
-      borderWidth: 1,
-      borderColor: theme.colorLogoTint,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.23,
-      shadowRadius: 2.62,
-      elevation: 4,
-      fontSize: 20,
-    },
-
-    richTextToolbarStyle: {
-      backgroundColor: theme.colorLogoTint,
-      borderColor: theme.colorLogoTint,
-      borderTopLeftRadius: 10,
-      borderTopRightRadius: 10,
-      borderWidth: 1,
+    category: {
+      backgroundColor: theme.background,
+      marginTop: 10,
+      maxWidth: Dimensions.get("window").width,
+      flex: 1,
+      flexDirection: "row",
+      flexWrap: "wrap",
+      paddingHorizontal: 8,
+      height: "100%",
+      width: '100%',
+      zIndex: 999,
+      alignItems:'center'
     },
 
     errorTextStyle: {
@@ -106,8 +106,8 @@ export default function CreatePostScreen() {
       color: theme.background,
       borderWidth: 1,
       borderColor: theme.tint,
-      borderRadius: 10,
-      padding: 10,
+      borderRadius: 5,
+      padding: 8,
       width: "25%",
       alignItems: "center",
       justifyContent: "center",
@@ -157,10 +157,10 @@ export default function CreatePostScreen() {
   return (
     <MainLayout>
       <SafeAreaView>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <BarlowCondensedText
-              fontStyle={fontStyleEnum.SemiBold}
+              fontStyle={fontStyleEnum.Medium}
               size={32}
               color={theme.text}
             >
@@ -172,12 +172,16 @@ export default function CreatePostScreen() {
               label="Title"
               placeholder="Enter your title..."
             ></Input>
-            {/* <Select
-              label="Category"
-              items={CategoryOptions}
-              selectedValue={category}
-              onValueChange={handleCategoryChange}
-            /> */}
+            <View style ={styles.category}>
+              <MontserratText size={18}>Category</MontserratText>
+              <Select
+                items={categoryList}
+                onValueChange={setcategory}
+                selectedValue={category}
+                zIndex={2000}
+              />
+            </View>
+
             <RichEditorTextArea
               setDescHTML={setDescHTML}
               showDescError={showDescError}
