@@ -94,6 +94,17 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
               <Button
                 mode="underline"
                 iconArrow={true}
+                text={"Post Overview"}
+                handlePress={() => navigation.navigate("UsersOverviewScreen")}
+                icon={
+                  <MaterialIcons name="preview" size={16} color={theme.text} />
+                }
+              />
+            </View>
+            <View style={{ marginVertical: 5 }}>
+              <Button
+                mode="underline"
+                iconArrow={true}
                 text={"Create A Post"}
                 handlePress={() => navigation.navigate("CreatePostScreen")}
                 icon={
@@ -109,8 +120,8 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
               <Button
                 mode="underline"
                 iconArrow={true}
-                text={"User Overview"}
-                handlePress={() => navigation.navigate("CreatePostScreen")}
+                text={"Posts Overview"}
+                handlePress={() => navigation.navigate("PostsOverviewScreen")}
                 icon={
                   <MaterialIcons name="preview" size={16} color={theme.text} />
                 }
@@ -121,24 +132,15 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
                 mode="underline"
                 iconArrow={true}
                 text={"Create A Bike Information"}
-                handlePress={() => navigation.navigate("CreatePostScreen")}
+                handlePress={() =>
+                  navigation.navigate("CreateInformationScreen")
+                }
                 icon={
                   <Ionicons
                     name={"ios-settings-sharp"}
                     size={16}
                     color={theme.text}
                   />
-                }
-              />
-            </View>
-            <View style={{ marginVertical: 5 }}>
-              <Button
-                mode="underline"
-                iconArrow={true}
-                text={"Post Overview"}
-                handlePress={() => navigation.navigate("CreatePostScreen")}
-                icon={
-                  <MaterialIcons name="preview" size={16} color={theme.text} />
                 }
               />
             </View>

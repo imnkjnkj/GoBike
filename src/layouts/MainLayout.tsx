@@ -5,9 +5,10 @@ import Layout from "./Layout";
 import { useSelector } from "react-redux";
 import { State } from "../redux/store";
 interface IMainLayout {
-    children: React.ReactNode;
-  }
-export default function MainLayout({ children }: IMainLayout) {
+  children: React.ReactNode;
+  isShowLogo?: boolean;
+}
+export default function MainLayout({ children, isShowLogo }: IMainLayout) {
   const { theme } = useSelector((state: State) => state.shared);
 
   const styles = StyleSheet.create({
@@ -27,13 +28,18 @@ export default function MainLayout({ children }: IMainLayout) {
     wrapper: {
       paddingHorizontal: 10,
     },
+    noLogo:{
+      marginTop: 50
+    }
   });
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: "center" }}>
-        <MenuHeader />
-      </View>
-      <Layout style={styles.wrapper}>{children}</Layout>
+      {isShowLogo && (
+        <View style={{ alignItems: "center" }}>
+          <MenuHeader />
+        </View>
+      )}
+      <Layout style={[styles.wrapper,isShowLogo && styles.noLogo ]}>{children}</Layout>
     </SafeAreaView>
   );
 }

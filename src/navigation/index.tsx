@@ -121,17 +121,17 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="UsersOverview"
+        name="UsersOverviewScreen"
         component={UsersOverview}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="PostsOverview"
+        name="PostsOverviewScreen"
         component={PostsOverview}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="CreateInformation"
+        name="CreateInformationScreen"
         component={CreateInformation}
         options={{ headerShown: false }}
       />
