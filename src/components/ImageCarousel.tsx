@@ -5,6 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  StyleProp,
+  ViewStyle,
+  ImageStyle,
 } from "react-native";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -15,8 +18,14 @@ import { BarlowCondensedText } from "./shared/StyledText";
 import { fontStyleEnum } from "../enums/common";
 interface IImageCarouselProps {
   data: string[];
+  showFlatlist?: boolean;
+  stylePreviewImg?: StyleProp<ImageStyle>
 }
-export default function ImageCarousel({ data }: IImageCarouselProps) {
+export default function ImageCarousel({
+  data,
+  showFlatlist,
+  stylePreviewImg
+}: IImageCarouselProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const { theme } = useSelector((state: State) => state.shared);
 
@@ -78,7 +87,6 @@ export default function ImageCarousel({ data }: IImageCarouselProps) {
       textAlign: "center",
     },
   });
-  console.log(data[selectedImageIndex]);
   const handlePrevious = () => {
     setSelectedImageIndex(selectedImageIndex - 1);
   };
@@ -100,7 +108,7 @@ export default function ImageCarousel({ data }: IImageCarouselProps) {
   );
   return (
     <View style={styles.imageCarouselContainer}>
-      <View style={styles.selectedThumbnail}>
+      <View style={[styles.selectedThumbnail,stylePreviewImg]}>
         {selectedImageIndex !== data.length - 1 && (
           <TouchableOpacity
             onPress={() => handleNext()}
@@ -128,21 +136,23 @@ export default function ImageCarousel({ data }: IImageCarouselProps) {
             size={13}
             textAlign={"center"}
           >
-            {`${selectedImageIndex + 1}/${data?.length + 1}`}
+            {`${selectedImageIndex + 1}/${data?.length}`}
           </BarlowCondensedText>
         </View>
         <Image
           source={{ uri: data[selectedImageIndex] }}
-          style={styles.selectedThumbnailImg}
+          style={ styles.selectedThumbnailImg}
         />
       </View>
-      <FlatList
-        data={data}
-        keyExtractor={(item, i) => i.toString()}
-        renderItem={renderItem}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
+      {showFlatlist && (
+        <FlatList
+          data={data}
+          keyExtractor={(item, i) => i.toString()}
+          renderItem={renderItem}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+      )}
     </View>
   );
 }

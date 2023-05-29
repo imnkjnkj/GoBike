@@ -10499,6 +10499,11 @@ react-native-codegen@^0.70.6:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
+react-native-datatable-component@^2.1.13:
+  version "2.1.13"
+  resolved "https://registry.yarnpkg.com/react-native-datatable-component/-/react-native-datatable-component-2.1.13.tgz#a88b2d6d3574b1ca219eac127ea782c41540c5d8"
+  integrity sha512-6LCSWoZs2xPH/qityGEWPCbqC09p0bTo2FKxx0CHG8Z7uB8D247Db2PwAoDrydletXwS98dPEu17QVUa6K8lRg==
+
 react-native-dropdown-picker@^5.4.6:
   version "5.4.6"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.4.6.tgz#3736fc468de4a295e4df8d1f65ed2eadaf9b445f"

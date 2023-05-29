@@ -96,7 +96,7 @@ const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
           </MontserratText>
         </View>
         <View style={styles.postDetailContent}>
-          <ImageCarousel data={pDetailData?.images} />
+          <ImageCarousel data={pDetailData?.images} showFlatlist={true} />
           <View style={{ marginTop: 20 }}>
             <BarlowCondensedText
               size={32}
@@ -106,7 +106,11 @@ const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
               {pDetailData?.name}
             </BarlowCondensedText>
             <View
-              style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 5,
+              }}
             >
               <View style={{ flexDirection: "row" }}>
                 <MontserratText

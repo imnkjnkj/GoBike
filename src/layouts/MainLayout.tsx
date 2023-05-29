@@ -29,7 +29,7 @@ export default function MainLayout({ children, isShowLogo }: IMainLayout) {
       paddingHorizontal: 10,
     },
     noLogo:{
-      marginTop: 50
+      marginTop: 45
     }
   });
   return (
@@ -39,7 +39,7 @@ export default function MainLayout({ children, isShowLogo }: IMainLayout) {
           <MenuHeader />
         </View>
       )}
-      <Layout style={[styles.wrapper,isShowLogo && styles.noLogo ]}>{children}</Layout>
+      <Layout style={isShowLogo ? styles.wrapper : styles.noLogo}>{children}</Layout>
     </SafeAreaView>
   );
 }

@@ -6,6 +6,7 @@ import {
   Platform,
   StyleProp,
   ViewStyle,
+  ImageStyle,
 } from "react-native";
 import React from "react";
 
@@ -25,6 +26,7 @@ interface IButtonProps {
   mode: "underline" | "border";
   iconArrow?: boolean;
   color?: string;
+  style?: StyleProp<ViewStyle>
 }
 export default function Button({
   handlePress,
@@ -34,6 +36,7 @@ export default function Button({
   height,
   mode,
   color,
+  style,
   iconArrow,
 }: IButtonProps) {
   const { theme } = useSelector((state: State) => state.shared);
@@ -74,8 +77,7 @@ export default function Button({
     }
   };
   return (
-    <View>
-      <TouchableOpacity style={styleButton(mode)} onPress={handlePress}>
+      <TouchableOpacity style={[styleButton(mode),style]} onPress={handlePress}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           {icon}
           <BarlowCondensedText
@@ -91,6 +93,5 @@ export default function Button({
           <MaterialIcons name="navigate-next" size={16} color={theme.text} />
         )}
       </TouchableOpacity>
-    </View>
   );
 }
