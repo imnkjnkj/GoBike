@@ -42,7 +42,6 @@ const LogInScreen = ({
     },
     logoContent: {
       flexDirection: "row",
-      //marginTop: Platform.OS==='android'? Constant.statusBarHeight:0,
       position: "relative",
     },
     logo: {

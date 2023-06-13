@@ -72,7 +72,6 @@ export default function Input({
       </MontserratText>
       <View style={styles.searchSection}>
         <TextInput
-        
           style={styles.input}
           placeholder={placeholder}
           onChangeText={(text) => setText(text)}

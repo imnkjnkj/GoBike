@@ -17,12 +17,9 @@ import RenderHtml, { MixedStyleDeclaration } from "react-native-render-html";
 import { useWindowDimensions } from "react-native";
 import Navigation from "../navigation";
 import { State } from "../redux/store";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../types";
-import { RouteProp } from "@react-navigation/native";
 import { IDashboarData, IPostsDetail } from "../types/posts";
 import { fontStyleEnum } from "../enums/common";
-import { sIsAdmin } from "../redux/user/selector";
+import Comment from "../components/comment/Comment";
 import { IUserProfileRes, USER_ROLES_NAME } from "../types/users";
 import Button from "../components/forms/Button";
 type MyStyles = Readonly<Record<string, MixedStyleDeclaration>>;
@@ -131,6 +128,9 @@ const PostDetailScreen = ({
             />
           </View>
         </View>
+        <View style={{ marginVertical: 10 }}>
+            <Comment />
+          </View>
       </ScrollView>
     </SafeAreaView>
   );

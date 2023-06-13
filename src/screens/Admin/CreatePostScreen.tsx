@@ -91,9 +91,9 @@ export default function CreatePostScreen() {
       flexWrap: "wrap",
       paddingHorizontal: 8,
       height: "100%",
-      width: '100%',
+      width: "100%",
       zIndex: 999,
-      alignItems:'center'
+      alignItems: "center",
     },
 
     errorTextStyle: {
@@ -169,10 +169,16 @@ export default function CreatePostScreen() {
 
             <Input
               setText={setTile}
+              heightInput={30}
               label="Title"
               placeholder="Enter your title..."
             ></Input>
-            <View style ={styles.category}>
+            <Input
+              setText={setTile}
+              label="Sapo"
+              placeholder="Enter your sapo..."
+            ></Input>
+            <View style={styles.category}>
               <MontserratText size={18}>Category</MontserratText>
               <Select
                 items={categoryList}

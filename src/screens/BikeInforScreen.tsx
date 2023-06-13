@@ -98,7 +98,7 @@ const BikeInforScreen = ({
             <>
               {pBikesList?.content?.map((item, i) => (
                 <View key={i}>
-                  <Bike item={item} />
+                  <Bike item={item} key={i} />
                 </View>
               ))}
             </>

@@ -20,6 +20,7 @@ import { fontStyleEnum } from "../enums/common";
 import { IBikesDetail } from "../types/bikes";
 import ImageCarousel from "../components/ImageCarousel";
 import TechSpecsInfor from "../components/TechSpecsInfor";
+import Comment from "../components/comment/Comment";
 
 type MyStyles = Readonly<Record<string, MixedStyleDeclaration>>;
 interface IBikeDetailScreenProps {
@@ -139,6 +140,22 @@ const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
           </View>
           <View style={{ marginVertical: 10 }}>
             <TechSpecsInfor pDetailData={pDetailData} />
+          </View>
+          <View style={{ marginVertical: 10 }}>
+            <BarlowCondensedText
+              fontStyle={fontStyleEnum.Medium}
+              color={theme.colorLogo}
+              size={24}
+            >
+              Feature
+            </BarlowCondensedText>
+            <MontserratText color={theme.text} size={16}>
+              {pDetailData.information.features}
+            </MontserratText>
+          </View>
+
+          <View style={{ marginVertical: 10 }}>
+            <Comment />
           </View>
         </View>
       </ScrollView>

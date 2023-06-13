@@ -94,7 +94,7 @@ function Menu({ pIsLogIn, pUserInfor, pLogout }: IMenuProps) {
               <Button
                 mode="underline"
                 iconArrow={true}
-                text={"Post Overview"}
+                text={"Users Overview"}
                 handlePress={() => navigation.navigate("UsersOverviewScreen")}
                 icon={
                   <MaterialIcons name="preview" size={16} color={theme.text} />

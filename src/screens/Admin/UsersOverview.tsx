@@ -1,10 +1,14 @@
-import { View, Text } from 'react-native'
+import { View, Text, SafeAreaView } from 'react-native'
 import React from 'react'
+import MainLayout from '../../layouts/MainLayout'
+import TableUser from '../../components/TableUser'
 
 export default function UsersOverview() {
   return (
-    <View>
-      <Text>UsersOverview</Text>
-    </View>
+    <MainLayout>
+      <SafeAreaView>
+        <TableUser />
+      </SafeAreaView>
+    </MainLayout>
   )
 }

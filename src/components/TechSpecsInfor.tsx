@@ -78,7 +78,7 @@ export default function TechSpecsInfor({ pDetailData }: ITechSpecsInforProps) {
       <BarlowCondensedText
         fontStyle={fontStyleEnum.Medium}
         color={theme.colorLogo}
-        size={20}
+        size={24}
       >
         Technical Specs
       </BarlowCondensedText>

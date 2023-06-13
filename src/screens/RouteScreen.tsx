@@ -73,7 +73,7 @@ const RouteScreen = ({ route, pGetNews, pNewsList }: ITabRouteProps) => {
         <Layout>
           {pNewsList.content?.map((item, i) => (
             <View key={i}>
-              <Post item={item} />
+              <Post item={item} key={i} />
             </View>
           ))}
         </Layout>
