@@ -32,8 +32,6 @@ export default function ImageCarousel({
   const styles = StyleSheet.create({
     imageCarouselContainer: {
       flex: 1,
-      //justifyContent: 'center',
-      //alignItems: 'center',
     },
     image: {
       width: 75,
@@ -74,7 +72,7 @@ export default function ImageCarousel({
       borderRadius: 100,
     },
     countImg: {
-      width: 33,
+      width: 45,
       height: 20,
       backgroundColor: "rgba(224, 224, 224, 0.7)",
       borderRadius: 6,

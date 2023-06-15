@@ -14,10 +14,8 @@ import {
   MontserratText,
 } from "../components/shared/StyledText";
 import RenderHtml, { MixedStyleDeclaration } from "react-native-render-html";
-import { useWindowDimensions } from "react-native";
-import Navigation from "../navigation";
 import { State } from "../redux/store";
-import { IDashboarData, IPostsDetail } from "../types/posts";
+import { IPostsDetail } from "../types/posts";
 import { fontStyleEnum } from "../enums/common";
 import Comment from "../components/comment/Comment";
 import { IUserProfileRes, USER_ROLES_NAME } from "../types/users";
@@ -93,16 +91,21 @@ const PostDetailScreen = ({
             >
               <View
                 style={{
-                  marginRight: 10,
+                  flexDirection: "row",
                 }}
               >
-                <Button mode={"border"} text={"Edit"}></Button>
+                <Button
+                  style={{ width: 40, marginRight: 10 }}
+                  mode={"border"}
+                  text={"Edit"}
+                ></Button>
+                <Button
+                  mode={"border"}
+                  text={"Delete"}
+                  color={theme.colorLogo}
+                  style={{ width: 50 }}
+                ></Button>
               </View>
-              <Button
-                mode={"border"}
-                text={"Delete"}
-                color={theme.colorLogo}
-              ></Button>
             </View>
           )}
         </View>
@@ -129,8 +132,8 @@ const PostDetailScreen = ({
           </View>
         </View>
         <View style={{ marginVertical: 10 }}>
-            <Comment />
-          </View>
+          <Comment />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

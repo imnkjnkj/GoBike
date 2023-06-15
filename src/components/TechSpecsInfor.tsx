@@ -60,10 +60,10 @@ export default function TechSpecsInfor({ pDetailData }: ITechSpecsInforProps) {
                   size={16}
                   style={{ textTransform: "capitalize" }}
                 >
-                  {titleKey}
+                  {key === 'features' ? '' : titleKey}
                 </MontserratText>
                 <MontserratText color={theme.text} size={16}>
-                  {list[key]}
+                  {key === 'features' ? '' : list[key]}
                 </MontserratText>
               </View>
             </View>

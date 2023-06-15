@@ -21,12 +21,18 @@ import { IBikesDetail } from "../types/bikes";
 import ImageCarousel from "../components/ImageCarousel";
 import TechSpecsInfor from "../components/TechSpecsInfor";
 import Comment from "../components/comment/Comment";
+import Button from "../components/forms/Button";
+import { IUserProfileRes, USER_ROLES_NAME } from "../types/users";
 
 type MyStyles = Readonly<Record<string, MixedStyleDeclaration>>;
 interface IBikeDetailScreenProps {
   pDetailData: IBikesDetail;
+  pUserInfor: IUserProfileRes;
 }
-const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
+const BikeDetailScreen = ({
+  pDetailData,
+  pUserInfor,
+}: IBikeDetailScreenProps) => {
   const { category } = useSelector((state: State) => state.shared);
   const { theme } = useSelector((state: State) => state.shared);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -77,24 +83,62 @@ const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
       width: "100%",
     },
   };
-  console.log(pDetailData);
+  const isAdmin = pUserInfor?.roles.some(
+    (x) => x.name === USER_ROLES_NAME.ADMIN
+  );
 
   const width = Dimensions.get("window").width;
 
   return (
     <SafeAreaView>
       <ScrollView style={styles.container}>
-        <View>
-          <BarlowCondensedText
-            fontStyle={fontStyleEnum.SemiBold}
-            color={theme.colorLogo}
-            size={24}
-          >
-            BIKE INFORMATION
-          </BarlowCondensedText>
-          <MontserratText color={"gray"} style={styles.createDate} size={16}>
-            {date}
-          </MontserratText>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <BarlowCondensedText
+              fontStyle={fontStyleEnum.SemiBold}
+              color={theme.colorLogo}
+              size={24}
+            >
+              BIKE INFORMATION
+            </BarlowCondensedText>
+            <MontserratText color={"gray"} style={styles.createDate} size={16}>
+              {date}
+            </MontserratText>
+          </View>
+
+          {isAdmin && (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                }}
+              >
+                <Button
+                  style={{ width: 40, marginRight: 10 }}
+                  mode={"border"}
+                  text={"Edit"}
+                ></Button>
+                <Button
+                  mode={"border"}
+                  text={"Delete"}
+                  color={theme.colorLogo}
+                  style={{ width: 50 }}
+                ></Button>
+              </View>
+            </View>
+          )}
         </View>
         <View style={styles.postDetailContent}>
           <ImageCarousel data={pDetailData?.images} showFlatlist={true} />
@@ -165,6 +209,7 @@ const BikeDetailScreen = ({ pDetailData }: IBikeDetailScreenProps) => {
 
 const mapStateToProps = (state: State) => ({
   pDetailData: state.bikes.detailData,
+  pUserInfor: state.user.userProfile,
 });
 
 const mapDispatchToProps = null;
