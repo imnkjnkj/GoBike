@@ -28,7 +28,6 @@ export const getBikes=createAsyncThunk(
     }=params;
     const bikesList=await bikesApi.getBikes({page,size,sort,categoryId});
     const filteredList=() => {
-      console.log(params);
       if(categoryId) {
         bikesList.content=bikesList.content.filter(
           (item: IBikesDetail) => item.categoryId===categoryId
@@ -61,7 +60,6 @@ export const getBikes=createAsyncThunk(
           (item: IBikesDetail) => item.wheelset.wheelSize===wheelSize
         );
       } else bikesList.content=bikesList.content;
-      console.log(bikesList.content);
     };
     filteredList();
     return bikesList;

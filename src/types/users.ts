@@ -21,13 +21,10 @@ export type DataUser = IUserProfileRes
 
 export interface DataUserForm {
   id?: number
-  emailAddress: string
-  isActive: boolean
-  name: string
-  password?: string
-  confirmPassword?: string
-  surname: string
-  userName: string
+  username: string,
+  password: string,
+  email: string,
+  confirmPassword: string,
 }
 
 export interface DataUserChecked {

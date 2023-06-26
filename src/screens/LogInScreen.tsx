@@ -15,14 +15,28 @@ import {
   MontserratText,
 } from "../components/shared/StyledText";
 import LOGO from "../assets/images/logo.svg";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import * as Google from "expo-auth-session/providers/google";
 import { AppDispatch, State } from "../redux/store";
 import { getUser, loginUser } from "../redux/user/thunkApi";
 import { useNavigation } from "@react-navigation/native";
 import { IUserLogin, IUserProfileRes } from "../types/users";
 import { fontStyleEnum } from "../enums/common";
+import * as yup from "yup";
+import { Formik } from "formik";
+import ErrorMsg from "../components/forms/ErrorMsg";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+const initialValues = {
+  username: "",
+  password: "",
+};
+
+export interface IInputField {
+  username: string;
+  password: string;
+}
 const LogInScreen = ({
   pLogin,
   pGetUser,
@@ -55,7 +69,7 @@ const LogInScreen = ({
       flexDirection: "row",
     },
     inputSection: {
-      width: Dimensions.get("window").width * 0.74,
+      // width: Dimensions.get("window").width * 0.74,
       flexDirection: "row",
       alignItems: "center",
       backgroundColor: theme.background,
@@ -80,17 +94,17 @@ const LogInScreen = ({
       color: theme.text,
     },
     form: {
-      alignItems: "center",
+      // alignItems: "center",
+      marginHorizontal: 70,
     },
     loginGoogle: {
       flexDirection: "row",
-      alignItems: "center",
+      alignSelf: "center",
       paddingHorizontal: 20,
       paddingVertical: 10,
     },
     login: {
-      flexDirection: "row",
-      alignItems: "center",
+      alignSelf: "center",
       backgroundColor: theme.background,
       borderColor: theme.colorLogo,
       borderWidth: 1,
@@ -98,6 +112,7 @@ const LogInScreen = ({
       paddingVertical: 8,
       borderRadius: 5,
       marginTop: 10,
+      width: "65%",
     },
     signUp: {
       position: "absolute",
@@ -108,8 +123,6 @@ const LogInScreen = ({
       borderTopColor: theme.text,
     },
   });
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const [token, setToken] = useState("");
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
@@ -135,6 +148,24 @@ const LogInScreen = ({
   const handleGoogleSignIn = async () => {
     await promptAsync();
   };
+  const loginValidationSchema = yup.object().shape({
+    username: yup
+      .string()
+      .required("Username is Required")
+      .max(250, ({ max }) => `Username must be at least ${max} characters`),
+    password: yup
+      .string()
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .required("Password is required"),
+  });
+  const form = useForm({
+    defaultValues: initialValues,
+    resolver: yupResolver(loginValidationSchema),
+  });
+  useEffect(() => {
+    form.reset(initialValues);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContent}>
@@ -151,54 +182,74 @@ const LogInScreen = ({
         </View>
       </View>
       <View style={styles.form}>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="user"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            onChangeText={(text) => setUsername(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="lock"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Password"
-            onChangeText={(text) => setPassword(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <TouchableOpacity style={styles.login}>
-          <MontserratText color={theme.colorLogo} size={16}>
-            Login
-          </MontserratText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginGoogle}
-          onPress={handleGoogleSignIn}
+        <Formik
+          validationSchema={loginValidationSchema}
+          initialValues={{ username: "", password: "" }}
+          onSubmit={(values) => console.log(values)}
         >
-          <AntDesign name="google" size={24} color={theme.colorLogo} />
-          <MontserratText
-            color={theme.colorLogo}
-            size={16}
-            style={{ marginLeft: 8 }}
-          >
-            Login With Google
-          </MontserratText>
-        </TouchableOpacity>
+          {({ handleChange, handleSubmit, values, errors, isValid }) => (
+            <>
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="user"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Username"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("username")}
+                  value={values.username}
+                />
+              </View>
+              {errors.username && <ErrorMsg text={errors.username} />}
+
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="user"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Username"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("password")}
+                  value={values.password}
+                  secureTextEntry
+                />
+              </View>
+              {errors.password && <ErrorMsg text={errors.password} />}
+              <TouchableOpacity
+                style={styles.login}
+                onPress={() => handleSubmit()}
+                disabled={!isValid}
+              >
+                <MontserratText color={theme.colorLogo} size={16}>
+                  Login
+                </MontserratText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.loginGoogle}
+                onPress={handleGoogleSignIn}
+              >
+                <AntDesign name="google" size={24} color={theme.colorLogo} />
+                <MontserratText
+                  color={theme.colorLogo}
+                  size={16}
+                  style={{ marginLeft: 8 }}
+                >
+                  Login With Google
+                </MontserratText>
+              </TouchableOpacity>
+            </>
+          )}
+        </Formik>
       </View>
+
       <View style={styles.signUp}>
         <TouchableOpacity
           onPress={() => navigation.navigate("SignUpScreen")}

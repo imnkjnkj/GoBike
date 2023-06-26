@@ -53,7 +53,6 @@ const Bike=({item}: IBikeProps) => {
   const handleClick=() => {
     navigation.navigate("BikeDetailScreen");
     dispatch(setDetailData(item));
-    console.log(item);
   };
   return (
     <TouchableOpacity style={styles.container} onPress={handleClick}>

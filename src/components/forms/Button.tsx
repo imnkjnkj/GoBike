@@ -15,18 +15,21 @@ import { BarlowCondensedText, MontserratText } from "../shared/StyledText";
 import { State } from "../../redux/store";
 import { Divider } from "react-native-paper";
 import { MaterialIcons } from "@expo/vector-icons";
-import { fontStyleEnum } from "../../enums/common";
+import { fontFamilyEnum, fontStyleEnum } from "../../enums/common";
 
 interface IButtonProps {
   handlePress?: () => void;
   text?: string;
   icon?: any;
   width?: number;
-  height?: number;
-  mode: "underline" | "border";
+  height?: number | string;
+  mode: "underline" | "border" | "solid";
   iconArrow?: boolean;
   color?: string;
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<ViewStyle>;
+  children?: React.ReactNode;
+  fontFamily?: fontFamilyEnum;
+  disabled?: boolean;
 }
 export default function Button({
   handlePress,
@@ -38,6 +41,9 @@ export default function Button({
   color,
   style,
   iconArrow,
+  fontFamily,
+  children,
+  disabled,
 }: IButtonProps) {
   const { theme } = useSelector((state: State) => state.shared);
   const styles = StyleSheet.create({
@@ -76,10 +82,10 @@ export default function Button({
         return null;
     }
   };
-  return (
-      <TouchableOpacity style={[styleButton(mode),style]} onPress={handlePress}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          {icon}
+  const renderText = (fontFamily: fontFamilyEnum) => {
+    switch (fontFamily) {
+      case fontFamilyEnum.BarlowCondensedText:
+        return (
           <BarlowCondensedText
             fontStyle={fontStyleEnum.SemiBold}
             color={color || theme.text}
@@ -88,10 +94,41 @@ export default function Button({
           >
             {text}
           </BarlowCondensedText>
-        </View>
-        {iconArrow && (
-          <MaterialIcons name="navigate-next" size={16} color={theme.text} />
-        )}
-      </TouchableOpacity>
+        );
+      case fontFamilyEnum.MontserratText:
+        return (
+          <MontserratText
+            fontStyle={fontStyleEnum.Light}
+            color={color || theme.text}
+            size={16}
+            style={styles.text}
+          >
+            {text}
+          </MontserratText>
+        );
+      default:
+        return null;
+    }
+  };
+  return (
+    <TouchableOpacity
+      style={[styleButton(mode || "border"), style]}
+      onPress={handlePress}
+      disabled={disabled}
+    >
+      {children ? (
+        <> {children} </>
+      ) : (
+        <>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {icon}
+            {renderText(fontFamily || fontFamilyEnum.BarlowCondensedText)}
+          </View>
+          {iconArrow && (
+            <MaterialIcons name="navigate-next" size={16} color={theme.text} />
+          )}
+        </>
+      )}
+    </TouchableOpacity>
   );
 }

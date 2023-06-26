@@ -4,12 +4,11 @@ import {
   TextInput,
   View,
   Dimensions,
-  Button,
   TouchableOpacity,
   useColorScheme,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
@@ -20,8 +19,21 @@ import * as Google from "expo-auth-session/providers/google";
 import { AppDispatch, State } from "../redux/store";
 import { getUser, loginUser } from "../redux/user/thunkApi";
 import { useNavigation } from "@react-navigation/native";
-import { IUserLogin, IUserProfileRes } from "../types/users";
-import { fontStyleEnum } from "../enums/common";
+import { DataUserForm, IUserLogin } from "../types/users";
+import { fontFamilyEnum, fontStyleEnum } from "../enums/common";
+import * as yup from "yup";
+import { Formik } from "formik";
+import ErrorMsg from "../components/forms/ErrorMsg";
+import Button from "../components/forms/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const initialValues = {
+  username: "",
+  password: "",
+  email: "",
+  confirmPassword: "",
+};
 
 const SignUpScreen = ({
   pLogin,
@@ -42,7 +54,6 @@ const SignUpScreen = ({
     },
     logoContent: {
       flexDirection: "row",
-      //marginTop: Platform.OS==='android'? Constant.statusBarHeight:0,
       position: "relative",
     },
     logo: {
@@ -56,7 +67,6 @@ const SignUpScreen = ({
       flexDirection: "row",
     },
     inputSection: {
-      width: Dimensions.get("window").width * 0.74,
       flexDirection: "row",
       alignItems: "center",
       backgroundColor: theme.background,
@@ -81,7 +91,7 @@ const SignUpScreen = ({
       color: theme.text,
     },
     form: {
-      alignItems: "center",
+      marginHorizontal: 70,
     },
     loginGoogle: {
       flexDirection: "row",
@@ -95,15 +105,17 @@ const SignUpScreen = ({
       backgroundColor: theme.background,
       borderColor: theme.colorLogo,
       borderWidth: 1,
-      paddingHorizontal: 60,
+      paddingHorizontal: 50,
       paddingVertical: 8,
       borderRadius: 5,
       marginTop: 10,
+      alignSelf: "center",
+      width: "65%",
+      textAlign: "center",
     },
     signUp: {
       position: "absolute",
       bottom: 0,
-      // left: "35%",
       width: "100%",
       borderTopWidth: 0.5,
       borderTopColor: theme.text,
@@ -114,6 +126,32 @@ const SignUpScreen = ({
   const [token, setToken] = useState("");
   const navigation = useNavigation();
   const colorScheme = useColorScheme();
+  const signUpValidationSchema = yup.object().shape({
+    username: yup.string().required("Username is Required"),
+    email: yup.string().email("Email is not match."),
+    password: yup
+      .string()
+      .min(8, ({ min }) => `Password must be at least ${min} characters`)
+      .required("Password is required"),
+    confirmPassword: yup
+      .string()
+      .required("Please enter confirm password.")
+      .oneOf([yup.ref("password")], "Confirm password is not match."),
+  });
+  const form = useForm({
+    defaultValues: initialValues,
+    resolver: yupResolver(signUpValidationSchema),
+  });
+  useEffect(() => {
+    form.reset(initialValues);
+  }, []);
+  const handleSignUp = (values: any) => {
+    console.log(values);
+    form.reset()
+
+  };
+  const { isSubmitting } = form.formState
+
 
   return (
     <View style={styles.container}>
@@ -131,70 +169,102 @@ const SignUpScreen = ({
         </View>
       </View>
       <View style={styles.form}>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="user"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            onChangeText={(text) => setUsername(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="mail"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Email"
-            onChangeText={(text) => setUsername(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="lock"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            keyboardType="email-address"
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Password"
-            onChangeText={(text) => setPassword(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <View style={styles.inputSection}>
-          <AntDesign
-            name="lock"
-            size={15}
-            style={styles.searchIcon}
-            color={theme.colorLogo}
-          />
-          <TextInput
-            style={styles.input}
-            secureTextEntry={true}
-            placeholder="Confirm Password"
-            onChangeText={(text) => setPassword(text)}
-            placeholderTextColor={theme.text}
-          />
-        </View>
-        <TouchableOpacity style={styles.login}>
-          <MontserratText color={theme.colorLogo} size={16}>
-            Sign Up
-          </MontserratText>
-        </TouchableOpacity>
+        <Formik
+          validationSchema={signUpValidationSchema}
+          initialValues={{
+            username: "",
+            password: "",
+            email: "",
+            confirmPassword: "",
+          }}
+          onSubmit={handleSignUp}
+        >
+          {({ handleChange, handleSubmit, values, errors, isValid }) => (
+            <>
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="user"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Username"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("username")}
+                  value={values.username}
+                />
+              </View>
+              {errors.username && <ErrorMsg text={errors.username} />}
+
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="mail"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Email"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("email")}
+                  value={values.email}
+                />
+              </View>
+              {errors.email && <ErrorMsg text={errors.email} />}
+
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="lock"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  secureTextEntry={true}
+                  placeholder="Password"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("password")}
+                  value={values.password}
+                />
+              </View>
+              {errors.password && <ErrorMsg text={errors.password} />}
+
+              <View style={styles.inputSection}>
+                <AntDesign
+                  name="lock"
+                  size={15}
+                  style={styles.searchIcon}
+                  color={theme.colorLogo}
+                />
+                <TextInput
+                  style={styles.input}
+                  secureTextEntry={true}
+                  placeholder="Confirm Password"
+                  placeholderTextColor={theme.text}
+                  onChangeText={handleChange("confirmPassword")}
+                  value={values.confirmPassword}
+                />
+              </View>
+              {errors.confirmPassword && (
+                <ErrorMsg text={errors.confirmPassword} />
+              )}
+              <Button
+                mode={"border"}
+                disabled={!isValid}
+                text={"Sign Up"}
+                color={theme.colorLogo}
+                style={styles.login}
+                height={40}
+                handlePress={handleSubmit}
+                fontFamily={fontFamilyEnum.MontserratText}
+              ></Button>
+            </>
+          )}
+        </Formik>
       </View>
       <View style={styles.signUp}>
         <TouchableOpacity

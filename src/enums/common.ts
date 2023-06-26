@@ -3,6 +3,13 @@ export enum fontStyleEnum {
   Light = "Light",
   Medium ="Medium"
 }
+
+export enum fontFamilyEnum {
+  MontserratText = "Montserrat",
+  BarlowCondensedText = "BarlowCondensed",
+}
+
+
 export enum Category {
   BIKEGEAR = "BIKES & GEAR",
   TRAINING = "TRAINING",
