@@ -5,15 +5,15 @@ import {
   ViewStyle,
   Dimensions,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
-import { Picker } from "@react-native-picker/picker";
-import { useSelector } from "react-redux";
-import { State } from "../../redux/store";
+import React,{useEffect,useRef,useState} from "react";
+import {Picker} from "@react-native-picker/picker";
+import {useSelector} from "react-redux";
+import {State} from "../../redux/store";
 import DropDownPicker from "react-native-dropdown-picker";
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {Feather,Ionicons,MaterialIcons} from "@expo/vector-icons";
 interface ItemsProps {
   label: string;
-  value?: number | string;
+  value?: number|string;
 }
 interface SelectProps {
   zIndex?: number;
@@ -21,11 +21,11 @@ interface SelectProps {
   onValueChange: React.Dispatch<React.SetStateAction<any>>;
   selectedValue: any;
   style?: StyleProp<ViewStyle>;
-  height?: number | string;
-  width?: number | string
+  height?: number|string;
+  width?: number|string
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select: React.FC<SelectProps>=({
   zIndex,
   items,
   onValueChange,
@@ -34,20 +34,20 @@ const Select: React.FC<SelectProps> = ({
   height,
   width
 }) => {
-  const { theme } = useSelector((state: State) => state.shared);
-  const styles = StyleSheet.create({
+  const {theme}=useSelector((state: State) => state.shared);
+  const styles=StyleSheet.create({
     container: {
       fontFamily: "Montserrat",
       flex: 1,
       flexShrink: 1,
       flexBasis: 95,
       margin: 4,
-      maxWidth: width || 160,
-      height: height || 35,
+      maxWidth: width||160,
+      height: height||35,
       zIndex: zIndex,
     },
     selectContainer: {
-      minHeight: height || 35,
+      minHeight: height||35,
       backgroundColor: theme.background,
       borderColor: theme.text,
       borderWidth: 0.5,
@@ -56,20 +56,20 @@ const Select: React.FC<SelectProps> = ({
     icon: {
       width: 10,
       height: 10,
-      color: theme.colorLogo,
+      color: theme.text,
     },
   });
-  const [pickerValue, setPickerValue] = useState(selectedValue);
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const handleValueChange = (value: any) => {
+  const [pickerValue,setPickerValue]=useState(selectedValue);
+  const [open,setOpen]=useState(false);
+  const [loading,setLoading]=useState(false);
+  const handleValueChange=(value: any) => {
     setPickerValue(value);
     onValueChange(value);
   };
   useEffect(() => {
     setPickerValue(selectedValue)
-  }, [selectedValue])
-  
+  },[selectedValue])
+
   return (
     <View style={styles.container}>
       <DropDownPicker
@@ -84,13 +84,13 @@ const Select: React.FC<SelectProps> = ({
         mode="BADGE"
         maxHeight={75}
         style={styles.selectContainer}
-        TickIconComponent={({ style }) => (
+        TickIconComponent={({style}) => (
           <MaterialIcons name="done" style={styles.icon} />
         )}
-        ArrowUpIconComponent={({ style }) => (
+        ArrowUpIconComponent={({style}) => (
           <Feather name="chevron-up" style={styles.icon} />
         )}
-        ArrowDownIconComponent={({ style }) => (
+        ArrowDownIconComponent={({style}) => (
           <Feather name="chevron-down" style={styles.icon} />
         )}
         textStyle={{
@@ -113,7 +113,7 @@ const Select: React.FC<SelectProps> = ({
           textTransform: "capitalize",
         }}
         dropDownContainerStyle={styles.selectContainer}
-        listMode="SCROLLVIEW"  
+        listMode="SCROLLVIEW"
       />
     </View>
   );

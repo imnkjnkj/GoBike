@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import React, { useRef, useState } from "react";
+import React,{useRef,useState} from "react";
 import MainLayout from "../../layouts/MainLayout";
-import { RichEditor } from "react-native-pell-rich-editor";
-import { State } from "../../redux/store";
-import { useSelector } from "react-redux";
+import {RichEditor} from "react-native-pell-rich-editor";
+import {State} from "../../redux/store";
+import {useSelector} from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
@@ -36,12 +36,12 @@ export interface RefLinkModal {
   setModalVisible: (visile: boolean) => void;
 }
 
-const labelFontSize = 14;
+const labelFontSize=14;
 
 export default function CreateInformation() {
-  const { theme } = useSelector((state: State) => state.shared);
+  const {theme}=useSelector((state: State) => state.shared);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     container: {
       // flex: 1,
       height: "100%",
@@ -139,22 +139,22 @@ export default function CreateInformation() {
       // borderBottomWidth: 1
     },
   });
-  const editorRef = useRef<RichEditor>();
-  const linkModal = useRef<RefLinkModal>();
-  const [descHTML, setDescHTML] = useState("");
-  const [showDescError, setShowDescError] = useState(false);
-  const [tile, setTile] = useState("");
-  const [category, setcategory] = useState();
+  const editorRef=useRef<RichEditor>();
+  const linkModal=useRef<RefLinkModal>();
+  const [descHTML,setDescHTML]=useState("");
+  const [showDescError,setShowDescError]=useState(false);
+  const [tile,setTile]=useState("");
+  const [category,setcategory]=useState();
 
   // const handleCategoryChange = (value: number) => {
   //   setcategory(value);
   // };
 
-  const submitContentHandle = () => {
-    const replaceHTML = descHTML.replace(/<(.|\n)*?>/g, "").trim();
-    const replaceWhiteSpace = replaceHTML.replace(/&nbsp;/g, "").trim();
+  const submitContentHandle=() => {
+    const replaceHTML=descHTML.replace(/<(.|\n)*?>/g,"").trim();
+    const replaceWhiteSpace=replaceHTML.replace(/&nbsp;/g,"").trim();
 
-    if (replaceWhiteSpace.length <= 0) {
+    if(replaceWhiteSpace.length<=0) {
       setShowDescError(true);
     } else {
       // send data to your server!
@@ -163,7 +163,7 @@ export default function CreateInformation() {
 
   return (
     <MainLayout>
-      <SafeAreaView>
+      <View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.container}>
             <BarlowCondensedText
@@ -187,7 +187,7 @@ export default function CreateInformation() {
               placeholder="Enter name bike..."
               style={styles.category}
             ></Input>
-            <View style={[styles.category, { zIndex: 6000 }]}>
+            <View style={[styles.category,{zIndex: 6000}]}>
               <MontserratText size={labelFontSize}>Category</MontserratText>
               <Select
                 items={categoryList}
@@ -196,7 +196,7 @@ export default function CreateInformation() {
                 zIndex={6000}
               />
             </View>
-            <View style={[styles.category, { zIndex: 5000 }]}>
+            <View style={[styles.category,{zIndex: 5000}]}>
               <MontserratText size={labelFontSize}>Brand</MontserratText>
               <Select
                 items={BrandList}
@@ -205,7 +205,7 @@ export default function CreateInformation() {
                 zIndex={5000}
               />
             </View>
-            <View style={[styles.category, { zIndex: 4000 }]}>
+            <View style={[styles.category,{zIndex: 4000}]}>
               <MontserratText size={labelFontSize}>
                 Recommended Age
               </MontserratText>
@@ -216,7 +216,7 @@ export default function CreateInformation() {
                 zIndex={4000}
               />
             </View>
-            <View style={[styles.category, { zIndex: 3000 }]}>
+            <View style={[styles.category,{zIndex: 3000}]}>
               <MontserratText size={labelFontSize}>
                 Recommended Height
               </MontserratText>
@@ -227,7 +227,7 @@ export default function CreateInformation() {
                 zIndex={3000}
               />
             </View>
-            <View style={[styles.category, { zIndex: 2000 }]}>
+            <View style={[styles.category,{zIndex: 2000}]}>
               <MontserratText size={labelFontSize}>
                 Bike Weight Limit
               </MontserratText>
@@ -238,7 +238,7 @@ export default function CreateInformation() {
                 zIndex={2000}
               />
             </View>
-            <View style={[styles.category, { zIndex: 1000 }]}>
+            <View style={[styles.category,{zIndex: 1000}]}>
               <MontserratText size={labelFontSize}>Wheel Size</MontserratText>
               <Select
                 items={WheelSizeList}
@@ -323,7 +323,7 @@ export default function CreateInformation() {
             </TouchableOpacity>
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </MainLayout>
   );
 }

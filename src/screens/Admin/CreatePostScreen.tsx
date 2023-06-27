@@ -9,7 +9,7 @@ import {
   Platform,
   Dimensions,
 } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
+import React,{useCallback,useRef,useState} from "react";
 import MainLayout from "../../layouts/MainLayout";
 import {
   actions,
@@ -21,8 +21,8 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as FileSystem from "expo-file-system";
-import { State } from "../../redux/store";
-import { useSelector } from "react-redux";
+import {State} from "../../redux/store";
+import {useSelector} from "react-redux";
 import {
   BarlowCondensedText,
   MontserratText,
@@ -42,16 +42,16 @@ export interface RefLinkModal {
   setModalVisible: (visile: boolean) => void;
 }
 
-const CategoryOptions = [
-  { label: Category.BIKEGEAR, value: CategoryId.BIKEGEAR },
-  { label: Category.HEALTHNUTRITION, value: CategoryId.HEALTHNUTRITION },
-  { label: Category.REPAIR, value: CategoryId.REPAIR },
-  { label: Category.TRAINING, value: CategoryId.TRAINING },
+const CategoryOptions=[
+  {label: Category.BIKEGEAR,value: CategoryId.BIKEGEAR},
+  {label: Category.HEALTHNUTRITION,value: CategoryId.HEALTHNUTRITION},
+  {label: Category.REPAIR,value: CategoryId.REPAIR},
+  {label: Category.TRAINING,value: CategoryId.TRAINING},
 ];
 export default function CreatePostScreen() {
-  const { theme } = useSelector((state: State) => state.shared);
+  const {theme}=useSelector((state: State) => state.shared);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     container: {
       flex: 1,
       height: "100%",
@@ -132,22 +132,22 @@ export default function CreatePostScreen() {
       color: "#515156",
     },
   });
-  const editorRef = useRef<RichEditor>();
-  const linkModal = useRef<RefLinkModal>();
-  const [descHTML, setDescHTML] = useState("");
-  const [showDescError, setShowDescError] = useState(false);
-  const [tile, setTile] = useState("");
-  const [category, setcategory] = useState(CategoryId.BIKEGEAR);
+  const editorRef=useRef<RichEditor>();
+  const linkModal=useRef<RefLinkModal>();
+  const [descHTML,setDescHTML]=useState("");
+  const [showDescError,setShowDescError]=useState(false);
+  const [tile,setTile]=useState("");
+  const [category,setcategory]=useState(CategoryId.BIKEGEAR);
 
-  const handleCategoryChange = (value: number) => {
+  const handleCategoryChange=(value: number) => {
     setcategory(value);
   };
 
-  const submitContentHandle = () => {
-    const replaceHTML = descHTML.replace(/<(.|\n)*?>/g, "").trim();
-    const replaceWhiteSpace = replaceHTML.replace(/&nbsp;/g, "").trim();
+  const submitContentHandle=() => {
+    const replaceHTML=descHTML.replace(/<(.|\n)*?>/g,"").trim();
+    const replaceWhiteSpace=replaceHTML.replace(/&nbsp;/g,"").trim();
 
-    if (replaceWhiteSpace.length <= 0) {
+    if(replaceWhiteSpace.length<=0) {
       setShowDescError(true);
     } else {
       // send data to your server!
@@ -156,52 +156,50 @@ export default function CreatePostScreen() {
 
   return (
     <MainLayout>
-      <SafeAreaView>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.container}>
-            <BarlowCondensedText
-              fontStyle={fontStyleEnum.Medium}
-              size={32}
-              color={theme.text}
-            >
-              Create A Post
-            </BarlowCondensedText>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.container}>
+          <BarlowCondensedText
+            fontStyle={fontStyleEnum.Medium}
+            size={32}
+            color={theme.text}
+          >
+            Create A Post
+          </BarlowCondensedText>
 
-            <Input
-              setText={setTile}
-              heightInput={30}
-              label="Title"
-              placeholder="Enter your title..."
-            ></Input>
-            <Input
-              setText={setTile}
-              label="Sapo"
-              placeholder="Enter your sapo..."
-            ></Input>
-            <View style={styles.category}>
-              <MontserratText size={18}>Category</MontserratText>
-              <Select
-                items={categoryList}
-                onValueChange={setcategory}
-                selectedValue={category}
-                zIndex={2000}
-              />
-            </View>
-
-            <RichEditorTextArea
-              setDescHTML={setDescHTML}
-              showDescError={showDescError}
-              setShowDescError={setShowDescError}
+          <Input
+            setText={setTile}
+            heightInput={30}
+            label="Title"
+            placeholder="Enter your title..."
+          ></Input>
+          <Input
+            setText={setTile}
+            label="Sapo"
+            placeholder="Enter your sapo..."
+          ></Input>
+          <View style={styles.category}>
+            <MontserratText size={18}>Category</MontserratText>
+            <Select
+              items={categoryList}
+              onValueChange={setcategory}
+              selectedValue={category}
+              zIndex={2000}
             />
-            <TouchableOpacity
-              style={styles.saveButtonStyle}
-              onPress={submitContentHandle}
-            >
-              <Text style={styles.textButtonStyle}>Save</Text>
-            </TouchableOpacity>
           </View>
-        </ScrollView>
-      </SafeAreaView>
+
+          <RichEditorTextArea
+            setDescHTML={setDescHTML}
+            showDescError={showDescError}
+            setShowDescError={setShowDescError}
+          />
+          <TouchableOpacity
+            style={styles.saveButtonStyle}
+            onPress={submitContentHandle}
+          >
+            <Text style={styles.textButtonStyle}>Save</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </MainLayout>
   );
 }

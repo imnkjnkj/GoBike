@@ -1,15 +1,15 @@
-import { View, StyleSheet, Platform } from "react-native";
+import {View,StyleSheet,Platform} from "react-native";
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
-import { BarlowCondensedText } from "./shared/StyledText";
-import { useSelector } from "react-redux";
-import { State } from "../redux/store";
-import { fontStyleEnum } from "../enums/common";
+import {BarlowCondensedText} from "./shared/StyledText";
+import {useSelector} from "react-redux";
+import {State} from "../redux/store";
+import {fontStyleEnum} from "../enums/common";
 
-export const MenuHeader = (props: any) => {
-  const { theme } = useSelector((state: State) => state.shared);
+export const MenuHeader=(props: any) => {
+  const {theme}=useSelector((state: State) => state.shared);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     headerContainer: {
       backgroundColor: theme.background,
       alignContent: "center",
@@ -18,7 +18,7 @@ export const MenuHeader = (props: any) => {
     },
     headerContent: {
       flexDirection: "row",
-      marginTop: Platform.OS === "android" ? Constant.statusBarHeight : 0,
+      paddingTop: Platform.OS==="android"? Constant.statusBarHeight:0,
       position: "relative",
     },
     logo: {

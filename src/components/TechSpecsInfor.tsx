@@ -1,26 +1,26 @@
-import { View, Text, StyleSheet } from "react-native";
+import {View,Text,StyleSheet} from "react-native";
 import React from "react";
 import Constant from "expo-constants";
-import { useSelector } from "react-redux";
-import { State } from "../redux/store";
+import {useSelector} from "react-redux";
+import {State} from "../redux/store";
 import {
   BarlowCondensedText,
   MontserratText,
 } from "../components/shared/StyledText";
-import { IBikesDetail } from "../types/bikes";
-import { fontStyleEnum } from "../enums/common";
+import {IBikesDetail} from "../types/bikes";
+import {fontStyleEnum} from "../enums/common";
 
 interface ITechSpecsInforProps {
   pDetailData: IBikesDetail;
 }
-export default function TechSpecsInfor({ pDetailData }: ITechSpecsInforProps) {
-  const { category } = useSelector((state: State) => state.shared);
-  const { theme } = useSelector((state: State) => state.shared);
-  var date = new Date().toLocaleString();
-  const styles = StyleSheet.create({
+export default function TechSpecsInfor({pDetailData}: ITechSpecsInforProps) {
+  const {category}=useSelector((state: State) => state.shared);
+  const {theme}=useSelector((state: State) => state.shared);
+  var date=new Date().toLocaleString();
+  const styles=StyleSheet.create({
     container: {
       paddingHorizontal: 10,
-      marginTop: Constant.statusBarHeight,
+      paddingTop: Constant.statusBarHeight,
       fontFamily: "Montserrat",
     },
     createDate: {
@@ -37,7 +37,7 @@ export default function TechSpecsInfor({ pDetailData }: ITechSpecsInforProps) {
       paddingVertical: 5,
     },
   });
-  const RenderItem = ({ list, title }: any) => {
+  const RenderItem=({list,title}: any) => {
     return (
       <View>
         <MontserratText
@@ -49,21 +49,21 @@ export default function TechSpecsInfor({ pDetailData }: ITechSpecsInforProps) {
           {title}
         </MontserratText>
         {Object.entries(list).map(([key]) => {
-          const titleKey = key
-            .replace(/([A-Z])/g, " $1") // Insert a space before each capital letter
-            .replace(/^./, (str) => str.toUpperCase()); // Capitalize the first letter
+          const titleKey=key
+            .replace(/([A-Z])/g," $1") // Insert a space before each capital letter
+            .replace(/^./,(str) => str.toUpperCase()); // Capitalize the first letter
           return (
-            <View key={key} style={{ marginTop: 5 }}>
+            <View key={key} style={{marginTop: 5}}>
               <View style={styles.col}>
                 <MontserratText
                   color={theme.text}
                   size={16}
-                  style={{ textTransform: "capitalize" }}
+                  style={{textTransform: "capitalize"}}
                 >
-                  {key === 'features' ? '' : titleKey}
+                  {key==='features'? '':titleKey}
                 </MontserratText>
                 <MontserratText color={theme.text} size={16}>
-                  {key === 'features' ? '' : list[key]}
+                  {key==='features'? '':list[key]}
                 </MontserratText>
               </View>
             </View>

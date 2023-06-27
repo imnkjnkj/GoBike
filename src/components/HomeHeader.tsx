@@ -7,19 +7,19 @@ import {
 } from "react-native";
 import LOGO from "../assets/images/logo.svg";
 import Constant from "expo-constants";
-import { useSelector } from "react-redux";
-import { State } from "../redux/store";
-import { BarlowCondensedText } from "./shared/StyledText";
-import { fontStyleEnum } from "../enums/common";
+import {useSelector} from "react-redux";
+import {State} from "../redux/store";
+import {BarlowCondensedText} from "./shared/StyledText";
+import {fontStyleEnum} from "../enums/common";
 
-const AnimatedLogo = Animated.createAnimatedComponent(View);
-const AnimatedName = Animated.createAnimatedComponent(Text);
+const AnimatedLogo=Animated.createAnimatedComponent(View);
+const AnimatedName=Animated.createAnimatedComponent(Text);
 
 export function HomeHeader(props: any) {
-  const { logoAnimation, logoNameAnimation, translateHeaderLogo } = props;
-  const { theme } = useSelector((state: State) => state.shared);
+  const {logoAnimation,logoNameAnimation,translateHeaderLogo}=props;
+  const {theme}=useSelector((state: State) => state.shared);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     headerContainer: {
       backgroundColor: theme.background,
       alignContent: "center",
@@ -45,21 +45,21 @@ export function HomeHeader(props: any) {
   });
   return (
     <>
-        <View style={styles.headerContent}>
-          <AnimatedLogo style={[logoAnimation, styles.logo, { transform: [{ translateY: translateHeaderLogo }] }]}>
-            <LOGO height={48} width={48} color={theme.colorLogo} />
-            <AnimatedName style={[logoNameAnimation]}>
-              <BarlowCondensedText
-                size={32}
-                color={theme.text}
-                style={styles.logoText}
-                fontStyle = {fontStyleEnum.SemiBold}
-              >
-                GoBike
-              </BarlowCondensedText>
-            </AnimatedName>
-          </AnimatedLogo>
-        </View>
+      <View style={styles.headerContent}>
+        <AnimatedLogo style={[logoAnimation,styles.logo,{transform: [{translateY: translateHeaderLogo}]}]}>
+          <LOGO height={48} width={48} color={theme.colorLogo} />
+          <AnimatedName style={[logoNameAnimation]}>
+            <BarlowCondensedText
+              size={32}
+              color={theme.text}
+              style={styles.logoText}
+              fontStyle={fontStyleEnum.SemiBold}
+            >
+              GoBike
+            </BarlowCondensedText>
+          </AnimatedName>
+        </AnimatedLogo>
+      </View>
     </>
   );
 }

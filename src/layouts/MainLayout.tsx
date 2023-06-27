@@ -1,17 +1,17 @@
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import {View,StyleSheet,SafeAreaView} from "react-native";
 import React from "react";
-import { MenuHeader } from "../components/MenuHeader";
+import {MenuHeader} from "../components/MenuHeader";
 import Layout from "./Layout";
-import { useSelector } from "react-redux";
-import { State } from "../redux/store";
+import {useSelector} from "react-redux";
+import {State} from "../redux/store";
 interface IMainLayout {
   children: React.ReactNode;
   isShowLogo?: boolean;
 }
-export default function MainLayout({ children, isShowLogo }: IMainLayout) {
-  const { theme } = useSelector((state: State) => state.shared);
+export default function MainLayout({children,isShowLogo}: IMainLayout) {
+  const {theme}=useSelector((state: State) => state.shared);
 
-  const styles = StyleSheet.create({
+  const styles=StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: theme.background,
@@ -28,18 +28,18 @@ export default function MainLayout({ children, isShowLogo }: IMainLayout) {
     wrapper: {
       paddingHorizontal: 10,
     },
-    noLogo:{
+    noLogo: {
       marginTop: 45
     }
   });
   return (
-    <SafeAreaView style={styles.container}>
-      {isShowLogo && (
-        <View style={{ alignItems: "center" }}>
+    <View style={styles.container}>
+      {isShowLogo&&(
+        <View style={{alignItems: "center"}}>
           <MenuHeader />
         </View>
       )}
-      <Layout style={isShowLogo ? styles.wrapper : styles.noLogo}>{children}</Layout>
-    </SafeAreaView>
+      <Layout style={isShowLogo? styles.wrapper:styles.noLogo}>{children}</Layout>
+    </View>
   );
 }

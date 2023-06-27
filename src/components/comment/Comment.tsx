@@ -3,27 +3,28 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
-import { State } from "../../redux/store";
+import React,{useState} from "react";
+import {Ionicons} from "@expo/vector-icons";
+import {useSelector} from "react-redux";
+import {State} from "../../redux/store";
 import Constant from "expo-constants";
-import { BarlowCondensedText } from "../shared/StyledText";
-import { fontStyleEnum } from "../../enums/common";
+import {BarlowCondensedText} from "../shared/StyledText";
+import {fontStyleEnum} from "../../enums/common";
 import CommentInput from "./CommentInput";
 import CommentItem from "./CommentItem";
 
 export interface IComment {
-    id: number
-    username: string,
-    email: string,
-    name: string,
-    date:  Date,
-    avatar: string,
-    content: string,
+  id: number
+  username: string,
+  email: string,
+  name: string,
+  date: Date,
+  avatar: string,
+  content: string,
 }
-const commentsData: IComment[] = [
+const commentsData: IComment[]=[
   {
     id: 1,
     username: "matt@mail.com",
@@ -44,11 +45,15 @@ const commentsData: IComment[] = [
   },
 ];
 export default function Comment() {
-  const width = Dimensions.get("window").width;
-  const { theme } = useSelector((state: State) => state.shared);
-  const styles = StyleSheet.create({
+  const width=Dimensions.get("window").width;
+  const {theme}=useSelector((state: State) => state.shared);
+  const styles=StyleSheet.create({
     wrapper: {
       fontFamily: "Montserrat",
+    },
+    container: {
+      marginBottom: 40,
+
     },
     createDate: {
       marginVertical: 10,
@@ -67,39 +72,26 @@ export default function Comment() {
       marginLeft: 32,
     },
   });
-  const [like, setLike] = useState(false);
-  const [comments, setComments] = useState(commentsData);
+  const [like,setLike]=useState(false);
+  const [comments,setComments]=useState(commentsData);
 
 
-  const handleLike = () => {
-    setLike((prev) => !prev);
-  };
+
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableWithoutFeedback onPress={handleLike}>
-          {like ? (
-            <>
-              <Ionicons name="ios-heart" size={20} color={theme.colorLogo} />
-              <BarlowCondensedText fontStyle={fontStyleEnum.Medium}>
-                Like
-              </BarlowCondensedText>
-            </>
-          ) : (
-            <>
-              <Ionicons
-                name="ios-heart-outline"
-                size={20}
-                color={theme.colorLogo}
-              />
-              <BarlowCondensedText fontStyle={fontStyleEnum.Medium}>
-                Like
-              </BarlowCondensedText>
-            </>
-          )}
-        </TouchableWithoutFeedback>
+        <TouchableOpacity onPress={(e) => setLike((current) => !current)} style={{flexDirection: 'row'}}>
+          <Ionicons
+            name={like? "ios-heart":"ios-heart-outline"}
+            size={20}
+            color={theme.colorLogo}
+          />
+          <BarlowCondensedText fontStyle={fontStyleEnum.Medium}>
+            Like
+          </BarlowCondensedText>
+        </TouchableOpacity>
         <View style={styles.commentIcon}>
-          {comments.length > 0 ? (
+          {comments.length>0? (
             <>
               <Ionicons
                 name="md-chatbubbles"
@@ -110,7 +102,7 @@ export default function Comment() {
                 Comments
               </BarlowCondensedText>
             </>
-          ) : (
+          ):(
             <>
               <Ionicons
                 name="md-chatbubbles-outline"
