@@ -68,6 +68,17 @@ export default function Button({
       borderColor: color || theme.text,
       borderWidth: 0.5,
     },
+    buttonSolid: {
+      backgroundColor: theme.tint,
+      padding: 5,
+      width: width || "100%",
+      height: height || 35,
+      borderRadius: 3,
+      justifyContent: "center",
+      flexDirection: "row",
+      borderColor: color || theme.background,
+      borderWidth: 0.5,
+    },
     text: {
       marginLeft: icon ? 15 : 0,
     },
@@ -78,6 +89,8 @@ export default function Button({
         return styles.buttonUnderline;
       case "border":
         return styles.buttonBorder;
+      case "solid":
+        return styles.buttonSolid;
       default:
         return null;
     }

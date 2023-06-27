@@ -19,6 +19,7 @@ import { filteredList } from "../redux/bikes";
 import Select from "../components/forms/Select";
 import Filter from "../components/Filter";
 import { renderCate } from "../utils/common";
+import NoResult from "../components/NoResult";
 type RouteScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   "BikeInforScreen"
@@ -54,12 +55,16 @@ const BikeInforScreen = ({
     },
   });
   const [loading, setLoading] = useState(true);
+  const [isClear, setIsClear] = useState(false);
   const [paramsValue, setParamsValue] = useState<IRequestParams>({
     categoryId: route?.params?.id,
     brand: "",
     riderHeight: "",
     wheelSize: "",
   });
+  const handleClear = () => {
+    setIsClear(true);
+  };
 
   const fetchData = async () => {
     await pGetBikes({
@@ -77,6 +82,9 @@ const BikeInforScreen = ({
   };
 
   useEffect(() => {
+    if (pBikesList?.content?.length < 0) {
+      setIsClear(true);
+    } else setIsClear(false);
     fetchData();
   }, [paramsValue]);
   if (loading) {
@@ -92,7 +100,11 @@ const BikeInforScreen = ({
         >
           {renderCate(paramsValue?.categoryId)}
         </BarlowCondensedText>
-        <Filter setParamsValue={setParamsValue} paramsValue={paramsValue} />
+        <Filter
+          isClear={isClear}
+          setParamsValue={setParamsValue}
+          paramsValue={paramsValue}
+        />
         <ScrollView style={{ marginTop: 90 }}>
           {pBikesList?.content?.length > 0 ? (
             <>
@@ -103,9 +115,7 @@ const BikeInforScreen = ({
               ))}
             </>
           ) : (
-            <BarlowCondensedText fontStyle={fontStyleEnum.SemiBold}>
-              No Data
-            </BarlowCondensedText>
+            <NoResult handleClear={handleClear} />
           )}
         </ScrollView>
       </View>
