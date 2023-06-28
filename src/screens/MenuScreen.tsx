@@ -6,6 +6,7 @@ import {State} from "../redux/store";
 import Menu from "../components/Menu";
 import Contact from "../components/Contact";
 import Search from "../components/Search";
+import Constant from "expo-constants";
 
 export default function MenuScreen() {
   const {theme}=useSelector((state: State) => state.shared);
@@ -14,6 +15,7 @@ export default function MenuScreen() {
     container: {
       flex: 1,
       backgroundColor: theme.background,
+      paddingTop: Constant.statusBarHeight
     },
     title: {
       fontSize: 20,

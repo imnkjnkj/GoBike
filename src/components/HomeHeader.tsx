@@ -37,7 +37,7 @@ export function HomeHeader(props: any) {
       position: "absolute",
       width: '100%',
       zIndex: 1,
-      left: '35%',
+      left: '34%',
     },
     logoText: {
       flexDirection: "row",
