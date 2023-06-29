@@ -83,7 +83,6 @@ export default function SelectImage() {
         setPreviewImages((prevImages) => [...prevImages, ...newImages]);
       }
     } catch (error) {
-      console.log("ImagePicker Error:", error);
     }
   };
 

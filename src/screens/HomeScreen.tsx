@@ -72,11 +72,6 @@ export default function HomeScreenScreen({
         logoNameAnimation={logoNameAnimation}
         translateHeaderLogo={translateHeaderLogo}
       />
-      <BannerCarousel
-        translateHeader={translateHeader}
-        translateBanner={translateBanner}
-        bannerAnimation={bannerAnimation}
-      />
       <MenuHeaderTab translateHeader={translateHeader} />
     </View>
   );
